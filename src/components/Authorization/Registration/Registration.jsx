@@ -5,7 +5,7 @@ function Registration() {
     
   return (
     <>
-
+      <div>Регистрация</div>
     </>
   )
 }
