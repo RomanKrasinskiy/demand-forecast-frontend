@@ -1,8 +1,8 @@
 import './ErrorPage';
 import { Link } from 'react-router-dom';
 import ErrorPageCSS from './ErrorPage.module.css';
-import logo from './../../images/logo.svg';
-import cat404 from './../../images/cat404.jpg';
+import logo from '../../images/logo.svg';
+import cat404 from '../../images/cat404.png';
 
 function ErrorPage() {
 
