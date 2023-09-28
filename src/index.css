@@ -11,13 +11,15 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 } */
-@import url("./vendor/normalize.css");
+@import url(./vendor/fonts/fonts.css);
+@import url(./vendor/normalize.css);
+
 html {
   scroll-behavior: smooth;
 }
 body {
-  margin: 0;
   /* background-color: rgba(32, 32, 32, 1); */
   font-family: "Inter", "Arial", sans-serif;
   font-style: normal;
 }
+
