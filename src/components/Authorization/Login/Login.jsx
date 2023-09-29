@@ -8,6 +8,8 @@ export default function Login( ) { // onLogin,
     useFormWithValidation({ name: "", email: "", password: "" });
 
   const handleSubmit = (e) => {
+    console.log('click login')
+
     e.preventDefault();
     // onLogin({
     //   email: values.email,
@@ -30,7 +32,6 @@ export default function Login( ) { // onLogin,
           // formError={formError}
           isDisabled={!isValid ? false : true}
         >
-          <div></div>
           <InputForm
             type="email"
             name="email"
