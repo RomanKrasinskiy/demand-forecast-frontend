@@ -14,3 +14,7 @@
 
 @import url(./vendor/fonts/fonts.css);
 @import url(./vendor/normalize.css);
+
+body {
+  background: #F5F6FA;
+}
