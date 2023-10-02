@@ -21,7 +21,7 @@ const Forecast = () => {
 
   return (
     <>
-    {/* Тут будет компонент Хедер, пока просто его задизайнил */}
+      {/* Тут будет компонент Хедер, пока просто его задизайнил */}
     <div className={ForecastCSS.header}>
       <img className={ForecastCSS.logo} src={logo} alt="Лента"/>
       <div className={ForecastCSS.btnContainer}>
@@ -117,6 +117,8 @@ const Forecast = () => {
           disableRowSelectionOnClick
           // slots={{ toolbar: CustomToolbar }} - Экспорт в Эксель только в платной версии
         />
+        {/* График */}
+        
       </div>
     </div>
     </>
