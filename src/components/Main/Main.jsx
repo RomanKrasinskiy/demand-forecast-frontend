@@ -1,12 +1,16 @@
 import './Main';
-import Forecast from '../Forecast/Forecast';
 
 function Main() {
 
 
   return (
     <>
-      <Forecast/>
+      <div>
+        картинка
+      </div>
+      <div>
+        компонент регистрации или логина
+      </div>
     </>
   )
 }
