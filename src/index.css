@@ -20,8 +20,7 @@ html {
   scroll-behavior: smooth;
 }
 body {
-  /* background-color: rgba(32, 32, 32, 1); */
+  background: #F5F6FA;
   font-family: "Inter", "Arial", sans-serif;
   font-style: normal;
 }
-
