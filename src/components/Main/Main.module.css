@@ -1,7 +1,32 @@
-.container {
-    display: flex;
-  justify-content: center;
-  align-items: center;
+.main {
+  flex: 1;
+  display: flex;
   height: 100vh;
-  background-color: transparent;
+  z-index: 2;
+  
+}
+.containerAuth {
+  max-width: 868px;
+  padding: 82px 120px 82px;
+  display: flex;
+  flex-direction: column;
+
+}
+.container {
+  display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+background-color: transparent;
+
+
+}
+.subtitle {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0 0 48px 0;
+  color: rgba(44, 42, 41, 1);
+
 }

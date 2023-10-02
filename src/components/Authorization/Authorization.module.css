@@ -7,6 +7,16 @@
     flex-direction: column;
     align-items: center;
 }
+.headerMain {
+    color: var(--black, #2C2A29);
+    text-align: center;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin: 216px 0 20px 0;
+    
+}
 
 .buttonSubmit {
     background-color: rgba(66, 133, 244, 1);
