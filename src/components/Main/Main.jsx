@@ -4,12 +4,9 @@ import Authorization from "../Authorization/Authorization";
 
 
 import { Box, Button, Stack } from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
-import MainBackground from "../../Main/MainBackground/MainBackground";
-import React from 'react';
+import MainBackground from "../Main/MainBackground/MainBackground";
 
 export default function Registration() {
-  const [showPassword, setShowPassword] = React.useState(false);
   // const handleClickShowPassword = () => setShowPassword((show) => !show);
   // const handleMouseDownPassword = (event) => {
   //   event.preventDefault();
