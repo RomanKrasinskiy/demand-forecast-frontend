@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 export default function Authorization({
   children,
   headerText,
+  isMain
   }) {
   
   const [errorText, setErrorText] = useState('');
@@ -19,7 +20,7 @@ export default function Authorization({
   return (
     <>
       <Logo />
-      <h1 className={Auth.header}>{headerText}</h1>
+      <h1 className={isMain ? Auth.headerMain : Auth.header} data-content={headerText}>{headerText}</h1>
       <form className={Auth.form}>{children}</form>
       
     </>

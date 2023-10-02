@@ -9,6 +9,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Button, FormControl, Input, InputLabel, MenuItem, Select, Stack } from "@mui/material";
 import MainBackground from "../../Main/MainBackground/MainBackground";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   // onLogin,
@@ -279,18 +280,19 @@ const handleChange = (event) => {
 
                 }}
               >Войти</Button>
+              <Link to='/'>
               <Button variant="outlined"
-                
-                sx={{
-                  width: '160px',
-                  height: '60px',
-                  backgroundColor: 'transparent',
-                  borderRadius: '46px',
-                  color: 'rgba(0, 60, 150, 1)',
-                  border: '2px solid rgba(0, 60, 150, 1)'
+              sx={{
+                width: '160px',
+                height: '60px',
+                backgroundColor: 'transparent',
+                borderRadius: '46px',
+                color: 'rgba(0, 60, 150, 1)',
+                border: '2px solid rgba(0, 60, 150, 1)'
 
-                }}
-              >Назад</Button>
+              }}
+            >Назад</Button>
+            </Link>
              </Stack>
           </Box>
         </Authorization>
