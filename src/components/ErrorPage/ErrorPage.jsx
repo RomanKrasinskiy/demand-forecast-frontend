@@ -1,22 +1,38 @@
 import './ErrorPage';
 import { Link } from 'react-router-dom';
+import { Button } from "@mui/material";
 import ErrorPageCSS from './ErrorPage.module.css';
-import logo from '../../images/logo.svg';
-import cat404 from '../../images/cat404.png';
+import Logo from '../Logo/Logo';
+import MainBackground from "../Main/MainBackground/MainBackground";
 
 function ErrorPage() {
 
   return (
     <>
-    <div className={ErrorPageCSS.header}>
-      <img className={ErrorPageCSS.logo} src={logo} alt="Лента"/>
-    </div>
-    <div className={ErrorPageCSS.container}>
-      <img className={ErrorPageCSS.img} src={cat404} alt="Упс, не туда попали"/>
-      <h1 className={ErrorPageCSS.title}>Упс! Кажется, вы не туда попали.</h1>
-      <h2 className={ErrorPageCSS.description}>Перейдите на главную страницу сайта.</h2>
-      <Link className={ErrorPageCSS.btn} to="/">Главная страница</Link>
-    </div>
+      <div className={ErrorPageCSS.container}>
+        <Logo />
+        <div className={ErrorPageCSS.textContainer}>
+          <h1 className={ErrorPageCSS.title}>Ошабка 404</h1>
+          <p className={ErrorPageCSS.text}>Мы не смогли найти информацию по вашему запросу</p>
+          <p className={ErrorPageCSS.linkText}>Вы можете <Link className={ErrorPageCSS.link}>вернуться на предыдущую страницу</Link></p>
+        </div>
+        <Button 
+          variant="contained"
+          sx={{
+            width: '304px',
+            height: '60px',
+            backgroundColor: 'rgba(0, 60, 150, 1)',
+            borderRadius: '46px',
+            border: '2px solid rgba(0, 60, 150, 1)',
+            color: 'white',
+            fontSize: '20px',
+            fontFamily: 'Helvetica Neue',
+            textTransform: 'none',
+          }}
+          href="/"
+        >На главную</Button>
+      </div>
+      <MainBackground/>
     </>
   )
 }
