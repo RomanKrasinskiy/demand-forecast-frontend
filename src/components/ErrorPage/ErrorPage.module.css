@@ -1,16 +1,23 @@
+.page {
+  display: flex;
+}
+
 .container {
+  min-height: 600px;
   padding-top: 75px;
   padding-left: 120px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: flex-start;
+  z-index: 2;
 }
 
 .textContainer {
-  margin: 284.4px 0 40px;
+  margin: 0 0 40px;
   display: flex;
   flex-direction: column;
+  z-index: 2;
 }
 
 .title {
