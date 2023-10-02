@@ -24,7 +24,6 @@
 
 .passiveBtn {
     color: var(--gray, #4D4D4D);
-    font-family: Helvetica Neue;
     font-size: 24px;
     font-style: normal;
     font-weight: 400;
@@ -37,7 +36,6 @@
 
 .activeBtn {
     color: var(--white, #FFF);
-    font-family: Helvetica Neue;
     font-size: 24px;
     font-style: normal;
     font-weight: 500;
@@ -99,7 +97,6 @@
     margin: 0;
     padding-bottom: 11px;
     color: var(--black, #2C2A29);
-    font-family: Helvetica Neue;
     font-size: 24px;
     font-style: normal;
     font-weight: 500;
@@ -110,7 +107,6 @@
 .option {
     margin: 0;
     color: #7B7B7B;
-    font-family: Helvetica Neue;
     font-size: 24px;
     font-style: normal;
     font-weight: 500;
@@ -148,7 +144,6 @@
     border: 0;
     outline: none;
     color: var(--light-grey, #A7A7A7);
-    font-family: Helvetica Neue;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -165,9 +160,7 @@
     background: var(--blue, #003C96);
     color: var(--white, #FFF);
     text-align: center;
-    font-family: Helvetica Neue;
     font-size: 20px;
-    font-style: normal;
     font-weight: 500;
     line-height: normal;
 }

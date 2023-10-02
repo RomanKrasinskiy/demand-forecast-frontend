@@ -7,6 +7,7 @@ import { Box, Button, FormControl, IconButton, Input, InputAdornment, InputLabel
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import MainBackground from "../../Main/MainBackground/MainBackground";
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Registration() {
   const [showPassword, setShowPassword] = React.useState(false);
@@ -230,7 +231,9 @@ return (
 
               }}
             >Зарегистрироваться</Button>
-            <Button variant="outlined"
+
+            <Link to='/'>
+              <Button variant="outlined"
               sx={{
                 width: '160px',
                 height: '60px',
@@ -241,7 +244,11 @@ return (
 
               }}
             >Назад</Button>
+            </Link>
+            
+
            </Stack>
+
         </Box>
       </Authorization>
     </div>

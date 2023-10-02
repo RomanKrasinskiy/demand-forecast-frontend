@@ -12,11 +12,11 @@ const HeaderAccordion = () => {
                 <div className={`${styles["tab"]}`}>
                 <input type="checkbox" name="accordion-1" id="cb1"></input>
                 <label htmlFor="cb1" className={styles["tabLabel"]}>Имя пользователя
-                    <p className={`${styles["tabSubtitle"]}`}>начальник по пирожкам</p>
+                    <p className={`${styles["tabSubtitle"]}`}>Начальник по пирожкам</p>
                     
                 </label>
                 <div className={styles["tabContent"]}>
-                    <p className={`${styles["tabEmail"]}`}>fosdijf@gmail.com</p>
+                    <p className={`${styles["tabEmail"]}`}>fosdfsdsdffsdijf@gmail.com</p>
                     <button className={`${styles["tabButton"]}`}>Выход</button>
                 </div>
                 

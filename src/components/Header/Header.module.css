@@ -6,7 +6,7 @@
     flex-direction: column;
     justify-content: center;
     background-color: #F5F6FA;
-    padding-top: 40px;
+    padding: 40px 0;
 }
 
 .container {
@@ -30,13 +30,10 @@
 .navLink {
     color: rgba(77, 77, 77, 1);
     text-decoration: none;
-    font-family: Helvetica Neue;
     border-radius: 46px;
     border: 2px solid rgba(0, 60, 150, 0);
     font-size: 24px;
-    font-style: normal;
     font-weight: 500;
-    line-height: normal;
     padding: 22px 34px;
     white-space: nowrap;
     transition: background-color 0.3s, border 0.3s;

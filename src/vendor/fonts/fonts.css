@@ -1,15 +1,33 @@
 @font-face {
-    font-family: 'Gilroy';
-    font-style:  normal;
+  font-family: 'HelveticaNeueCyr';
     font-weight: 300;
-    font-display: swap;
-    src: url(./Gilroy-Light.otf) format("otf"),
-  }
-  
-  @font-face {
-    font-family: 'Gilroy';
-    font-style:  normal;
-    font-weight: 800;
-    font-display: swap;
-    src: url(./Gilroy-ExtraBold.otf) format("otf"),
-  }
+    font-style: normal;
+  src: 
+    url(./HelveticaNeue/HelveticaNeueCyr-Light.woff2) format("woff2"),
+    url(./HelveticaNeue/HelveticaNeueCyr-Light.woff) format("woff");
+}
+@font-face {
+  font-family: 'HelveticaNeueCyr';
+  font-weight: 500;
+  font-style: normal;
+  src: 
+    url(./HelveticaNeue/HelveticaNeueCyr-Medium.woff2) format("woff2"),
+    url(./HelveticaNeue/HelveticaNeueCyr-Medium.woff) format("woff");
+}
+@font-face {
+  font-family: 'HelveticaNeueCyr';
+  font-weight: 700;
+  font-style: normal;
+  src: 
+    url(./HelveticaNeue/HelveticaNeueCyr-Bold.woff2) format("woff2"),
+    url(./HelveticaNeue/HelveticaNeueCyr-Bold.woff) format("woff");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  src: 
+    url(./Inter/Inter-Regular.woff2) format("woff2"),
+    url(./Inter/Inter-Regular.woff) format("woff");
+}
