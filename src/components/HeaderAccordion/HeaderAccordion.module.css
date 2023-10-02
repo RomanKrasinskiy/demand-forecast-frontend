@@ -1,0 +1,116 @@
+.span {
+    position: relative;
+    border-radius: 48px;
+    width: 300px;
+    height: 72px;
+}
+.accordion {
+    background-color: rgba(255, 255, 255, 1); 
+    border-radius: 48px;
+    width: 300px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .tab input {
+    opacity: 0; 
+    z-index: -1; 
+    
+  }
+  .tabContent {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.35s;
+  }
+  .tab input:checked ~ .tabContent {
+    max-height: 10rem;
+    
+  }
+  /* .tab input:checked .tabSubtitle {
+    text-overflow: clip;
+    white-space: normal;
+    overflow: visible;
+  } */
+  
+  .tabLabel,
+  .tabClose {
+    display: flex;
+    color:black;
+    cursor: pointer;
+    flex-direction: column;
+    margin: 0;
+  }
+  .tabLabel {
+    justify-content: space-between;
+    padding: 0 35px 15px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    
+  }
+  .tabSubtitle {
+    margin: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 220px;
+  }
+  input[type="checkbox"]:checked + label .tabSubtitle {
+    white-space: normal; /* Позволяет тексту переноситься */
+    max-width: 220px; /* Убирает ограничение максимальной ширины */
+  }
+  input[type="checkbox"]:checked + label .tabLabel {
+    white-space: normal; /* Позволяет тексту переноситься */
+    max-width: 220px; /* Убирает ограничение максимальной ширины */  }
+  
+  .tabLabel::after {
+    position: absolute;
+    top: 18px;
+    right: 17px;
+    content: "";
+    width: 32px;
+    height: 32px;
+    background-image: url('../../images/up.svg');
+    text-align: center;
+    transition: all 0.35s;
+
+  }
+  .tab input:checked + .tabLabel::after {
+    /* transform: rotate(0deg); */
+  }
+  .tabContent p {
+    margin: 0;
+    justify-content: space-between;
+    padding: 0 35px;
+  }
+  .tabEmail {
+  }
+  .tabButton {
+    padding: 0 35px 24px;
+    cursor: pointer;
+    background-color: transparent;
+    color: rgba(170, 35, 50, 1);
+    border: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+  .tabClose {
+    justify-content: flex-end;
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+  }
+  .accordion--radio {
+  }
+  
+  .tab input:not(:checked) + .tabLabel:hover::after {
+    animation: bounce .5s infinite;
+  }
+  @keyframes bounce {
+    25% {
+      transform: translateY(.25rem);
+    }
+    75% {
+      transform: translateY(-.25rem);
+    }
+  }

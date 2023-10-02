@@ -1,7 +1,6 @@
 .header {
     margin: 0;
-    padding: 40px 0;
-    text-align: center;
+    padding: 160px 0 24px;
 }
 .form {
     display: flex;

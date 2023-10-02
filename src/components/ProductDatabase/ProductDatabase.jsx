@@ -1,11 +1,9 @@
-import './ProductDatabase';
+import "./ProductDatabase";
 
 function ProductDatabase() {
-
   return (
     <>
-      <div>ProductDatabase</div>
-    
+    таблица ProductDatabase
     </>
   );
 }
