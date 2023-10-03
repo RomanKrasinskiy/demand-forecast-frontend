@@ -1,4 +1,4 @@
-.header {
+/* .header {
     display: flex;
     justify-content: space-between;
     padding: 40px 120px 64px;
@@ -82,28 +82,34 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+} */
+.forecast {
+    width: 100%;
+    height: calc(100% - 155px);
+    background-color: #F5F6FA;
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
 }
+.forecastContainer {
+    height: 100%;
+    width: calc(100% - 240px);
+    border: 1px solid green;
+    display: flex;
+    justify-content: center;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 20px;
 
+
+}
 .switchContainer {
     display: flex;
-    justify-content: space-between;
-    gap: 40px;
-    margin-left: 160px;
-    width: 235px;
-    height: 40px;
+    width: calc(100% - 240px);
+    padding-top: 24px;   
 }
-
-.optionActive {
-    margin: 0;
-    padding-bottom: 11px;
-    color: var(--black, #2C2A29);
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    border-bottom: 3px solid #003C96;
-}
-
 .option {
     margin: 0;
     color: #7B7B7B;
@@ -111,35 +117,42 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    position: relative;
+    cursor: pointer;
+    margin-left: 40px;
+}
+.active {
+    color: black;
+}
+.option.active:after {
+    display: block;
+    content: '';
+    width:100%;
+    height:3px; 
+    margin-top: 11px;
+    background:#003C96;
+    border-radius: 20px;
+    padding: 0 1px;
 }
 
-.dataContainer {
-    margin: 0 120px 40px;
-    padding: 32px 40px 24px;
-    height: 824px;
-    flex-shrink: 0;
-    border-radius: 20px;
-    background: var(--white, #FFF);
-    display: flex;
-    flex-direction: column;
 
+.dataContainer {
+    width: 100%;
+    border: 1px solid red;
+    padding: 32px 40px 24px;
 }
 
 .searchContainer {
+    width: 100%;
     margin-bottom: 24px;
-    display: flex;
     height: 60px;
-    align-items: center;
     flex-shrink: 0;
     border-radius: 24px;
     border: 1px solid var(--light-grey, #A7A7A7);
 }
-
 .search {
-    width: 100%;
     padding: 10px 24px;
     align-items: center;
-    align-self: stretch;
     border-radius: 24px 0 0 24px;
     border: 0;
     outline: none;
@@ -164,6 +177,10 @@
     font-weight: 500;
     line-height: normal;
 }
+/* 
+
+
+
 
 .optionsContainer {
     margin-bottom: 32px;
@@ -173,4 +190,4 @@
     gap: 18px;
 }
 
-
+ */

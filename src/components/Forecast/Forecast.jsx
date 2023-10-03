@@ -1,11 +1,19 @@
 import './Forecast';
 import ForecastCSS from './Forecast.module.css';
-import logo from '../../images/logo.svg';
-import dropArrow from '../../images/drop-arrow.svg';
-import { TextField, Autocomplete } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
-import { stores, groups, categories, subcategories } from '../../utils/MenuProps';
-import { columns, rows } from '../../utils/ForecastData';
+// import logo from '../../images/logo.svg';
+// import dropArrow from '../../images/drop-arrow.svg';
+import { Button } from '@mui/material';
+// import { DataGrid } from '@mui/x-data-grid';
+import Paper from '@mui/material/Paper';
+import InputBase from '@mui/material/InputBase';
+// import Divider from '@mui/material/Divider';
+// import IconButton from '@mui/material/IconButton';
+// import MenuIcon from '@mui/icons-material/Menu';
+// import SearchIcon from '@mui/icons-material/Search';
+// import DirectionsIcon from '@mui/icons-material/Directions';
+// import { stores, groups, categories, subcategories } from '../../utils/MenuProps';
+// import { columns, rows } from '../../utils/ForecastData';
+import { useState } from 'react';
 // import Header from './../Header/Header';
 // import SearchForm from './../SearchForm/SearchForm';
 
@@ -18,39 +26,60 @@ import { columns, rows } from '../../utils/ForecastData';
 // }
 
 const Forecast = () => {
+  const [table, setTable] = useState(true);
+  const [chart, setChart] = useState(false);
+
+  function switchState(item) {
+    if (item === 'table') {
+      setTable(true);
+      setChart(false);
+    } else if (item === 'chart') {
+      setTable(false);
+      setChart(true);
+    }
+  }
 
   return (
-    <>
-      {/* Тут будет компонент Хедер, пока просто его задизайнил */}
-    <div className={ForecastCSS.header}>
-      <img className={ForecastCSS.logo} src={logo} alt="Лента"/>
-      <div className={ForecastCSS.btnContainer}>
-        <button className={ForecastCSS.passiveBtn}>База товаров</button>
-        <button className={ForecastCSS.activeBtn}>Прогноз</button>
-        <button className={ForecastCSS.passiveBtn}>Статистика</button>
+    <section className={ForecastCSS.forecast}>
+      {/* Переключатель Таблица-График */}
+      <div className={ForecastCSS.switchContainer}>
+        <p onClick={() => switchState('table')} className={table ? `${ForecastCSS.option} ${ForecastCSS.active}` : ForecastCSS.option}>Таблица</p>
+        <p onClick={() => switchState('chart')} className={chart ? `${ForecastCSS.option} ${ForecastCSS.active}` : ForecastCSS.option}>График</p>
       </div>
-      <div className={ForecastCSS.userContainer}>
-        <div className={ForecastCSS.userData}>
-          <p className={ForecastCSS.userName}>Василий Антонов</p>
-          <p className={ForecastCSS.userTitle}>Должность</p>
-        </div>
-        <img className={Forecast.select} src={dropArrow}/>
-      </div>
-    </div>
-    {/* Переключатель Таблица-График */}
-    <div className={ForecastCSS.switchContainer}>
-      <p className={ForecastCSS.optionActive}>Таблица</p>
-      <p className={ForecastCSS.option}>График</p>
-    </div>
+      <div className={ForecastCSS.forecastContainer}>
     {/* Основной блок с данными */}
-    <div className={ForecastCSS.dataContainer}>
+        <div className={ForecastCSS.dataContainer}>
       {/* Тут будет компонент SearchForm, пока просто его задизайнил */}
-      <div className={ForecastCSS.searchContainer}>
-        <input className={ForecastCSS.search} placeholder='Поиск'/>
-        <button className={ForecastCSS.findBtn}>Найти</button>
-      </div>
+      <Paper
+      component="form"
+      sx={{  display: 'flex', alignItems: 'center', width: '100', borderRadius: '24px', border: '1px solid rgba(167, 167, 167, 1)', boxShadow: 'none' }}
+    >
+      <InputBase
+        sx={{ ml: 2.5, flex: 1, fontSize: '20px',
+          fontFamily: 'HelveticaNeueCyr', }}
+        placeholder="Поиск"
+        // inputProps={{ 'aria-label': 'search google maps' }}
+      />
+      <Button
+        variant="contained"
+        sx={{
+          width: "160px",
+          height: "60px",
+          backgroundColor: 'rgba(0, 60, 150, 1)',
+          fontSize: '20px',
+          fontFamily: 'HelveticaNeueCyr',
+          borderRadius: "23px",
+          color: "white",
+          border: "1px solid rgba(0, 60, 150, 1)",
+          boxShadow: 'none',
+        }}
+      >
+        Найти
+      </Button>
+      
+    </Paper>
       {/* Панель с фильтрами */}
-      <div className={ForecastCSS.optionsContainer}>
+      {/* <div className={ForecastCSS.optionsContainer}>
         <Autocomplete
           disablePortal
           id="stores"
@@ -95,10 +124,10 @@ const Forecast = () => {
           }}
           renderInput={(params) => <TextField {...params} label="Подкатегория" />}
         />
-      </div>
+      </div> */}
       {/* Таблица */}
-      <div className={ForecastCSS.table}>
-        <DataGrid 
+      {/* <div className={ForecastCSS.table}> */}
+        {/* <DataGrid 
           sx={{
             '& .header': {
               backgroundColor: '#F1F5FF',
@@ -116,12 +145,14 @@ const Forecast = () => {
           checkboxSelection
           disableRowSelectionOnClick
           // slots={{ toolbar: CustomToolbar }} - Экспорт в Эксель только в платной версии
-        />
+        /> */}
         {/* График */}
         
-      </div>
+      {/* </div> */}
     </div>
-    </>
+    </div>
+    </section>
+    
   )
 }
 

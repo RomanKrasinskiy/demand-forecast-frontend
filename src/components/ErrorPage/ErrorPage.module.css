@@ -23,9 +23,7 @@
 .title {
   margin: 0 0 24px;
   color: var(--black, #2C2A29);
-  font-family: Helvetica Neue;
   font-size: 64px;
-  font-style: normal;
   font-weight: 700;
   line-height: normal;
 }
@@ -33,9 +31,7 @@
 .text {
   margin: 0 0 8px;
   color: var(--gray, #4D4D4D);
-  font-family: Helvetica Neue;
   font-size: 24px;
-  font-style: normal;
   font-weight: 500;
   line-height: normal;
 }
@@ -43,18 +39,14 @@
 .linkText {
   margin: 0;
   color: var(--light-grey, #A7A7A7);
-  font-family: Helvetica Neue;
   font-size: 24px;
-  font-style: normal;
   font-weight: 400;
   line-height: normal;
 }
 
 .link {
   color: var(--blue, #003C96);
-  font-family: Helvetica Neue;
   font-size: 24px;
-  font-style: normal;
   font-weight: 400;
   line-height: normal;
 }

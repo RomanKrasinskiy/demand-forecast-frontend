@@ -11,7 +11,6 @@ export function useFormWithValidation(inputValues) {
 
   const handleChange = (event) => {
     const target = event.target;
-
     const name = target.name;
     const value = target.value;
     setValues({ ...values, [name]: value });

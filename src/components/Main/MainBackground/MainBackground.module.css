@@ -19,20 +19,16 @@
     min-height: 1080px;
     
     position: relative;
-    /* border: 2px solid black; */
     
-    /* overflow: hidden; */
+  
     background-size: cover;
     flex: 1;
 
 }
 .circle {
     background-image: url('../../../images/circlebackground.png');
-    /* width: 819px;
-    height: 1405px; */
     width: 1400px;
-height: 1406px;
-    /* position: absolute; */
+    height: 1406px;
     top: -539px;
     right: -549px;
     z-index: 1;
@@ -40,17 +36,11 @@ height: 1406px;
 }
 .leaf {
     background-image: url('../../../images/leafbackground.png');
-    /* width: 1000px;
-    height: 1024px; */
     width: 2051px;
     height: 663px;
     bottom: -226px;
     right: -990px;
     z-index: 0;
-
-
-
-
 }
 .circle, .leaf {
     background-repeat: no-repeat;

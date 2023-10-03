@@ -38,7 +38,6 @@ return (
           // isDisabled={!isValid ? false : true}
         >
           <h3 className={MainCss.subtitle}>
-            
             Этот сервис поможет вам визуазировать прогноз спроса на 14 дней в
             будущее
           </h3>

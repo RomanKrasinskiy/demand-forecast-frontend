@@ -11,6 +11,7 @@ const Header = () => {
       color: isActive ? "white" : "",
       backgroundColor: isActive ? "rgba(0, 60, 150, 1)" : "",
       borderRadius: isActive && '46px',
+      fontWeight: isActive && '500'
     };
   };
   return (
