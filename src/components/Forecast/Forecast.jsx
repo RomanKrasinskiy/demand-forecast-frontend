@@ -1,52 +1,29 @@
 import './Forecast';
 import ForecastCSS from './Forecast.module.css';
-// import logo from '../../images/logo.svg';
-// import dropArrow from '../../images/drop-arrow.svg';
-import { Autocomplete, Button, TextField } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
-import Paper from '@mui/material/Paper';
-import InputBase from '@mui/material/InputBase';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
-import DirectionsIcon from '@mui/icons-material/Directions';
-import { stores, groups, categories, subcategories } from '../../utils/MenuProps';
-import { columns, rows } from '../../utils/ForecastData';
 import { useState } from 'react';
-// import Header from './../Header/Header';
-// import SearchForm from './../SearchForm/SearchForm';
-
-// function CustomToolbar() {
-//   return (
-//     <GridToolbarContainer>
-//       <GridToolbarExport />
-//     </GridToolbarContainer>
-//   );
-// }
+import { TextField, Autocomplete } from '@mui/material';
+import { stores, groups, categories, subcategories } from '../../utils/MenuProps';
+import ForecastTable from './ForecastTable/ForecastTable';
+import ForecastChart from './ForecastChart/ForecastChart';
 
 const Forecast = () => {
-  const [table, setTable] = useState(true);
-  const [chart, setChart] = useState(false);
+  const [iaDataTable, setDataChart] = useState(true);
 
-  function switchState(item) {
-    if (item === 'table') {
-      setTable(true);
-      setChart(false);
-    } else if (item === 'chart') {
-      setTable(false);
-      setChart(true);
-    }
+  function handleDataChart() {
+    iaDataTable ? setDataChart(false) : '';
+  }
+
+  function handleDataTable() {
+    !iaDataTable ? setDataChart(true) : '';
   }
 
   return (
-    <section className={ForecastCSS.forecast}>
-      {/* Переключатель Таблица-График */}
-      <div className={ForecastCSS.switchContainer}>
-        <p onClick={() => switchState('table')} className={table ? `${ForecastCSS.option} ${ForecastCSS.active}` : ForecastCSS.option}>Таблица</p>
-        <p onClick={() => switchState('chart')} className={chart ? `${ForecastCSS.option} ${ForecastCSS.active}` : ForecastCSS.option}>График</p>
-      </div>
-      <div className={ForecastCSS.forecastContainer}>
+    <>
+    {/* Переключатель Таблица-График */}
+    <div className={ForecastCSS.switchContainer}>
+      <button className={`${ForecastCSS.option} ${iaDataTable ? ForecastCSS.optionActive : ''}`} onClick={handleDataTable}>Таблица</button>
+      <button className={`${ForecastCSS.option} ${!iaDataTable ? ForecastCSS.optionActive : ''}`} onClick={handleDataChart}>График</button>
+    </div>
     {/* Основной блок с данными */}
         <div className={ForecastCSS.dataContainer}>
       {/* Тут будет компонент SearchForm, пока просто его задизайнил */}
@@ -125,29 +102,11 @@ const Forecast = () => {
           renderInput={(params) => <TextField {...params} label="Подкатегория" />}
         />
       </div>
-      {/* Таблица */}
-      <div className={ForecastCSS.table}>
-        <DataGrid 
-          sx={{
-            '& .header': {
-              backgroundColor: '#F1F5FF',
-            },
-            '& .MuiDataGrid-columnHeaderCheckbox': {
-              backgroundColor: '#F1F5FF',
-            },
-          }}
-          rows={rows} 
-          columns={columns}
-          initialState={{
-            pagination: { paginationModel: { pageSize: 5 }},
-          }}
-          pageSizeOptions={[5, 10, 20, 30]}
-          checkboxSelection
-          disableRowSelectionOnClick
-          // slots={{ toolbar: CustomToolbar }} - Экспорт в Эксель только в платной версии
-        />
-        {/* График */}
-        
+      <div className={ForecastCSS.data}>
+      {iaDataTable
+        ? <ForecastTable />
+        : <ForecastChart />
+      }
       </div>
     </div>
     </div>
