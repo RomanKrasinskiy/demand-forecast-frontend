@@ -7,25 +7,6 @@
     height: 40px;
 }
 
-.optionActive {
-    margin: 0;
-    padding-bottom: 11px;
-    color: var(--black, #2C2A29);
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    border: 0;
-    border-bottom: 3px solid #003C96;
-    background: transparent;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.optionActive:hover {
-    opacity: 0.7;
-}
-
 .option {
     margin: 0;
     padding-bottom: 11px;
@@ -42,6 +23,11 @@
 
 .option:hover {
     opacity: 0.7;
+}
+
+.optionActive {
+    color: #2C2A29;
+    border-bottom: 3px solid #003C96;
 }
 
 .dataContainer {
@@ -101,20 +87,3 @@
     align-items: center;
     gap: 18px;
 }
-
-.chartContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 18px;
-}
-
-.chart {
-    margin-top: 18px;
-    width: 75%;
-}
-
-.chartTable {
-    width: 25%;
-}
-
