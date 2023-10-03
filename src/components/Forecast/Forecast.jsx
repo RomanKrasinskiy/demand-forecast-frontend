@@ -7,22 +7,22 @@ import ForecastTable from './ForecastTable/ForecastTable';
 import ForecastChart from './ForecastChart/ForecastChart';
 
 const Forecast = () => {
-  const [iaDataTable, setDataChart] = useState(true);
+  const [isDataTable, setDataChart] = useState(true);
 
   function handleDataChart() {
-    iaDataTable ? setDataChart(false) : '';
+    isDataTable ? setDataChart(false) : '';
   }
 
   function handleDataTable() {
-    !iaDataTable ? setDataChart(true) : '';
+    !isDataTable ? setDataChart(true) : '';
   }
 
   return (
     <>
     {/* Переключатель Таблица-График */}
     <div className={ForecastCSS.switchContainer}>
-      <button className={`${ForecastCSS.option} ${iaDataTable ? ForecastCSS.optionActive : ''}`} onClick={handleDataTable}>Таблица</button>
-      <button className={`${ForecastCSS.option} ${!iaDataTable ? ForecastCSS.optionActive : ''}`} onClick={handleDataChart}>График</button>
+      <button className={`${ForecastCSS.option} ${isDataTable ? ForecastCSS.optionActive : ''}`} onClick={handleDataTable}>Таблица</button>
+      <button className={`${ForecastCSS.option} ${!isDataTable ? ForecastCSS.optionActive : ''}`} onClick={handleDataChart}>График</button>
     </div>
     {/* Основной блок с данными */}
     <div className={ForecastCSS.dataContainer}>
@@ -79,7 +79,7 @@ const Forecast = () => {
         />
       </div>
       <div className={ForecastCSS.data}>
-      {iaDataTable
+      {isDataTable
         ? <ForecastTable />
         : <ForecastChart />
       }
