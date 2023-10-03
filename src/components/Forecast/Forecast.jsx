@@ -2,17 +2,17 @@ import './Forecast';
 import ForecastCSS from './Forecast.module.css';
 // import logo from '../../images/logo.svg';
 // import dropArrow from '../../images/drop-arrow.svg';
-import { Button } from '@mui/material';
-// import { DataGrid } from '@mui/x-data-grid';
+import { Autocomplete, Button, TextField } from '@mui/material';
+import { DataGrid } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
-// import Divider from '@mui/material/Divider';
-// import IconButton from '@mui/material/IconButton';
-// import MenuIcon from '@mui/icons-material/Menu';
-// import SearchIcon from '@mui/icons-material/Search';
-// import DirectionsIcon from '@mui/icons-material/Directions';
-// import { stores, groups, categories, subcategories } from '../../utils/MenuProps';
-// import { columns, rows } from '../../utils/ForecastData';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
+import DirectionsIcon from '@mui/icons-material/Directions';
+import { stores, groups, categories, subcategories } from '../../utils/MenuProps';
+import { columns, rows } from '../../utils/ForecastData';
 import { useState } from 'react';
 // import Header from './../Header/Header';
 // import SearchForm from './../SearchForm/SearchForm';
@@ -52,7 +52,7 @@ const Forecast = () => {
       {/* Тут будет компонент SearchForm, пока просто его задизайнил */}
       <Paper
       component="form"
-      sx={{  display: 'flex', alignItems: 'center', width: '100', borderRadius: '24px', border: '1px solid rgba(167, 167, 167, 1)', boxShadow: 'none' }}
+      sx={{  display: 'flex', alignItems: 'center', width: '100', borderRadius: '24px', border: '1px solid rgba(167, 167, 167, 1)', boxShadow: 'none', margin: '0 40px'}}
     >
       <InputBase
         sx={{ ml: 2.5, flex: 1, fontSize: '20px',
@@ -79,7 +79,7 @@ const Forecast = () => {
       
     </Paper>
       {/* Панель с фильтрами */}
-      {/* <div className={ForecastCSS.optionsContainer}>
+      <div className={ForecastCSS.optionsContainer}>
         <Autocomplete
           disablePortal
           id="stores"
@@ -124,10 +124,10 @@ const Forecast = () => {
           }}
           renderInput={(params) => <TextField {...params} label="Подкатегория" />}
         />
-      </div> */}
+      </div>
       {/* Таблица */}
-      {/* <div className={ForecastCSS.table}> */}
-        {/* <DataGrid 
+      <div className={ForecastCSS.table}>
+        <DataGrid 
           sx={{
             '& .header': {
               backgroundColor: '#F1F5FF',
@@ -145,10 +145,10 @@ const Forecast = () => {
           checkboxSelection
           disableRowSelectionOnClick
           // slots={{ toolbar: CustomToolbar }} - Экспорт в Эксель только в платной версии
-        /> */}
+        />
         {/* График */}
         
-      {/* </div> */}
+      </div>
     </div>
     </div>
     </section>
