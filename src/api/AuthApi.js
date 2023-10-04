@@ -19,7 +19,7 @@ class Auth {
       console.log(res)
     })
     }
-  login(email, password, shop) {
+  login({ email, password, shop }) {
     return fetch(API_MAIN_CONFIG.signIn, {
       method: "POST",
       headers: API_MAIN_CONFIG.headers,
