@@ -5,17 +5,17 @@ import { REGEX_NAME, REGEX_EMAIL } from "../utils/constants";
 //хук управления формой и валидации формы
 export function useFormWithValidation(inputValues) {
   const [values, setValues] = useState(inputValues);
-
   const [errors, setErrors] = useState({});
-  const [isValid, setIsValid] = useState(false);
+  const [isValid, setIsValid] = useState(!false);
 
   const handleChange = (event) => {
     const target = event.target;
 
     const name = target.name;
+    
     const value = target.value;
     setValues({ ...values, [name]: value });
-
+    // console.log(values);
     if (value.length < 1) {
       setErrors((state) => ({ ...state, [name]: "Это обязательное поле" }));
       setIsValid(false);
@@ -50,7 +50,7 @@ export function useFormWithValidation(inputValues) {
     } else {
       setErrors({ ...errors, [name]: target.validationMessage });
     }
-    setIsValid(target.closest("form").checkValidity());
+    // setIsValid(target.closest("form").checkValidity());
   };
 
   const resetForm = useCallback(

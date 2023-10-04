@@ -10,11 +10,12 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Button, FormControl, Input, InputLabel, MenuItem, Select, Stack } from "@mui/material";
 import MainBackground from "../../Main/MainBackground/MainBackground";
 import { Link } from "react-router-dom";
+import { useFormWithValidation } from "../../../hooks/useFormWithValidation";
 
-export default function Login() {
-  // onLogin,
-  // const { values, handleChange, errors, isValid } =
-  //   useFormWithValidation({ name: "", email: "", password: "" });
+// eslint-disable-next-line react/prop-types
+export default function Login({ onLogin }) {
+  const { values, handleChange} =
+    useFormWithValidation({ email: "", password: "", shop: "" });
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => {
@@ -77,23 +78,25 @@ export default function Login() {
   
 
 const [shops] = React.useState(data); // в стейт
-const [selectedShop, setSelectedShop] = React.useState('');
+// const [selectedShop, setSelectedShop] = React.useState('');
 
-const handleChange = (event) => {
-  const value = event.target.value;
-    console.log(value);
-    setSelectedShop(value);
-    console.log(value.store);
-};
+// const handleChange = (event) => {
+//   const value = event.target.value;
+//     console.log(value);
+//     setSelectedShop(value);
+//     console.log(value.store);
+// };
 
   const handleSubmit = (e) => {
     console.log("click login");
 
     e.preventDefault();
-    // onLogin({
-    //   email: values.email,
-    //   password: values.password,
-    // });
+    onLogin({
+      email: values.email,
+      password: values.password,
+      userName: values.userName,
+      usersPosition: values.usersPosition
+    });
   };
 
   return (
@@ -122,11 +125,14 @@ const handleChange = (event) => {
               type="email"
               size="normal"
               variant="standard"
+              value={values.email}
               fullWidth
               required
             >
               <InputLabel
-                htmlFor="standard-adornment-password"
+                htmlFor="standard-adornment-email"
+                value={values.email}
+
                 sx={{
                   left: "26px",
                   top: "16px",
@@ -144,7 +150,10 @@ const handleChange = (event) => {
               </InputLabel>
               <Input
                 disableUnderline
-                id="name"
+                value={values.email}
+                onChange={handleChange}
+                id="email"
+                name='email'
                 type="text"
                 sx={{
                   border: "1px solid rgba(77, 77, 77, 1)",
@@ -155,63 +164,72 @@ const handleChange = (event) => {
               />
             </FormControl>
             <FormControl
-              id="email"
-              label="Email"
-              type="email"
-              size="normal"
-              variant="standard"
-              fullWidth
-              required
-            >
-              <InputLabel
-                htmlFor="standard-adornment-password"
-                sx={{
-                  left: "26px",
-                  top: "16px",
-                  "&.MuiInputLabel-shrink": {
-                    // позиционирование дэйбла в активном состоянии
-                    top: "4px",
-                    transform: "translate(0, -10px) scale(1)",
-                  },
-                  "&.Mui-focused": {
-                    color: "rgba(0, 60, 150, 1)", // Погда поле выбрано цвет синий. Добавить валидацию смены цвета на красный при error
-                  },
-                }}
-              >
-                Пароль
-              </InputLabel>
-              <Input
-                disableUnderline
-                id="standard-adornment-password"
-                type={showPassword ? "text" : "password"}
-                sx={{
-                  border: "1px solid rgba(77, 77, 77, 1)",
-                  borderRadius: "24px",
-                  padding: "13px 24px",
-                  marginBottom: "4px",
-                }}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      sx={{
-                        color: 'rgba(0, 60, 150, 1)'
-                      }}
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-              />
-            </FormControl>
-
-            <FormControl 
-            id="tk"
-            label="tk"
+            id="password"
+            label="Password"
+            type="password"
             size="normal"
             variant="standard"
+            fullWidth
+            required
+            value={values.password}
+            onSubmit={handleSubmit}
+
+          >
+            <InputLabel
+              htmlFor="standard-adornment-password"
+              sx={{
+                left: "26px",
+                top: "16px",
+                "&.MuiInputLabel-shrink": {
+                  // позиционирование дэйбла в активном состоянии
+                  top: "4px",
+                  transform: "translate(0, -10px) scale(1)",
+                },
+                "&.Mui-focused": {
+                  color: "rgba(0, 60, 150, 1)", // Погда поле выбрано цвет синий. Добавить валидацию смены цвета на красный при error
+                },
+              }}
+            >
+              Пароль
+            </InputLabel>
+            <Input
+              name='password'
+              disableUnderline
+              id="password"
+              type={showPassword ? "text" : "password"}
+              value={values.password}
+              onChange={handleChange}
+              sx={{
+                border: "1px solid rgba(77, 77, 77, 1)",
+                borderRadius: "24px",
+                padding: "13px 24px",
+                marginBottom: "4px",
+              }}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    sx={{
+                      color: 'rgba(0, 60, 150, 1)'
+                    }}
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
+
+            <FormControl 
+            id="shop"
+
+            label="shop"
+            size="normal"
+            variant="standard"
+            onSubmit={handleSubmit}
+            value={values.shop}
             fullWidth
             sx={{
               overflow: "hidden", // Скрываем часть текста, которая не помещается
@@ -219,7 +237,8 @@ const handleChange = (event) => {
               textOverflow: "ellipsis",
             }}
             required>
-              <InputLabel  id="demo-simple-select-label"
+              <InputLabel  id="demo-simple-select-shop"
+              
                 sx={{
                   left: "26px",
                   top: "20px",
@@ -236,10 +255,11 @@ const handleChange = (event) => {
 
                 }}>Торговый комплекс</InputLabel>
               <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={selectedShop}
-                label="TK"
+                labelId="demo-simple-select-shop"
+                id="shop"
+                value={values.shop}
+                onChange={handleChange}
+                label="shop"
                 disableUnderline
                 
                 sx={{
@@ -254,11 +274,11 @@ const handleChange = (event) => {
                     color: 'red'
                   }
                 }}
-                onChange={handleChange}
+                
               >
-                {shops.map((item) => (
-                    <MenuItem sx={{
-                    }} key={`${item.city}-${item.store}`} value={item}>{`${item.city} ${item.store}`}
+                {shops.map((shop) => (
+                    <MenuItem id="shop" 
+                    key={`${shop.city}-${shop.store}`} value={values.shop}>{`${shop.city} ${shop.store}`}
           </MenuItem>
                   ))}
                 
