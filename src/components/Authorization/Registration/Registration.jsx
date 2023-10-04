@@ -1,32 +1,38 @@
 import RegCSS from './Registration.module.css'
 import Authorization from "../Authorization";
 // import Select from 'react-select'
-
-
 import { Box, Button, FormControl, IconButton, Input, InputAdornment, InputLabel, Stack } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import MainBackground from "../../Main/MainBackground/MainBackground";
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useFormWithValidation } from '../../../hooks/useFormWithValidation';
 
-export default function Registration() {
+
+// eslint-disable-next-line react/prop-types
+export default function Registration({ onRegister }) {
+  
   const [showPassword, setShowPassword] = React.useState(false);
+  const { values, handleChange} =
+    useFormWithValidation({email: "", password: "", userName: "", usersPosition: ""});
+
+
+
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
+  const handleMouseDownPassword = (e) => {e.preventDefault()};
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('click reg')
-    // onRegister({
-    //   name: values.name,
-    //   email: values.email,
-    //   password: values.password,
-    // });
+    onRegister({
+      email: values.email,
+      password: values.password,
+      userName: values.userName,
+      usersPosition: values.usersPosition
+    });
+
+    console.log(values)
   };
-
-
 
 return (
     
@@ -36,12 +42,7 @@ return (
       <Authorization
         headerText="Регистрация"
         navSpanBtnLink="/signup"
-        spanBtnLinkText="Регистрация"
-        classButton="button__indent"
-        onSubmit={handleSubmit}
-        // isValid={isValid}
-        // formError={formError}
-        // isDisabled={!isValid ? false : true}
+
       >
         <Box sx={{
           width: '100%'
@@ -52,11 +53,14 @@ return (
             type="email"
             size="normal"
             variant="standard"
+            value={values.email}
             fullWidth
             required
+            onSubmit={handleSubmit}
           >
             <InputLabel
               htmlFor="standard-adornment-password"
+              value={values.email}
               sx={{
                 left: "26px",
                 top: "16px",
@@ -74,8 +78,11 @@ return (
             </InputLabel>
             <Input
               disableUnderline
-              id="name"
+              name='email'
+              id="email"
               type="text"
+              value={values.email}
+              onChange={handleChange}
               sx={{
                 border: "1px solid rgba(77, 77, 77, 1)",
                 borderRadius: "24px",
@@ -84,14 +91,18 @@ return (
               }}
             />
           </FormControl>
+
           <FormControl
-            id="email"
-            label="Email"
-            type="email"
+            id="password"
+            label="Password"
+            type="password"
             size="normal"
             variant="standard"
             fullWidth
             required
+            value={values.password}
+            onSubmit={handleSubmit}
+
           >
             <InputLabel
               htmlFor="standard-adornment-password"
@@ -111,9 +122,12 @@ return (
               Пароль
             </InputLabel>
             <Input
+              name='password'
               disableUnderline
-              id="standard-adornment-password"
+              id="password"
               type={showPassword ? "text" : "password"}
+              value={values.password}
+              onChange={handleChange}
               sx={{
                 border: "1px solid rgba(77, 77, 77, 1)",
                 borderRadius: "24px",
@@ -138,7 +152,9 @@ return (
           </FormControl>
 
           <FormControl
-            id="name"
+            id="userName"
+            name='userName'
+
             label="Name"
             type="text"
             size="normal"
@@ -146,7 +162,7 @@ return (
             fullWidth
           >
             <InputLabel
-              htmlFor="standard-adornment-password"
+              htmlFor="standard-adornment-userName"
               sx={{
                 left: "26px",
                 top: "16px",
@@ -164,8 +180,13 @@ return (
             </InputLabel>
             <Input
               disableUnderline
-              id="name"
+              name='userName'
+              id="userName"
               type="text"
+              value={values.userName}
+              onChange={handleChange}
+
+
               sx={{
                 border: "1px solid rgba(77, 77, 77, 1)",
                 borderRadius: "24px",
@@ -176,15 +197,15 @@ return (
           </FormControl>
 
           <FormControl
-            id="post"
-            label="Post"
+            id="usersPosition"
+            label="UsersPosition"
             type="text"
             size="normal"
             variant="standard"
             fullWidth
           >
             <InputLabel
-              htmlFor="standard-adornment-password"
+              htmlFor="standard-adornment-usersPosition"
               sx={{
                 left: "26px",
                 top: "16px",
@@ -201,9 +222,14 @@ return (
               Должность
             </InputLabel>
             <Input
+            name='usersPosition'
               disableUnderline
-              id="name"
+              id="usersPosition"
               type="text"
+              value={values.usersPosition}
+              onChange={handleChange}
+
+
               sx={{
                 border: "1px solid rgba(77, 77, 77, 1)",
                 borderRadius: "24px",
@@ -211,16 +237,13 @@ return (
                 marginBottom: "4px",
               }}
             />
-          </FormControl>
-        
-
-        
           <Stack spacing={2} direction="row"
             sx={{
               paddingTop: '24px'
             }}
           >
             <Button variant="contained"
+            onClick={handleSubmit}
               sx={{
                 width: '304px',
                 height: '60px',
@@ -231,6 +254,7 @@ return (
                 textTransform: 'none',
                 fontWeight: '500',
                 fontSize: '20px',
+                
 
               }}
             >Зарегистрироваться</Button>
@@ -253,6 +277,10 @@ return (
             
 
            </Stack>
+
+          </FormControl>
+        
+          
 
         </Box>
       </Authorization>

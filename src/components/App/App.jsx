@@ -2,7 +2,7 @@ import "./App";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 // import ProtectedRoutes from '../ProtectedRoutes/ProtectedRoutes';
 import AppCSS from "./App.module.css";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
 import ErrorPage from "../ErrorPage/ErrorPage";
 import Registration from "../Authorization/Registration/Registration";
@@ -10,51 +10,54 @@ import Login from "../Authorization/Login/Login";
 import Main from "../Main/Main";
 import Forecast from "../Forecast/Forecast";
 import Statistics from "../Statistics/Statistics";
-import Preloader from "../Preloader/Preloader";
+// import Preloader from "../Preloader/Preloader";
 import ProductDatabase from "../ProductDatabase/ProductDatabase";
 import Header from "../Header/Header";
-
-const loggedIn = true; // временная заглушка
-const currentUser = true; // временная заглушка
-const handleRegister = true; // временная заглушка
-const formError = false; // временная заглушка
-const isActive = false; // временная заглушка
-const handleLogin = true; // временная заглушка
-const number = "404"; // заглушка
-const message = "err message"; // заглушка
+import { useState } from "react";
+import { auth } from "../../api/AuthApi";
 
 function App() {
+  const navigate = useNavigate();
+
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({
+    email: "",
+    password: "",
+    userName: "",
+    usersPosition: "",
+    id: "",
+  });
+
+  function handleRegister({ email, password, userName, usersPosition }) {
+    // setIsLoading(true)
+    auth
+      .register({ email, password, userName, usersPosition })
+      .then(() => {
+        navigate('/signin')
+      })
+      // .catch((err) => setFormError({ isError: true, text: err.message })) // Уточнить у дизайнеров, будет ли валидация полей
+      // .finally(() => setIsLoading(false));
+  }
+
+
   return (
     <div className={AppCSS.app}>
       <CurrentUserContext.Provider value={currentUser}>
         <Routes>
-          <Route exact path="/" element={<Main loggedIn={loggedIn} />} />
-          <Route
-            path="/authentication" // предварительная ручка
-            element={
-              !loggedIn ? (
-                <Navigate to="/forecast" />
-              ) : (
-                <Registration
-                  onRegister={handleRegister}
-                  formError={formError}
-                />
-              )
-            }
-          />
+          <Route exact path="/" element={<Main />} />
           <Route
             path="/signup" // предварительная ручка
-            element={!loggedIn ? <Navigate to="/forecast" /> : <Registration />}
+            element={
+              loggedIn ? (
+                <Navigate to="/forecast" />
+              ) : (
+                <Registration onRegister={handleRegister} />
+              )
+            }
           />
           <Route
             path="/signin" // предварительная ручка
-            element={
-              !loggedIn ? (
-                <Navigate to="/forecast" />
-              ) : (
-                <Login onLogin={handleLogin} formError={formError} />
-              )
-            }
+            element={loggedIn ? <Navigate to="/forecast" /> : <Login />}
           />
           <Route>
             <Route
@@ -71,7 +74,7 @@ function App() {
               element={
                 <>
                   <Header />
-                  <Forecast loggedIn={loggedIn} />
+                  <Forecast />
                 </>
               }
             />
@@ -85,12 +88,10 @@ function App() {
               }
             />
           </Route>
-          <Route
-            path="*"
-            element={<ErrorPage number={number} message={message} />}
-          />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
-        <Preloader isActive={isActive} />
+        {/* <Preloader  /> */}
+        {/* isActive={isActive} */}
       </CurrentUserContext.Provider>
     </div>
   );
