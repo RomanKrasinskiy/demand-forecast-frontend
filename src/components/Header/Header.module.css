@@ -7,6 +7,7 @@
     justify-content: center;
     background-color: #F5F6FA;
     padding: 40px 0;
+white-space: wrap;
 }
 
 .container {
@@ -15,16 +16,18 @@
     align-items: center;
     width: calc(100% - 240px);
     transition: .5s;
+    white-space: wrap;
 }
 
 .navContainer {
     background-color: white;
     border-radius: 42px;
     display: flex;
-    justify-content: start;
-    gap: 34px;
+    justify-content: space-between;
     padding: 0;
     list-style-type: none;
+    width: calc(100% - 65%);
+    min-width: 598px;
 }
 
 .navLink {
@@ -33,7 +36,7 @@
     border-radius: 46px;
     border: 2px solid rgba(0, 60, 150, 0);
     font-size: 24px;
-    font-weight: 500;
+    font-weight: 300;
     padding: 22px 34px;
     white-space: nowrap;
     transition: background-color 0.3s, border 0.3s;

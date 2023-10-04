@@ -44,14 +44,7 @@ function App() {
           />
           <Route
             path="/signup" // предварительная ручка
-            element={
-              !loggedIn ? (
-                <Navigate to="/forecast" />
-              ) : (
-                  <Registration/>
-                
-              )
-            }
+            element={!loggedIn ? <Navigate to="/forecast" /> : <Registration />}
           />
           <Route
             path="/signin" // предварительная ручка
@@ -68,27 +61,28 @@ function App() {
               path="/productdatabase" // предварительная ручка
               element={
                 <>
-                  <Header/>
+                  <Header />
                   <ProductDatabase />
                 </>
-              
-            }
+              }
             />
             <Route
               path="/forecast" // предварительная ручка
               element={
                 <>
-                <Header/>
-                <Forecast loggedIn={loggedIn} />
-              </>
+                  <Header />
+                  <Forecast loggedIn={loggedIn} />
+                </>
               }
             />
             <Route
               path="/statistics" // предварительная ручка
-              element={<>
-                <Header />
-                <Statistics />
-              </>}
+              element={
+                <>
+                  <Header />
+                  <Statistics />
+                </>
+              }
             />
           </Route>
           <Route

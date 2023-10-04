@@ -2,15 +2,18 @@
   position: relative;
   border-radius: 48px;
   width: 300px;
-  height: 72px;
+  min-height: 72px;
 }
 
 .accordion {
   background-color: rgba(255, 255, 255, 1);
   border-radius: 48px;
   width: 300px;
-  
-
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+input[type="checkbox"] {
   position: absolute;
   top: 0;
   left: 0;
@@ -29,9 +32,10 @@
 }
 
 .tab input:checked~.tabContent {
-  max-height: 10rem;
+  max-height: 200px;
 
 }
+
 
 .tabLabel,
 .tabClose {
@@ -43,7 +47,9 @@
 }
 
 .tabLabel {
-  justify-content: space-between;
+  max-width: 300px;
+  justify-content: center;
+  min-height: 72px;
   padding: 0 35px 4px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -53,6 +59,8 @@
   font-weight: 400;
   line-height: normal;
   color: rgba(44, 42, 41, 1);
+  transition: all 1s;
+
 
 }
 
@@ -68,6 +76,8 @@
   font-weight: 400;
   line-height: normal;
   color: rgba(167, 167, 167, 1);
+  transition: all 0.35s;
+
 }
 
 input[type="checkbox"]:checked+label .tabSubtitle {
@@ -79,6 +89,10 @@ input[type="checkbox"]:checked+label .tabSubtitle {
 input[type="checkbox"]:checked+label .tabLabel {
   white-space: normal;
   max-width: 220px;
+}
+input[type="checkbox"]:checked .tabLabel .tab {
+  height: 200px;
+  display: flex;
 }
 
 .tabLabel::after {
@@ -107,11 +121,17 @@ font-size: 20px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
+text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: all 0.35s;
+
 
 }
 
+
 .tabButton {
-  padding: 0 35px 24px;
+  padding: 10px 35px 24px;
   cursor: pointer;
   background-color: transparent;
   color: rgba(170, 35, 50, 1);
@@ -119,6 +139,9 @@ line-height: normal;
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
+  font-family: "Inter";
+  font-size: 20px;
+  font-weight: 400;
 }
 
 .tabClose {
@@ -126,8 +149,6 @@ line-height: normal;
   padding: 0.5rem 1rem;
   font-size: 0.75rem;
 }
-
-.accordion--radio {}
 
 .tab input:not(:checked)+.tabLabel:hover::after {
   animation: bounce .5s infinite;

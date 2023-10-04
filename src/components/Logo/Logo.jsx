@@ -6,7 +6,7 @@ function Logo() {
 
   return (
     <div className={styles.container}>
-      <Link className={styles.logo} to="/" />
+      <Link className={styles.logo} to="/forecast" />
     </div>
   )
 }

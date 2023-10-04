@@ -4,6 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-right: 10px;
 }
 .logo {
     background-image: url('../../images/logoHeader.png');
