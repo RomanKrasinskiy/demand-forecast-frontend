@@ -58,7 +58,9 @@ return (
                     borderRadius: "46px",
                     color: "white",
                     border: "2px solid rgba(0, 60, 150, 1)",
-                  }}
+                    textTransform: 'none',
+                    fontWeight: '500',
+                    fontSize: '20px',                  }}
                 >
                   Войти
                 </Button>
@@ -73,6 +75,11 @@ return (
                     borderRadius: "46px",
                     color: "rgba(0, 60, 150, 1)",
                     border: "2px solid rgba(0, 60, 150, 1)",
+                    textTransform: 'none',
+                    fontWeight: '500',
+                    fontSize: '20px',
+
+
                   }}
                 >
                   Зарегистрироваться

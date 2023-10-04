@@ -11,6 +11,7 @@ const Header = () => {
       color: isActive ? "white" : "",
       backgroundColor: isActive ? "rgba(0, 60, 150, 1)" : "",
       borderRadius: isActive && '46px',
+      fontWeight: isActive && '500'
     };
   };
   return (
@@ -22,7 +23,7 @@ const Header = () => {
             to="/productdatabase" style={activeState}
             className={`${styles.navLink} ${styles.navDataBase}`}
           >
-            База данных
+            База товаров
           </NavLink>
           <NavLink to="/forecast" style={activeState}
           className={`${styles.navLink} ${styles.navForecast}`}

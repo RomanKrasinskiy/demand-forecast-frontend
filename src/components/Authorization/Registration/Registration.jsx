@@ -227,7 +227,10 @@ return (
                 backgroundColor: 'rgba(0, 60, 150, 1)',
                 borderRadius: '46px',
                 color: 'white',
-                border: '2px solid rgba(0, 60, 150, 1)'
+                border: '2px solid rgba(0, 60, 150, 1)',
+                textTransform: 'none',
+                fontWeight: '500',
+                fontSize: '20px',
 
               }}
             >Зарегистрироваться</Button>
@@ -240,8 +243,10 @@ return (
                 backgroundColor: 'transparent',
                 borderRadius: '46px',
                 color: 'rgba(0, 60, 150, 1)',
-                border: '2px solid rgba(0, 60, 150, 1)'
-
+                border: '2px solid rgba(0, 60, 150, 1)',
+                textTransform: 'none',
+                fontWeight: '500',
+                fontSize: '20px',
               }}
             >Назад</Button>
             </Link>
