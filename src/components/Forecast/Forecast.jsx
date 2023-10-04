@@ -1,10 +1,10 @@
-import './Forecast';
 import ForecastCSS from './Forecast.module.css';
 import { useState } from 'react';
-import { TextField, Autocomplete, Paper, InputBase, Button } from '@mui/material';
+import { TextField, Autocomplete } from '@mui/material';
 import { stores, groups, categories, subcategories } from '../../utils/MenuProps';
 import ForecastTable from './ForecastTable/ForecastTable';
 import ForecastChart from './ForecastChart/ForecastChart';
+import SearchForm from './../SearchForm/SearchForm';
 
 const Forecast = () => {
   const [isDataTable, setDataChart] = useState(true);
@@ -26,43 +26,8 @@ const Forecast = () => {
     </div>
     {/* Основной блок с данными */}
     <div className={ForecastCSS.dataContainer}>
-      {/* Тут будет компонент SearchForm, пока просто его задизайнил */}
       <div className={ForecastCSS.searchContainer}>
-      <Paper
-      component="form"
-      sx={{  display: 'flex', alignItems: 'center', width: '100', borderRadius: '24px', border: '1px solid rgba(167, 167, 167, 1)', boxShadow: 'none', marginBottom: '24px',}}
-    >
-      <InputBase
-        sx={{ 
-          ml: 2.5, 
-          flex: 1, 
-          fontSize: '20px',
-          fontWeight: '400',
-          fontFamily: 'HelveticaNeueCyr',
-         }}
-          placeholder="Поиск"
-          
-        // inputProps={{ 'aria-label': 'search google maps' }}
-      />
-      <Button
-        variant="contained"
-        sx={{
-          width: "160px",
-          height: "60px",
-          backgroundColor: 'rgba(0, 60, 150, 1)',
-          fontSize: '20px',          
-          borderRadius: "23px",
-          color: "white",
-          border: "1px solid rgba(0, 60, 150, 1)",
-          boxShadow: 'none',
-          textTransform: 'none',
-
-        }}
-      >
-        Найти
-      </Button>
-      
-    </Paper>
+        <SearchForm />
       </div>
       {/* Панель с фильтрами */}
       <div className={ForecastCSS.optionsContainer}>

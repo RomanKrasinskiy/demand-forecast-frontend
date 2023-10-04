@@ -41,31 +41,6 @@
     
 }
 
-/* .searchContainer {
-    margin-bottom: 24px;
-    display: flex;
-    height: 60px;
-    align-items: center;
-    flex-shrink: 0;
-    border-radius: 24px;
-    border: 1px solid var(--light-grey, #A7A7A7);
-} */
-
-/* .search {
-    width: 100%;
-    padding: 10px 24px;
-    align-items: center;
-    align-self: stretch;
-    border-radius: 24px 0 0 24px;
-    border: 0;
-    outline: none;
-    color: var(--light-grey, #A7A7A7);
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-} */
-
 .findBtn {
     width: 160px;
     height: 60px;

@@ -4,6 +4,7 @@ import { TextField, Autocomplete } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { stores, groups, categories, subcategories } from '../../utils/MenuProps';
 import { tableColumns, tableRows } from '../../utils/ProductData';
+import SearchForm from './../SearchForm/SearchForm';
 
 function ProductDatabase() {
   return (
@@ -14,10 +15,8 @@ function ProductDatabase() {
     </div>
     {/* Основной блок с данными */}
     <div className={ProductDataCSS.dataContainer}>
-      {/* Тут будет компонент SearchForm, пока просто его задизайнил */}
       <div className={ProductDataCSS.searchContainer}>
-        <input className={ProductDataCSS.search} placeholder='Поиск'/>
-        <button className={ProductDataCSS.findBtn}>Найти</button>
+        <SearchForm />
       </div>
       {/* Панель с фильтрами */}
       <div className={ProductDataCSS.optionsContainer}>
