@@ -38,6 +38,19 @@ function App() {
       // .catch((err) => setFormError({ isError: true, text: err.message })) // Уточнить у дизайнеров, будет ли валидация полей
       // .finally(() => setIsLoading(false));
   }
+  function handleLogin({ email, password, shop }) {
+    // setIsLoading(true)
+      console.log(email, password, shop)
+    auth
+      .login({ email, password, shop })
+      .then(() => {
+        console.log(email, password, shop)
+
+        navigate('/productdatabase')
+      })
+      // .catch((err) => setFormError({ isError: true, text: err.message }))
+      // .finally(() => setIsLoading(false));
+  }
 
 
   return (
@@ -57,7 +70,7 @@ function App() {
           />
           <Route
             path="/signin" // предварительная ручка
-            element={loggedIn ? <Navigate to="/forecast" /> : <Login />}
+            element={loggedIn ? <Navigate to="/forecast" /> : <Login onLogin={handleLogin}/>}
           />
           <Route>
             <Route

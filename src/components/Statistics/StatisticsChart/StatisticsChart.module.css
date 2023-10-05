@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+}
+
+.chart {
+    margin-top: 18px;
+    width: 75%;
+}
+
+.table {
+    width: 25%;
+}

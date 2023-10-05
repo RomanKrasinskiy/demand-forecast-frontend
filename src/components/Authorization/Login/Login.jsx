@@ -21,9 +21,6 @@ export default function Login({ onLogin }) {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-
-
-
   const data = [
     {"store": "asd31ыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыывввввввввввввввввввввв",
       "city": "erert",
@@ -76,26 +73,16 @@ export default function Login({ onLogin }) {
       "is_active": 1},
    ];
   
-
 const [shops] = React.useState(data); // в стейт
-// const [selectedShop, setSelectedShop] = React.useState('');
 
-// const handleChange = (event) => {
-//   const value = event.target.value;
-//     console.log(value);
-//     setSelectedShop(value);
-//     console.log(value.store);
-// };
 
   const handleSubmit = (e) => {
     console.log("click login");
-
     e.preventDefault();
     onLogin({
       email: values.email,
       password: values.password,
-      userName: values.userName,
-      usersPosition: values.usersPosition
+      shop: values.shop,
     });
   };
 
@@ -224,12 +211,11 @@ const [shops] = React.useState(data); // в стейт
 
             <FormControl 
             id="shop"
-
+            name ='shop'
             label="shop"
             size="normal"
             variant="standard"
             onSubmit={handleSubmit}
-            value={values.shop}
             fullWidth
             sx={{
               overflow: "hidden", // Скрываем часть текста, которая не помещается
@@ -257,6 +243,7 @@ const [shops] = React.useState(data); // в стейт
               <Select
                 labelId="demo-simple-select-shop"
                 id="shop"
+                name='shop'
                 value={values.shop}
                 onChange={handleChange}
                 label="shop"
@@ -277,9 +264,8 @@ const [shops] = React.useState(data); // в стейт
                 
               >
                 {shops.map((shop) => (
-                    <MenuItem id="shop" 
-                    key={`${shop.city}-${shop.store}`} value={values.shop}>{`${shop.city} ${shop.store}`}
-          </MenuItem>
+                    // <MenuItem id="shop" name='shop' key={`${shop.city}-${shop.store}`} value={values.shop}>{`${shop.city} ${shop.store}`}</MenuItem>
+                    <MenuItem id="shop" name='shop' onClick={handleChange} key={`${shop.city}-${shop.store}`} value={shop.store}>{`${shop.city} ${shop.store}`}</MenuItem>
                   ))}
                 
               </Select>
@@ -290,6 +276,8 @@ const [shops] = React.useState(data); // в стейт
               }}
             >
               <Button variant="contained"
+                onClick={handleSubmit}
+
                 sx={{
                   width: '304px',
                   height: '60px',

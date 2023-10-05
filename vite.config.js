@@ -11,5 +11,8 @@ export default defineConfig({
     host: true,
     strictPort: true,
     port: 5173
+  },
+  optimizeDeps: {
+    exclude: ['js-big-decimal']
   }
 })
