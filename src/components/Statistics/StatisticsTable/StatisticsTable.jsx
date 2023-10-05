@@ -1,12 +1,13 @@
 import StatisticsTableCSS from './StatisticsTable.module.css';
-import { DataGrid } from '@mui/x-data-grid';
+// import { DataGrid } from '@mui/x-data-grid';
 import { tableColumns, tableRows } from '../../../utils/ForecastData';
+import { DataGrid } from '@mui/x-data-grid';
 
 const StatisticsTable = () => {
 
   return (
     <div className={StatisticsTableCSS.table}>
-      <DataGrid 
+      <DataGrid
         sx={{
           '& .header': {
             backgroundColor: '#F1F5FF',
@@ -17,9 +18,9 @@ const StatisticsTable = () => {
         }}
         rows={tableRows} 
         columns={tableColumns}
-        initialState={{
-          pagination: { paginationModel: { pageSize: 10 }},
-        }}
+        
+        initialState={{pagination: { paginationModel: { pageSize: 10 }}}}
+
         pageSizeOptions={[5, 10, 20, 30]}
         checkboxSelection
         disableRowSelectionOnClick

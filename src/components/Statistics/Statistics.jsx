@@ -1,9 +1,11 @@
 import StatisticsCSS from './Statistics.module.css';
-import { useState } from 'react';
 import { TextField, Autocomplete, Paper, InputBase, Button } from '@mui/material';
 import { stores, groups, categories, subcategories } from '../../utils/MenuProps';
 import ForecastTable from './StatisticsTable/StatisticsTable';
 import ForecastChart from './StatisticsChart/StatisticsChart';
+import { useState } from "react";
+import DatePickerCalendar from '../DatePickerCalendar/DatePickerCalendar';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const Statistics = () => {
   const [isDataTable, setDataChart] = useState(true);
@@ -15,6 +17,7 @@ const Statistics = () => {
   function handleDataTable() {
     !isDataTable ? setDataChart(true) : '';
   }
+
 
   return (
     <>
@@ -70,9 +73,8 @@ const Statistics = () => {
           id="stores"
           options={stores}
           sx={{ 
-            maxWidth: 387, 
+            maxWidth: '387px',
             width: '100%',
-            height: 48,
           }}
           renderInput={(params) => <TextField {...params} label="ТК" />}
         />
@@ -81,9 +83,8 @@ const Statistics = () => {
           id="group"
           options={groups}
           sx={{ 
-            maxWidth: 387, 
+            maxWidth: '387px', 
             width: '100%',
-            height: 48,
           }}
           renderInput={(params) => <TextField {...params} label="Группа" />}
         />
@@ -92,9 +93,8 @@ const Statistics = () => {
           id="categories"
           options={categories}
           sx={{ 
-            maxWidth: 387, 
+            maxWidth: '387px', 
             width: '100%',
-            height: 48,
           }}
           renderInput={(params) => <TextField {...params} label="Категория" />}
         />
@@ -103,12 +103,28 @@ const Statistics = () => {
           id="subcategories"
           options={subcategories}
           sx={{ 
-            maxWidth: 387, 
+            maxWidth: '387px', 
             width: '100%',
-            height: 48,
           }}
           renderInput={(params) => <TextField {...params} label="Подкатегория" />}
         />
+        <DatePickerCalendar />
+        <ArrowDropDownIcon 
+          className={StatisticsCSS.arrow}
+          sx={{
+            position: 'absolute',
+            top: '16px',
+            right: '8px',
+            width: '28px',
+            height: '28px',
+            cursor: 'pointer',
+            borderRadius: 50,
+            color: 'rgba(0, 0, 0, 0.54);'
+            
+          }}
+          
+        />
+
       </div>
       <div className={StatisticsCSS.data}>
       {isDataTable
