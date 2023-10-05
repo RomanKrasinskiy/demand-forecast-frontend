@@ -4,8 +4,26 @@ import { TextField, Autocomplete } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { stores, groups, categories, subcategories } from '../../utils/MenuProps';
 import { tableColumns, tableRows } from '../../utils/ProductData';
+import SearchForm from './../SearchForm/SearchForm';
 
 function ProductDatabase() {
+  // на рендере страницы дёргаем из Датастейта:
+  // const stores = перечень ТК мапнутый в форму нужную для фильтра (useSelector)
+  // const groups = перечень Групп мапнутый в форму нужную для фильтра (useSelector)
+  // const categories = перечень Категорий мапнутый в форму нужную для фильтра (useSelector)
+  // const subcategories = перечень Подкатегорий мапнутый в форму нужную для фильтра (useSelector)
+  // {tableRows, tableColumns} = на рендере тут все товары по выбранной на вхое ТК (useSelector)
+
+  // обработка клика по выбору позиции из фильтра = отрендерить таблицу по новым данным, то есть:
+  //   - отправили запрос на бэк с новым параметром фильттра (useDispatch на ответ обращения апишки?)
+  //   - после ответа с бэка дёрнули из стейта новые данные (useSelect)
+  // обработка поиска по товару = аналогично
+
+  // обработка галочки в таблице = добавить в стейт, который будет отправлять запрос на бэк за прогнозом. (useDispatch)
+  // при этом у нас нет кнопки "получить прогноз". так что стейт получается "накопительный"
+
+  // обработка снятия галочки в таблице = убрать из стейта, который будет отправлять запрос на бэк за прогнозом. (useDispatch)
+
   return (
     <>
     {/* Переключатель Таблица-График */}
@@ -14,10 +32,8 @@ function ProductDatabase() {
     </div>
     {/* Основной блок с данными */}
     <div className={ProductDataCSS.dataContainer}>
-      {/* Тут будет компонент SearchForm, пока просто его задизайнил */}
       <div className={ProductDataCSS.searchContainer}>
-        <input className={ProductDataCSS.search} placeholder='Поиск'/>
-        <button className={ProductDataCSS.findBtn}>Найти</button>
+        <SearchForm />
       </div>
       {/* Панель с фильтрами */}
       <div className={ProductDataCSS.optionsContainer}>

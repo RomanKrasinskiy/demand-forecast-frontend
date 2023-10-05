@@ -1,4 +1,3 @@
-import './ErrorPage';
 import { Link } from 'react-router-dom';
 import { Button } from "@mui/material";
 import ErrorPageCSS from './ErrorPage.module.css';

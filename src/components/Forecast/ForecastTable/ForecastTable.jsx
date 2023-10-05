@@ -1,4 +1,3 @@
-import './ForecastTable';
 import ForecastTableCSS from './ForecastTable.module.css';
 import { DataGrid } from '@mui/x-data-grid';
 import { tableColumns, tableRows } from '../../../utils/ForecastData';

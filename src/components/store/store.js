@@ -1,8 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import initialReducer from "./initialState";
+import userReducer from "./userSlice";
+import filterReducer from "./filterSlice";
+import dataReducer from "./dataSlice";
 
 export const store = configureStore({
   reducer: {
-    initial: initialReducer,
+    user: userReducer,
+    filter: filterReducer,
+    data: dataReducer,
   }
 });
