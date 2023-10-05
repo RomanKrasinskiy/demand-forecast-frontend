@@ -2,17 +2,23 @@ import "./ProductDatabase";
 import ProductDataCSS from './ProductDatabase.module.css';
 import { TextField, Autocomplete } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
-import { stores, groups, categories, subcategories } from '../../utils/MenuProps';
-import { tableColumns, tableRows } from '../../utils/ProductData';
+import { useSelector } from "react-redux";
 import SearchForm from './../SearchForm/SearchForm';
 
 function ProductDatabase() {
-  // на рендере страницы дёргаем из Датастейта:
-  // const stores = перечень ТК мапнутый в форму нужную для фильтра (useSelector)
-  // const groups = перечень Групп мапнутый в форму нужную для фильтра (useSelector)
-  // const categories = перечень Категорий мапнутый в форму нужную для фильтра (useSelector)
-  // const subcategories = перечень Подкатегорий мапнутый в форму нужную для фильтра (useSelector)
-  // {tableRows, tableColumns} = на рендере тут все товары по выбранной на вхое ТК (useSelector)
+  const stores = useSelector(state => state.data.shopNames);
+  const groups = useSelector(state => state.data.groupNames);
+  const categories = useSelector(state => state.data.categoryNames);
+  const subcategories = useSelector(state => state.data.subcategoryNames);
+  const productTableRows = useSelector(state => state.data.productTableRows);
+  // Колонки в таблице продуктов постоянные - не вижу смысла их дежать в стейте.
+  const productTableColumns = [
+    { field: 'c1', headerName: 'ТК', width: 308, headerClassName: 'header'},
+    { field: 'c2', headerName: 'Группа', width: 310, headerClassName: 'header' },
+    { field: 'c3', headerName: 'Категория', width: 310, headerClassName: 'header' },
+    { field: 'c4', headerName: 'Подкатегория', width: 310, headerClassName: 'header' },
+    { field: 'c5', headerName: 'Товар', width: 310, headerClassName: 'header' }
+  ];
 
   // обработка клика по выбору позиции из фильтра = отрендерить таблицу по новым данным, то есть:
   //   - отправили запрос на бэк с новым параметром фильттра (useDispatch на ответ обращения апишки?)
@@ -92,8 +98,8 @@ function ProductDatabase() {
             backgroundColor: '#F1F5FF',
           },
         }}
-        rows={tableRows} 
-        columns={tableColumns}
+        rows={productTableRows} 
+        columns={productTableColumns}
         initialState={{
           pagination: { paginationModel: { pageSize: 10 }},
         }}

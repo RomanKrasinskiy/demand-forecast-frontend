@@ -1,12 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const filterState = {
-  // здесь пропишем всё, что анм нужно держать в стейте по поисковым запросам
-}
-
 export const filterSlice = createSlice({
   name: 'filter',
-  filterState,
+  initialState: {
+    shopId: 'Reutov',
+    // здесь будут лежать фильтры для отправки запросов для получения данных
+  },
   reducers: {
     // здесь пропишем все нужные действия со стейтами
   }

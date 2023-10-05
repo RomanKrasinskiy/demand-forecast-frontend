@@ -1,7 +1,7 @@
 import ForecastCSS from './Forecast.module.css';
 import { useState } from 'react';
 import { TextField, Autocomplete } from '@mui/material';
-import { stores, groups, categories, subcategories } from '../../utils/MenuProps';
+import { useSelector } from "react-redux";
 import ForecastTable from './ForecastTable/ForecastTable';
 import ForecastChart from './ForecastChart/ForecastChart';
 import SearchForm from './../SearchForm/SearchForm';
@@ -17,11 +17,12 @@ const Forecast = () => {
     !isDataTable ? setDataChart(true) : '';
   }
 
+  const stores = useSelector(state => state.data.shopNames);
+  const groups = useSelector(state => state.data.groupNames);
+  const categories = useSelector(state => state.data.categoryNames);
+  const subcategories = useSelector(state => state.data.subcategoryNames);
+
   // на рендере страницы дёргаем из Датастейта:
-  // const stores = перечень ТК мапнутый в форму нужную для фильтра (useSelector)
-  // const groups = перечень Групп мапнутый в форму нужную для фильтра (useSelector)
-  // const categories = перечень Категорий мапнутый в форму нужную для фильтра (useSelector)
-  // const subcategories = перечень Подкатегорий мапнутый в форму нужную для фильтра (useSelector)
 
   // const tableColumns и tableRows = наполнение таблицы прогнозом. И их надо прокинуть параметрами в компоненты. (useSelector)
   // const data, chartRows, chartColumns = наполнение графика прогноза. options для него можно иметь постоянным, но нужно посмотреть,
