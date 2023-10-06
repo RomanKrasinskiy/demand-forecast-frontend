@@ -1,10 +1,9 @@
 import ProductDataCSS from './ProductDatabase.module.css';
 import { useState } from 'react';
-import { setNewCategoriesFilter, setNewGroupFilter, setNewShopFilter, setNewSubcategoriesFilter } from '../store/filterSlice';
 import { TextField, Autocomplete } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setNewCategoriesFilter, setNewGroupFilter, setNewShopFilter, setNewSubcategoriesFilter } from '../store/filterSlice';
 import SearchForm from './../SearchForm/SearchForm';
 
 function ProductDatabase() {
@@ -16,7 +15,6 @@ function ProductDatabase() {
   const groups = useSelector(state => state.data.groupNames);
   const categories = useSelector(state => state.data.categoryNames);
   const subcategories = useSelector(state => state.data.subcategoryNames);
-  const productTableRows = useSelector(state => state.data.productTableRows);
 
   // забираем из стейта значение фильтров
   const shopFilter = useSelector(state => state.filter.shopFilter);
@@ -36,6 +34,8 @@ function ProductDatabase() {
     { field: 'c4', headerName: 'Подкатегория', width: 310, headerClassName: 'header' },
     { field: 'c5', headerName: 'Товар', width: 310, headerClassName: 'header' }
   ];
+  // Забираем наполнение строк таблицы
+  const productTableRows = useSelector(state => state.data.productTableRows);
 
   // обработка клика по выбору позиции из фильтра = отрендерить таблицу по новым данным, то есть:
   //   - отправили запрос на бэк с новым параметром фильтра (useDispatch на ответ обращения апишки?)
@@ -79,7 +79,6 @@ function ProductDatabase() {
           disablePortal
           id="group"
           options={groups}
-          value={groupFilter}
           isOptionEqualToValue={(option, value) => option.id === value.id}
           sx={{ 
             maxWidth: 387, 
@@ -87,6 +86,7 @@ function ProductDatabase() {
             height: 48,
           }}
           renderInput={(params) => <TextField {...params} label="Группа" />}
+          value={groupFilter}
           onChange={(event, newValue) => {
             dispatch(setNewGroupFilter(newValue))
           }}

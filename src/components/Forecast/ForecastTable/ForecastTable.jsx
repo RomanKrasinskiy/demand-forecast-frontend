@@ -1,10 +1,18 @@
 import ForecastTableCSS from './ForecastTable.module.css';
 import { useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { tableColumns, tableRows } from '../../../utils/ForecastData';
+import { useSelector } from "react-redux";
 
 const ForecastTable = () => {
-  const [rowSelectionModel, setRowSelectionModel] = useState([]);
+  const [rowSelectionModel, setRowSelectionModel] = useState([0]);
+
+  // Забираем наполнение таблицы
+  const forecastTableColumns = useSelector(state => state.data.forecastTableColumns);
+  const forecastTableRows = useSelector(state => state.data.forecastTableRows);
+
+  // Создаём диспетчер
+  // const dispatch = useDispatch();
+
 
   return (
     <div className={ForecastTableCSS.table}>
@@ -17,8 +25,8 @@ const ForecastTable = () => {
             backgroundColor: '#F1F5FF',
           },
         }}
-        rows={tableRows} 
-        columns={tableColumns}
+        rows={forecastTableRows} 
+        columns={forecastTableColumns}
         initialState={{
           pagination: { paginationModel: { pageSize: 10 }},
         }}
