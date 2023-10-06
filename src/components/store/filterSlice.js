@@ -25,25 +25,27 @@ export const filterSlice = createSlice({
         label: action.payload.label,
       }
     },
+
     setNewCategoriesFilter(state, action) {
       state.categoryFilter = {
         key: action.payload.key,
         label: action.payload.label,
       }
     },
+
     setNewSubcategoriesFilter(state, action) {
       state.subcategoryFilter = {
         key: action.payload.key,
         label: action.payload.label,
       }
     },
+
     setNewDateFilter(state, action) {
       state.dateFilter = {
         key: action.payload.key,
         label: action.payload.label,
       }
     },
-
   }
 })
 

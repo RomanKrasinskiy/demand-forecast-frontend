@@ -25,11 +25,8 @@ function ProductDatabase() {
   const subcategoryFilter = useSelector(state => state.filter.subcategoryFilter);
   // const productFilter = useSelector(state => state.filter.productFilter); // - это в сёрч форму нужно будет убрать.
 
-  // пытаемся контролировать выбранные значения фильтров
-  // const [shopFilterValue, setShopFilterValue] = useState(shopFilter);
+  // Создаём диспетчер
   const dispatch = useDispatch();
-  // const newShopFilter = (newValue) => dispatch(setNewShopFilter({newValue}));
-
   
   // Колонки в таблице продуктов постоянные - не вижу смысла их держать в стейте.
   const productTableColumns = [
