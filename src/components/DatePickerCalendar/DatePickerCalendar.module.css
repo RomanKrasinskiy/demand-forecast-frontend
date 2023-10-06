@@ -28,7 +28,34 @@
     border: 2px solid rgba(24, 118, 210, 1);
 } */
 
-.arrow {
-    width: 24px;
-    height: 24px;
+.arrowButton {
+    width: 28px;
+    height: 28px;
+    position: absolute;
+    top: 14px;
+    right: 8px;
+    border-radius: 50%;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+.arrowButton:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+    transition: background-color .2s ease-in-out; 
+}
+.arrow {
+    width: 28px;
+    height: 28px;
+    color: rgba(0, 0, 0, 0.54);
+
+}
+/* .arrow:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+    transition: background-color .2s ease-in-out;
+} */

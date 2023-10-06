@@ -5,7 +5,6 @@ import ForecastTable from './StatisticsTable/StatisticsTable';
 import ForecastChart from './StatisticsChart/StatisticsChart';
 import { useState } from "react";
 import DatePickerCalendar from '../DatePickerCalendar/DatePickerCalendar';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const Statistics = () => {
   const [isDataTable, setDataChart] = useState(true);
@@ -108,22 +107,8 @@ const Statistics = () => {
           }}
           renderInput={(params) => <TextField {...params} label="Подкатегория" />}
         />
-        <DatePickerCalendar />
-        <ArrowDropDownIcon 
-          className={StatisticsCSS.arrow}
-          sx={{
-            position: 'absolute',
-            top: '16px',
-            right: '8px',
-            width: '28px',
-            height: '28px',
-            cursor: 'pointer',
-            borderRadius: 50,
-            color: 'rgba(0, 0, 0, 0.54);'
-            
-          }}
-          
-        />
+          <DatePickerCalendar />
+        
 
       </div>
       <div className={StatisticsCSS.data}>

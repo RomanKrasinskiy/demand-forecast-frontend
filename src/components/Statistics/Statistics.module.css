@@ -91,7 +91,4 @@
 }
 
 
-.arrow:hover {
-    background-color: rgba(0, 0, 0, 0.04);
-    transition: background-color .2s ease-in-out;
-}
+
