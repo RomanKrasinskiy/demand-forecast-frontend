@@ -12,6 +12,7 @@ export function useFormWithValidation(inputValues) {
     const target = event.target;
     const name = target.name;
     const value = target.value;
+    console.log(name, value);
     setValues({ ...values, [name]: value });
     // console.log(values);
     if (value.length < 1) {

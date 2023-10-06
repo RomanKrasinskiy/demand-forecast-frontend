@@ -1,6 +1,6 @@
 import StatisticsTableCSS from './StatisticsTable.module.css';
 // import { DataGrid } from '@mui/x-data-grid';
-import { tableColumns, tableRows } from '../../../utils/ForecastData';
+import { tableColumns, tableRows } from '../../../utils/StatisticsData';
 import { DataGrid } from '@mui/x-data-grid';
 
 const StatisticsTable = () => {
@@ -15,13 +15,13 @@ const StatisticsTable = () => {
           '& .MuiDataGrid-columnHeaderCheckbox': {
             backgroundColor: '#F1F5FF',
           },
+          
         }}
         rows={tableRows} 
         columns={tableColumns}
-        
         initialState={{pagination: { paginationModel: { pageSize: 10 }}}}
-
         pageSizeOptions={[5, 10, 20, 30]}
+        
         checkboxSelection
         disableRowSelectionOnClick
       />  
