@@ -6,12 +6,8 @@ import { useRef, useState } from "react";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import colors from 'react-multi-date-picker/plugins/colors';
 import weekends from "react-multi-date-picker/plugins/highlight_weekends"
-// import { useFormWithValidation } from '../../hooks/useFormWithValidation';
-
-
 
 export default function DatePickerCalendar() {
-
   const [props, setProps] = useState({});
   const datePickerRef = useRef();
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
@@ -26,7 +22,7 @@ export default function DatePickerCalendar() {
   };
 
   const [selectedDates, setSelectedDates] = useState(); // будем мапиться по массиву, переводить даты в строку .toString() и отправлять запрос с датами на бэк
-  console.log(selectedDates);
+  // console.log(selectedDates);
 
   return (
     <div className={DatePickerCalendarCSS.calendar} >
@@ -34,20 +30,17 @@ export default function DatePickerCalendar() {
       {...props}
         value={selectedDates}
         onChange={setSelectedDates}
-        // id='date'
-        // name='date'
         onPropsChange={setProps}
         ref={datePickerRef}
         containerClassName={DatePickerCalendarCSS.container}
         inputClass={DatePickerCalendarCSS.input}
-        // arrowClassName={DatePickerCalendarCSS.arrow}
         placeholder='Дата или период'
         
         numberOfMonths={2}
         plugins={[
           weekends([6, 7]),
           highlightWeekends(),
-          colors({ defaultColor: "blue" }), // цвета
+          colors({ defaultColor: "blue" }), 
           // eslint-disable-next-line react/jsx-key
           <Settings
             position="right"

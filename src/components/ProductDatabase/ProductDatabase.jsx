@@ -1,10 +1,10 @@
 import ProductDataCSS from './ProductDatabase.module.css';
 import { useState } from 'react';
-// import { setNewShopFilter } from '../store/filterSlice';
+import { setNewCategoriesFilter, setNewGroupFilter, setNewShopFilter, setNewSubcategoriesFilter } from '../store/filterSlice';
 import { TextField, Autocomplete } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { useSelector } from "react-redux";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import SearchForm from './../SearchForm/SearchForm';
 
 function ProductDatabase() {
@@ -23,11 +23,11 @@ function ProductDatabase() {
   const groupFilter = useSelector(state => state.filter.groupFilter);
   const categoryFilter = useSelector(state => state.filter.categoryFilter);
   const subcategoryFilter = useSelector(state => state.filter.subcategoryFilter);
-  // const productFilter = useSelector(state => state.filter.productFilter); - это в сёрч форму нужно будет убрать.
+  // const productFilter = useSelector(state => state.filter.productFilter); // - это в сёрч форму нужно будет убрать.
 
   // пытаемся контролировать выбранные значения фильтров
-  const [shopFilterValue, setShopFilterValue] = useState(shopFilter);
-  // const dispatch = useDispatch();
+  // const [shopFilterValue, setShopFilterValue] = useState(shopFilter);
+  const dispatch = useDispatch();
   // const newShopFilter = (newValue) => dispatch(setNewShopFilter({newValue}));
 
   
@@ -53,7 +53,7 @@ function ProductDatabase() {
     <>
     {/* Переключатель Таблица-График */}
     <div className={ProductDataCSS.switchContainer}>
-      <button className={ProductDataCSS.optionActive} >Таблица</button>
+      <button className={ProductDataCSS.optionActive}>Таблица</button>
     </div>
     {/* Основной блок с данными */}
     <div className={ProductDataCSS.dataContainer}>
@@ -66,6 +66,7 @@ function ProductDatabase() {
           disablePortal
           id="stores"
           options={stores}
+          isOptionEqualToValue={(option, value) => option.id === value.id}
           sx={{ 
             maxWidth: 387, 
             width: '100%',
@@ -74,25 +75,24 @@ function ProductDatabase() {
           renderInput={(params) => <TextField {...params} label="ТК" />}
           value={shopFilter}
           onChange={(event, newValue) => {
-            setShopFilterValue(newValue);
-            console.log(shopFilterValue);
-            console.log(newValue);
+            dispatch(setNewShopFilter(newValue))
           }}
         />
         <Autocomplete
           disablePortal
           id="group"
           options={groups}
+          value={groupFilter}
+          isOptionEqualToValue={(option, value) => option.id === value.id}
           sx={{ 
             maxWidth: 387, 
             width: '100%',
             height: 48,
           }}
           renderInput={(params) => <TextField {...params} label="Группа" />}
-          value={groupFilter}
-          // onChange={(event, newValue) => {
-            
-          // }}
+          onChange={(event, newValue) => {
+            dispatch(setNewGroupFilter(newValue))
+          }}
         />
         <Autocomplete
           disablePortal
@@ -105,14 +105,15 @@ function ProductDatabase() {
           }}
           renderInput={(params) => <TextField {...params} label="Категория" />}
           value={categoryFilter}
-          // onChange={(event, newValue) => {
-            
-          // }}
+          onChange={(event, newValue) => {
+            dispatch(setNewCategoriesFilter(newValue))
+          }}
         />
         <Autocomplete
           disablePortal
           id="subcategories"
           options={subcategories}
+          isOptionEqualToValue={(option, value) => option.id === value.id}
           sx={{ 
             maxWidth: 387, 
             width: '100%',
@@ -120,9 +121,9 @@ function ProductDatabase() {
           }}
           renderInput={(params) => <TextField {...params} label="Подкатегория" />}
           value={subcategoryFilter}
-          // onChange={(event, newValue) => {
-            
-          // }}
+          onChange={(event, newValue) => {
+            dispatch(setNewSubcategoriesFilter(newValue))
+          }}
         />
       </div>
       <div className={ProductDataCSS.data}>
