@@ -1,7 +1,7 @@
 import ForecastCSS from './Forecast.module.css';
 import { useState } from 'react';
 import { TextField, Autocomplete } from '@mui/material';
-import { stores, groups, categories, subcategories } from '../../utils/MenuProps';
+import { useSelector } from "react-redux";
 import ForecastTable from './ForecastTable/ForecastTable';
 import ForecastChart from './ForecastChart/ForecastChart';
 import SearchForm from './../SearchForm/SearchForm';
@@ -16,14 +16,16 @@ const Forecast = () => {
   function handleDataTable() {
     !isDataTable ? setDataChart(true) : '';
   }
+  // забираем из стейта наполнение фильтров
+  const stores = useSelector(state => state.data.shopNames);
+  const groups = useSelector(state => state.data.groupNames);
+  const categories = useSelector(state => state.data.categoryNames);
+  const subcategories = useSelector(state => state.data.subcategoryNames);
 
   // на рендере страницы дёргаем из Датастейта:
-  // const stores = перечень ТК мапнутый в форму нужную для фильтра (useSelector)
-  // const groups = перечень Групп мапнутый в форму нужную для фильтра (useSelector)
-  // const categories = перечень Категорий мапнутый в форму нужную для фильтра (useSelector)
-  // const subcategories = перечень Подкатегорий мапнутый в форму нужную для фильтра (useSelector)
 
   // const tableColumns и tableRows = наполнение таблицы прогнозом. И их надо прокинуть параметрами в компоненты. (useSelector)
+
   // const data, chartRows, chartColumns = наполнение графика прогноза. options для него можно иметь постоянным, но нужно посмотреть,
   // можно ли задать максимум по оси Y не конкретным числом, а в зависимости от наполнения графика (есть ли такой параметр в chart.js)
   // это тоже надо прокинуть параметром в компонент (useSelector)
@@ -35,8 +37,8 @@ const Forecast = () => {
   //   - после ответа с бэка дёрнули из стейта новые данные (useSelect)
   // обработка поиска по товару = аналогично
 
-  // обработка галочки в таблице = добавить в стейт, который будет отправлять запрос на бэк за экспортом в Эксель (useDispatch)
-  // обработка снятия галочки в таблице = убрать из стейта, который будет отправлять запрос на бэк за экспортом в Эксель (useDispatch)
+  // галочки в таблице = массив с номерами строк rowSelectionModel (местный стейт, не редакс), который будет отправлять запрос на бэк 
+  // за прогнозом, а полученный результат useDispatch в слайс с данными.
 
   // клик по кнопке Скачать в Эксель = дёрнуть бэк за файлом.
 

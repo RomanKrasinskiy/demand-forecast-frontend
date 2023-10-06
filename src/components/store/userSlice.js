@@ -1,12 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const userState = {
-  // тут будут данные о юзере
-}
-
 export const userSlice = createSlice({
   name: 'user',
-  userState,
+  initialState: {
+    // тут будут данные о юзере
+  },
   reducers: {
     // здесь пропишем все нужные действия со стейтами
   }

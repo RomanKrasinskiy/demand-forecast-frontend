@@ -1,30 +1,55 @@
-import "./ProductDatabase";
 import ProductDataCSS from './ProductDatabase.module.css';
+import { useState } from 'react';
+// import { setNewShopFilter } from '../store/filterSlice';
 import { TextField, Autocomplete } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
-import { stores, groups, categories, subcategories } from '../../utils/MenuProps';
-import { tableColumns, tableRows } from '../../utils/ProductData';
+import { useSelector } from "react-redux";
+// import { useDispatch } from "react-redux";
 import SearchForm from './../SearchForm/SearchForm';
 
 function ProductDatabase() {
-  // на рендере страницы дёргаем из Датастейта:
-  // const stores = перечень ТК мапнутый в форму нужную для фильтра (useSelector)
-  // const groups = перечень Групп мапнутый в форму нужную для фильтра (useSelector)
-  // const categories = перечень Категорий мапнутый в форму нужную для фильтра (useSelector)
-  // const subcategories = перечень Подкатегорий мапнутый в форму нужную для фильтра (useSelector)
-  // {tableRows, tableColumns} = на рендере тут все товары по выбранной на вхое ТК (useSelector)
+  // контролируем выбранные ячейки
+  const [rowSelectionModel, setRowSelectionModel] = useState([0]);
+
+  // забираем из стейта наполнение фильтров
+  const stores = useSelector(state => state.data.shopNames);
+  const groups = useSelector(state => state.data.groupNames);
+  const categories = useSelector(state => state.data.categoryNames);
+  const subcategories = useSelector(state => state.data.subcategoryNames);
+  const productTableRows = useSelector(state => state.data.productTableRows);
+
+  // забираем из стейта значение фильтров
+  const shopFilter = useSelector(state => state.filter.shopFilter);
+  const groupFilter = useSelector(state => state.filter.groupFilter);
+  const categoryFilter = useSelector(state => state.filter.categoryFilter);
+  const subcategoryFilter = useSelector(state => state.filter.subcategoryFilter);
+  // const productFilter = useSelector(state => state.filter.productFilter); - это в сёрч форму нужно будет убрать.
+
+  // пытаемся контролировать выбранные значения фильтров
+  const [shopFilterValue, setShopFilterValue] = useState(shopFilter);
+  // const dispatch = useDispatch();
+  // const newShopFilter = (newValue) => dispatch(setNewShopFilter({newValue}));
+
+  
+  // Колонки в таблице продуктов постоянные - не вижу смысла их держать в стейте.
+  const productTableColumns = [
+    { field: 'c1', headerName: 'ТК', width: 308, headerClassName: 'header'},
+    { field: 'c2', headerName: 'Группа', width: 310, headerClassName: 'header' },
+    { field: 'c3', headerName: 'Категория', width: 310, headerClassName: 'header' },
+    { field: 'c4', headerName: 'Подкатегория', width: 310, headerClassName: 'header' },
+    { field: 'c5', headerName: 'Товар', width: 310, headerClassName: 'header' }
+  ];
 
   // обработка клика по выбору позиции из фильтра = отрендерить таблицу по новым данным, то есть:
-  //   - отправили запрос на бэк с новым параметром фильттра (useDispatch на ответ обращения апишки?)
+  //   - отправили запрос на бэк с новым параметром фильтра (useDispatch на ответ обращения апишки?)
   //   - после ответа с бэка дёрнули из стейта новые данные (useSelect)
   // обработка поиска по товару = аналогично
 
-  // обработка галочки в таблице = добавить в стейт, который будет отправлять запрос на бэк за прогнозом. (useDispatch)
-  // при этом у нас нет кнопки "получить прогноз". так что стейт получается "накопительный"
-
-  // обработка снятия галочки в таблице = убрать из стейта, который будет отправлять запрос на бэк за прогнозом. (useDispatch)
+  // галочки в таблице = массив с номерами строк rowSelectionModel (местный стейт, не редакс), который будет отправлять запрос на бэк 
+  // за прогнозом, а полученный результат useDispatch в слайс с данными.
 
   return (
+    
     <>
     {/* Переключатель Таблица-График */}
     <div className={ProductDataCSS.switchContainer}>
@@ -47,6 +72,12 @@ function ProductDatabase() {
             height: 48,
           }}
           renderInput={(params) => <TextField {...params} label="ТК" />}
+          value={shopFilter}
+          onChange={(event, newValue) => {
+            setShopFilterValue(newValue);
+            console.log(shopFilterValue);
+            console.log(newValue);
+          }}
         />
         <Autocomplete
           disablePortal
@@ -58,6 +89,10 @@ function ProductDatabase() {
             height: 48,
           }}
           renderInput={(params) => <TextField {...params} label="Группа" />}
+          value={groupFilter}
+          // onChange={(event, newValue) => {
+            
+          // }}
         />
         <Autocomplete
           disablePortal
@@ -69,6 +104,10 @@ function ProductDatabase() {
             height: 48,
           }}
           renderInput={(params) => <TextField {...params} label="Категория" />}
+          value={categoryFilter}
+          // onChange={(event, newValue) => {
+            
+          // }}
         />
         <Autocomplete
           disablePortal
@@ -80,6 +119,10 @@ function ProductDatabase() {
             height: 48,
           }}
           renderInput={(params) => <TextField {...params} label="Подкатегория" />}
+          value={subcategoryFilter}
+          // onChange={(event, newValue) => {
+            
+          // }}
         />
       </div>
       <div className={ProductDataCSS.data}>
@@ -92,14 +135,19 @@ function ProductDatabase() {
             backgroundColor: '#F1F5FF',
           },
         }}
-        rows={tableRows} 
-        columns={tableColumns}
+        rows={productTableRows} 
+        columns={productTableColumns}
         initialState={{
           pagination: { paginationModel: { pageSize: 10 }},
         }}
         pageSizeOptions={[5, 10, 20, 30]}
         checkboxSelection
         disableRowSelectionOnClick
+        keepNonExistentRowsSelected
+        onRowSelectionModelChange={(newRowSelectionModel) => {
+          setRowSelectionModel(newRowSelectionModel);
+        }}
+        rowSelectionModel={rowSelectionModel}
       />
       </div>
     </div>

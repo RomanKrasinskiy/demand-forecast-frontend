@@ -1,8 +1,10 @@
 import ForecastTableCSS from './ForecastTable.module.css';
+import { useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { tableColumns, tableRows } from '../../../utils/ForecastData';
 
 const ForecastTable = () => {
+  const [rowSelectionModel, setRowSelectionModel] = useState([]);
 
   return (
     <div className={ForecastTableCSS.table}>
@@ -23,6 +25,11 @@ const ForecastTable = () => {
         pageSizeOptions={[5, 10, 20, 30]}
         checkboxSelection
         disableRowSelectionOnClick
+        keepNonExistentRowsSelected
+        onRowSelectionModelChange={(newRowSelectionModel) => {
+          setRowSelectionModel(newRowSelectionModel);
+        }}
+        rowSelectionModel={rowSelectionModel}
       />  
     </div>
   )
