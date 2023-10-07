@@ -17,6 +17,10 @@ const Forecast = () => {
   function handleDataTable() {
     !isDataTable ? setDataChart(true) : '';
   }
+  
+  // Получаем состояние выбранных ячеек
+  const forecastRowSelection = useSelector(state => state.filter.productRowSelect);
+
   // Забираем из стейта наполнение фильтров
   const stores = useSelector(state => state.data.shopNames);
   const groups = useSelector(state => state.data.groupNames);
@@ -52,14 +56,18 @@ const Forecast = () => {
   // галочки в таблице = массив с номерами строк rowSelectionModel (местный стейт, не редакс), который будет отправлять запрос на бэк 
   // за прогнозом, а полученный результат useDispatch в слайс с данными.
 
+  // отрисовать кенопку для экселя
   // клик по кнопке Скачать в Эксель = дёрнуть бэк за файлом.
 
   return (
     <>
     {/* Переключатель Таблица-График */}
-    <div className={ForecastCSS.switchContainer}>
-      <button className={`${ForecastCSS.option} ${isDataTable ? ForecastCSS.optionActive : ''}`} onClick={handleDataTable}>Таблица</button>
-      <button className={`${ForecastCSS.option} ${!isDataTable ? ForecastCSS.optionActive : ''}`} onClick={handleDataChart}>График</button>
+    <div className={ForecastCSS.btnContainer}>
+      <div className={ForecastCSS.switchContainer}>
+        <button className={`${ForecastCSS.option} ${isDataTable ? ForecastCSS.optionActive : ''}`} onClick={handleDataTable}>Таблица</button>
+        <button className={`${ForecastCSS.option} ${!isDataTable ? ForecastCSS.optionActive : ''}`} onClick={handleDataChart}>График</button>
+      </div>
+      <button className={`${ForecastCSS.btnExcel} ${(forecastRowSelection.length > 0) ? ForecastCSS.btnExcelActive : ''}`} data-tooltip="Выберите строки для экспорта">Выгрузить в Excel</button>
     </div>
     {/* Основной блок с данными */}
     <div className={ForecastCSS.dataContainer}>
