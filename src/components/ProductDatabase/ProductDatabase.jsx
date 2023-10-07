@@ -97,10 +97,8 @@ function ProductDatabase() {
           }}
           renderInput={(params) => <TextField {...params} label="Группа" />}
           value={groupFilter}
-          onChange={(event, newValue, reason) => {
-            console.log(reason);
-            if (reason === 'clear') {dispatch(setNewGroupFilter(null))}
-            else {dispatch(setNewGroupFilter(newValue))}
+          onChange={(event, newValue) => {
+            dispatch(setNewGroupFilter(newValue))
           }}
         />
         <Autocomplete
