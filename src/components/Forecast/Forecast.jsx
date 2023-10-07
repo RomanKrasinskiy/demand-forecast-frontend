@@ -1,7 +1,8 @@
 import ForecastCSS from './Forecast.module.css';
 import { useState } from 'react';
 import { TextField, Autocomplete } from '@mui/material';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setNewCategoriesFilter, setNewGroupFilter, setNewShopFilter, setNewSubcategoriesFilter } from '../store/filterSlice';
 import ForecastTable from './ForecastTable/ForecastTable';
 import ForecastChart from './ForecastChart/ForecastChart';
 import SearchForm from './../SearchForm/SearchForm';
@@ -16,11 +17,25 @@ const Forecast = () => {
   function handleDataTable() {
     !isDataTable ? setDataChart(true) : '';
   }
-  // забираем из стейта наполнение фильтров
+  
+  // Получаем состояние выбранных ячеек
+  const forecastRowSelection = useSelector(state => state.filter.productRowSelect);
+
+  // Забираем из стейта наполнение фильтров
   const stores = useSelector(state => state.data.shopNames);
   const groups = useSelector(state => state.data.groupNames);
   const categories = useSelector(state => state.data.categoryNames);
   const subcategories = useSelector(state => state.data.subcategoryNames);
+
+  // Забираем из стейта значение фильтров
+  const shopFilter = useSelector(state => state.filter.shopFilter);
+  const groupFilter = useSelector(state => state.filter.groupFilter);
+  const categoryFilter = useSelector(state => state.filter.categoryFilter);
+  const subcategoryFilter = useSelector(state => state.filter.subcategoryFilter);
+  // const productFilter = useSelector(state => state.filter.productFilter); // - это в сёрч форму нужно будет убрать.
+
+  // Создаём диспетчер
+  const dispatch = useDispatch();
 
   // на рендере страницы дёргаем из Датастейта:
 
@@ -29,6 +44,7 @@ const Forecast = () => {
   // const data, chartRows, chartColumns = наполнение графика прогноза. options для него можно иметь постоянным, но нужно посмотреть,
   // можно ли задать максимум по оси Y не конкретным числом, а в зависимости от наполнения графика (есть ли такой параметр в chart.js)
   // это тоже надо прокинуть параметром в компонент (useSelector)
+
   // {tableColumns, tableRows} и {data, chartRows, chartColumns} - это одни и те же данные, но по-разному мапнутые
   // также нужно подумать, эту логику нужно прописывать тут или лучше в копонентах таблицы и графика соответственно.
 
@@ -40,14 +56,18 @@ const Forecast = () => {
   // галочки в таблице = массив с номерами строк rowSelectionModel (местный стейт, не редакс), который будет отправлять запрос на бэк 
   // за прогнозом, а полученный результат useDispatch в слайс с данными.
 
+  // отрисовать кенопку для экселя
   // клик по кнопке Скачать в Эксель = дёрнуть бэк за файлом.
 
   return (
     <>
     {/* Переключатель Таблица-График */}
-    <div className={ForecastCSS.switchContainer}>
-      <button className={`${ForecastCSS.option} ${isDataTable ? ForecastCSS.optionActive : ''}`} onClick={handleDataTable}>Таблица</button>
-      <button className={`${ForecastCSS.option} ${!isDataTable ? ForecastCSS.optionActive : ''}`} onClick={handleDataChart}>График</button>
+    <div className={ForecastCSS.btnContainer}>
+      <div className={ForecastCSS.switchContainer}>
+        <button className={`${ForecastCSS.option} ${isDataTable ? ForecastCSS.optionActive : ''}`} onClick={handleDataTable}>Таблица</button>
+        <button className={`${ForecastCSS.option} ${!isDataTable ? ForecastCSS.optionActive : ''}`} onClick={handleDataChart}>График</button>
+      </div>
+      <button className={`${ForecastCSS.btnExcel} ${(forecastRowSelection.length > 0) ? ForecastCSS.btnExcelActive : ''}`} data-tooltip="Выберите строки для экспорта">Выгрузить в Excel</button>
     </div>
     {/* Основной блок с данными */}
     <div className={ForecastCSS.dataContainer}>
@@ -66,6 +86,10 @@ const Forecast = () => {
             height: 48,
           }}
           renderInput={(params) => <TextField {...params} label="ТК" />}
+          value={shopFilter}
+          onChange={(event, newValue) => {
+            dispatch(setNewShopFilter(newValue))
+          }}
         />
         <Autocomplete
           // disablePortal
@@ -77,6 +101,10 @@ const Forecast = () => {
             height: 48,
           }}
           renderInput={(params) => <TextField {...params} label="Группа" />}
+          value={groupFilter}
+          onChange={(event, newValue) => {
+            dispatch(setNewGroupFilter(newValue))
+          }}
         />
         <Autocomplete
           disablePortal
@@ -88,6 +116,10 @@ const Forecast = () => {
             height: 48,
           }}
           renderInput={(params) => <TextField {...params} label="Категория" />}
+          value={categoryFilter}
+          onChange={(event, newValue) => {
+            dispatch(setNewCategoriesFilter(newValue))
+          }}
         />
         <Autocomplete
           disablePortal
@@ -99,6 +131,10 @@ const Forecast = () => {
             height: 48,
           }}
           renderInput={(params) => <TextField {...params} label="Подкатегория" />}
+          value={subcategoryFilter}
+          onChange={(event, newValue) => {
+            dispatch(setNewSubcategoriesFilter(newValue))
+          }}
         />
       </div>
       <div className={ForecastCSS.data}>

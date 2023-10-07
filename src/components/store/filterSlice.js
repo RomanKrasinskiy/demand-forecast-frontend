@@ -9,6 +9,8 @@ export const filterSlice = createSlice({
     subcategoryFilter: null,
     productFilter: null, // для поиска 
     dateFilter: null,
+    productRowSelect: [],
+    forecastRowSelect: [],
   },
   reducers: {
     setNewShopFilter(state, action) {
@@ -25,18 +27,21 @@ export const filterSlice = createSlice({
         label: action.payload.label,
       }
     },
+
     setNewCategoriesFilter(state, action) {
       state.categoryFilter = {
         key: action.payload.key,
         label: action.payload.label,
       }
     },
+
     setNewSubcategoriesFilter(state, action) {
       state.subcategoryFilter = {
         key: action.payload.key,
         label: action.payload.label,
       }
     },
+
     setNewDateFilter(state, action) {
       state.dateFilter = {
         key: action.payload.key,
@@ -44,6 +49,13 @@ export const filterSlice = createSlice({
       }
     },
 
+    setNewProductRowSelect(state, action) {
+      state.productRowSelect = action.payload
+    },
+
+    setNewForecastRowSelect(state, action) {
+      state.productRowSelect = action.payload
+    },
   }
 })
 
@@ -52,6 +64,9 @@ export const {
   setNewGroupFilter, 
   setNewCategoriesFilter, 
   setNewSubcategoriesFilter, 
-  setNewDateFilter } = filterSlice.actions;
+  setNewDateFilter,
+  setNewProductRowSelect,
+  setNewForecastRowSelect,
+} = filterSlice.actions;
 
 export default filterSlice.reducer;
