@@ -60,7 +60,7 @@ function ProductDatabase() {
       <div className={ProductDataCSS.switchContainer}>
         <button className={ProductDataCSS.optionActive}>Таблица</button>
       </div>
-      <button className={`${ProductDataCSS.btnExcel} ${(productRowSelection.length > 0) ? ProductDataCSS.btnExcelActive : ''}`} data-tooltip="Выберите строки для прогноза">Выгрузить в Excel</button>
+      <button className={`${ProductDataCSS.btnExcel} ${(productRowSelection.length > 0) ? ProductDataCSS.btnExcelActive : ''}`} data-tooltip="Выберите строки для прогноза">Получить прогноз</button>
     </div>
     {/* Основной блок с данными */}
     <div className={ProductDataCSS.dataContainer}>
