@@ -18,8 +18,7 @@ const StatisticsTable = () => {
   
   
   
-  const filteredRows = tableRows.filter(item => shopFilter?.key == item.id);
-  // const filteredRows = tableRows.filter(item => console.log(shopFilter.label));
+  const filteredRows = tableRows.filter(item => shopFilter?.key == item.id); 
 
   return (
     <div className={StatisticsTableCSS.table}>

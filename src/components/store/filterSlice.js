@@ -17,8 +17,7 @@ export const filterSlice = createSlice({
         label: action.payload.label,
       }
     },
-    
-
+  
     setNewGroupFilter(state, action) {
       state.groupFilter = {
         key: action.payload.key,

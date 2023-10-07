@@ -37,7 +37,7 @@ function ProductDatabase() {
     { field: 'c2', headerName: 'Группа', width: 310, headerClassName: 'header' },
     { field: 'c3', headerName: 'Категория', width: 310, headerClassName: 'header' },
     { field: 'c4', headerName: 'Подкатегория', width: 310, headerClassName: 'header' },
-    { field: 'c5', headerName: 'Товар', width: 310, headerClassName: 'header' }
+    { field: 'c5', headerName: 'Товар', width: 310, headerClassName: 'header' },
   ];
 
   // обработка клика по выбору позиции из фильтра = отрендерить таблицу по новым данным, то есть:
