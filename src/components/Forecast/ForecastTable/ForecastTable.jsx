@@ -37,7 +37,6 @@ const ForecastTable = () => {
         keepNonExistentRowsSelected
         onRowSelectionModelChange={(newRowSelection) => {
           dispatch(setNewForecastRowSelect(newRowSelection));
-          console.log(forecastRowSelection)
         }}
         rowSelectionModel={forecastRowSelection}
       />  
