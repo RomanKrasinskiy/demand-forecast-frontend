@@ -1,9 +1,12 @@
 import styles from './HeaderAccordion.module.css'
 
 
-const HeaderAccordion = () => {
+// eslint-disable-next-line react/prop-types
+const HeaderAccordion = ({ onSignOut }) => {
     
-  
+    const onSignOutClick = () => {
+        onSignOut();
+      };
 
   return (
     <>
@@ -17,7 +20,7 @@ const HeaderAccordion = () => {
                 </label>
                 <div className={styles["tabContent"]}>
                     <p className={`${styles["tabEmail"]}`}>Ваш email@gmail.com</p>
-                    <button className={`${styles["tabButton"]}`}>Выход</button>
+                    <button onClick={onSignOutClick} className={`${styles["tabButton"]}`}>Выход</button>
                 </div>
                 
                 </div>

@@ -8,7 +8,7 @@ export const filterSlice = createSlice({
     categoryFilter: null,
     subcategoryFilter: null,
     productFilter: null, // для поиска 
-    dateFilter: null,
+    dateFilter: {},
     productRowSelect: [],
     forecastRowSelect: [],
   },
@@ -42,10 +42,7 @@ export const filterSlice = createSlice({
     },
 
     setNewDateFilter(state, action) {
-      state.dateFilter = {
-        key: action.payload.key,
-        label: action.payload.label,
-      }
+      state.dateFilter = action.payload
     },
 
     setNewProductRowSelect(state, action) {

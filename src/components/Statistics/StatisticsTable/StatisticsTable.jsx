@@ -12,7 +12,7 @@ const StatisticsTable = () => {
   // const stores = useSelector(state => state.data.shopNames);
   const shopFilter = useSelector(state => state.filter.shopFilter);
 
-  console.log(shopFilter)
+  // console.log(shopFilter)
   
   
   

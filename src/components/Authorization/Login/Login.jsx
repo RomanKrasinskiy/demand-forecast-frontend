@@ -1,7 +1,7 @@
 import LoginCSS from "./Login.module.css";
 import Authorization from "../Authorization";
 // import { useFormWithValidation } from "../../../hooks/useFormWithValidation";
-import React from "react";
+import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
@@ -75,6 +75,9 @@ export default function Login({ onLogin }) {
   
 const [shops] = React.useState(data); // в стейт
 
+   useEffect(() => {
+     // феч запрос за названиями всез магазов
+   }, []);
 
   const handleSubmit = (e) => {
     console.log("click login");
