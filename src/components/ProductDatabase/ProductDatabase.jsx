@@ -1,22 +1,25 @@
 import ProductDataCSS from './ProductDatabase.module.css';
-import { useState } from 'react';
-import { setNewCategoriesFilter, setNewGroupFilter, setNewShopFilter, setNewSubcategoriesFilter } from '../store/filterSlice';
 import { TextField, Autocomplete } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { 
+  setNewCategoriesFilter, 
+  setNewGroupFilter, 
+  setNewShopFilter, 
+  setNewSubcategoriesFilter,
+  setNewProductRowSelect,
+ } from '../store/filterSlice';
 import SearchForm from './../SearchForm/SearchForm';
 
 function ProductDatabase() {
   // контролируем выбранные ячейки
-  const [rowSelectionModel, setRowSelectionModel] = useState([0]);
+  const productRowSelection = useSelector(state => state.filter.productRowSelect);
 
   // забираем из стейта наполнение фильтров
   const stores = useSelector(state => state.data.shopNames);
   const groups = useSelector(state => state.data.groupNames);
   const categories = useSelector(state => state.data.categoryNames);
   const subcategories = useSelector(state => state.data.subcategoryNames);
-  const productTableRows = useSelector(state => state.data.productTableRows);
 
   // забираем из стейта значение фильтров
   const shopFilter = useSelector(state => state.filter.shopFilter);
@@ -25,11 +28,8 @@ function ProductDatabase() {
   const subcategoryFilter = useSelector(state => state.filter.subcategoryFilter);
   // const productFilter = useSelector(state => state.filter.productFilter); // - это в сёрч форму нужно будет убрать.
 
-  // пытаемся контролировать выбранные значения фильтров
-  // const [shopFilterValue, setShopFilterValue] = useState(shopFilter);
+  // Создаём диспетчер
   const dispatch = useDispatch();
-  // const newShopFilter = (newValue) => dispatch(setNewShopFilter({newValue}));
-
   
   // Колонки в таблице продуктов постоянные - не вижу смысла их держать в стейте.
   const productTableColumns = [
@@ -39,21 +39,28 @@ function ProductDatabase() {
     { field: 'c4', headerName: 'Подкатегория', width: 310, headerClassName: 'header' },
     { field: 'c5', headerName: 'Товар', width: 310, headerClassName: 'header' },
   ];
+  // Забираем наполнение строк таблицы
+  const productTableRows = useSelector(state => state.data.productTableRows);
 
   // обработка клика по выбору позиции из фильтра = отрендерить таблицу по новым данным, то есть:
   //   - отправили запрос на бэк с новым параметром фильтра (useDispatch на ответ обращения апишки?)
   //   - после ответа с бэка дёрнули из стейта новые данные (useSelect)
   // обработка поиска по товару = аналогично
 
-  // галочки в таблице = массив с номерами строк rowSelectionModel (местный стейт, не редакс), который будет отправлять запрос на бэк 
-  // за прогнозом, а полученный результат useDispatch в слайс с данными.
+  // галочки в таблице:
+  //   - по клику падают в массив в filterSlice
+
+  // добавить обработку кнопке "Получить прогноз"
 
   return (
     
     <>
     {/* Переключатель Таблица-График */}
-    <div className={ProductDataCSS.switchContainer}>
-      <button className={ProductDataCSS.optionActive}>Таблица</button>
+    <div className={ProductDataCSS.btnContainer}>
+      <div className={ProductDataCSS.switchContainer}>
+        <button className={ProductDataCSS.optionActive}>Таблица</button>
+      </div>
+      <button className={`${ProductDataCSS.btnExcel} ${(productRowSelection.length > 0) ? ProductDataCSS.btnExcelActive : ''}`} data-tooltip="Выберите строки для прогноза">Выгрузить в Excel</button>
     </div>
     {/* Основной блок с данными */}
     <div className={ProductDataCSS.dataContainer}>
@@ -82,7 +89,6 @@ function ProductDatabase() {
           disablePortal
           id="group"
           options={groups}
-          value={groupFilter}
           isOptionEqualToValue={(option, value) => option.id === value.id}
           sx={{ 
             maxWidth: 387, 
@@ -90,6 +96,7 @@ function ProductDatabase() {
             height: 48,
           }}
           renderInput={(params) => <TextField {...params} label="Группа" />}
+          value={groupFilter}
           onChange={(event, newValue) => {
             dispatch(setNewGroupFilter(newValue))
           }}
@@ -146,9 +153,9 @@ function ProductDatabase() {
         disableRowSelectionOnClick
         keepNonExistentRowsSelected
         onRowSelectionModelChange={(newRowSelectionModel) => {
-          setRowSelectionModel(newRowSelectionModel);
+          dispatch(setNewProductRowSelect(newRowSelectionModel));
         }}
-        rowSelectionModel={rowSelectionModel}
+        rowSelectionModel={productRowSelection}
       />
       </div>
     </div>

@@ -1,10 +1,19 @@
 import ForecastTableCSS from './ForecastTable.module.css';
-import { useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { tableColumns, tableRows } from '../../../utils/ForecastData';
+import { useSelector, useDispatch } from "react-redux";
+import { setNewForecastRowSelect } from '../../store/filterSlice';
 
 const ForecastTable = () => {
-  const [rowSelectionModel, setRowSelectionModel] = useState([]);
+  // контролируем выбранные ячейки
+  const forecastRowSelection = useSelector(state => state.filter.productRowSelect);
+
+  // Забираем наполнение таблицы
+  const forecastTableColumns = useSelector(state => state.data.forecastTableColumns);
+  const forecastTableRows = useSelector(state => state.data.forecastTableRows);
+
+  // Создаём диспетчер
+  const dispatch = useDispatch();
+
 
   return (
     <div className={ForecastTableCSS.table}>
@@ -17,8 +26,8 @@ const ForecastTable = () => {
             backgroundColor: '#F1F5FF',
           },
         }}
-        rows={tableRows} 
-        columns={tableColumns}
+        rows={forecastTableRows} 
+        columns={forecastTableColumns}
         initialState={{
           pagination: { paginationModel: { pageSize: 10 }},
         }}
@@ -26,10 +35,11 @@ const ForecastTable = () => {
         checkboxSelection
         disableRowSelectionOnClick
         keepNonExistentRowsSelected
-        onRowSelectionModelChange={(newRowSelectionModel) => {
-          setRowSelectionModel(newRowSelectionModel);
+        onRowSelectionModelChange={(newRowSelection) => {
+          dispatch(setNewForecastRowSelect(newRowSelection));
+          console.log(forecastRowSelection)
         }}
-        rowSelectionModel={rowSelectionModel}
+        rowSelectionModel={forecastRowSelection}
       />  
     </div>
   )
