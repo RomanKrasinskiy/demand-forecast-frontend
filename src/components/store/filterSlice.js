@@ -11,6 +11,7 @@ export const filterSlice = createSlice({
     dateFilter: '',
     productRowSelect: [],
     forecastRowSelect: [],
+    statisticsShopFilter: [],
   },
   reducers: {
     setNewShopFilter(state, action) {
@@ -41,6 +42,10 @@ export const filterSlice = createSlice({
     setNewForecastRowSelect(state, action) {
       state.productRowSelect = action.payload
     },
+
+    setNewStatisticsShopFilter(state, action) {
+      state.statisticsShopFilter = action.payload
+    }
   }
 })
 
@@ -52,6 +57,7 @@ export const {
   setNewDateFilter,
   setNewProductRowSelect,
   setNewForecastRowSelect,
+  setNewStatisticsShopFilter,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;
