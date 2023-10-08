@@ -1,59 +1,29 @@
-import { Paper, InputBase, Button } from '@mui/material';
+import SearchCSS from './Search.module.css';
 import { useSelector, useDispatch } from "react-redux";
 import { setNewProductFilter } from '../store/filterSlice';
+import { useState } from 'react';
 
 function SerchForm() {
   // Забираем из стейта значение фильтра
   const productFilter = useSelector(state => state.filter.productFilter);
+  const [searchQuery, setSearchQuery] = useState(productFilter);
   // Создаём диспетчер
   const dispatch = useDispatch();
+  // Поведение инпута
+  function handleChange(e) {
+    setSearchQuery(e.target.value);
+  }
+  // Обработка сабмита
+  function handleSubmit(e) {
+    e.preventDefault();
+    dispatch(setNewProductFilter(searchQuery));
+  }
 
   return (
-    <>
-      <Paper
-        component="form"
-        sx={{  
-          display: 'flex', 
-          alignItems: 'center', 
-          width: '100', 
-          borderRadius: '24px', 
-          border: '1px solid rgba(167, 167, 167, 1)', 
-          boxShadow: 'none', 
-          marginBottom: '24px',}}
-      >
-        <InputBase
-          sx={{ 
-            ml: 2.5, 
-            flex: 1, 
-            fontSize: '20px',
-            fontWeight: '400',
-            fontFamily: 'HelveticaNeueCyr',
-           }}
-          placeholder="Поиск"
-          value={productFilter}
-        // inputProps={{ 'aria-label': 'search google maps' }}
-        />
-        <Button
-          variant="contained"
-          sx={{
-            width: "160px",
-            height: "60px",
-            backgroundColor: 'rgba(0, 60, 150, 1)',
-            fontSize: '20px',          
-            borderRadius: "23px",
-            color: "white",
-            border: "1px solid rgba(0, 60, 150, 1)",
-            boxShadow: 'none',
-            textTransform: 'none',
-          }}
-          onClick={(event, newValue) => {
-            dispatch(setNewProductFilter(newValue));
-          }}
-        >
-        Найти
-        </Button>
-      </Paper>
-    </>
+    <form className={SearchCSS.searchContainer} onSubmit={handleSubmit}>
+      <input className={SearchCSS.search} placeholder='Поиск' defaultValue={productFilter || ''} onChange={handleChange}/>
+      <button className={SearchCSS.findBtn} type='submit'>Найти</button>
+    </form>
   )
 }
 
