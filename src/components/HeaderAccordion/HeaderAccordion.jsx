@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import styles from './HeaderAccordion.module.css'
 
 
@@ -6,7 +7,9 @@ const HeaderAccordion = ({ onSignOut }) => {
   // забираем из стейта наполнение полей
   const name = useSelector(state => state.user.name);
   const occupation = useSelector(state => state.user.occupation);
-  const email = useSelector(state => state.user.email);  const onSignOutClick = () => {
+  const email = useSelector(state => state.user.email);  
+  
+  const onSignOutClick = () => {
         onSignOut();
       };
 
