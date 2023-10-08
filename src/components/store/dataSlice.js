@@ -5,29 +5,131 @@ export const dataSlice = createSlice({
   initialState: {
     shopNames: [
       {
-        key: '1',
-        label: 'Москва',
+        "store_name": "GAZON",
+        "city": "ROGOD2",
+        "division": "tuy5r",
+        "type_format": 1,
+        "loc": 3,
+        "size":19,
+        "is_active": true
       },
       {
-        key: '2',
-        label: 'Питер',
+        "store_name": "MAGAZ1",
+        "city": "GOROD1",
+        "division": "tsdfr",
+        "type_format": 3,
+        "loc": 5,
+        "size":31,
+        "is_active": true
       },
       {
-        key: '3',
-        label: 'Екб',
+        "store_name": "MAGAZ2",
+        "city": "GOROD1",
+        "division": "tsdfr",
+        "type_format": 3,
+        "loc": 5,
+        "size":31,
+        "is_active": true
       },
       {
-        key: '4',
-        label: 'sdf26',
+        "store_name": "MAGAZ3",
+        "city": "GOROD1",
+        "division": "tsdfr",
+        "type_format": 3,
+        "loc": 5,
+        "size":31,
+        "is_active": true
       },
       {
-        key: '5',
-        label: 'sdf27',
+        "store_name": "MAGAZ4",
+        "city": "GOROD1",
+        "division": "tsdfr",
+        "type_format": 3,
+        "loc": 5,
+        "size":31,
+        "is_active": true
       },
       {
-        key: '6',
-        label: 'sdf29',
+        "store_name": "MAGAZ5",
+        "city": "GOROD1",
+        "division": "tsdfr",
+        "type_format": 3,
+        "loc": 5,
+        "size":31,
+        "is_active": true
       },
+      {
+        "store_name": "MAGAZ6",
+        "city": "GOROD1",
+        "division": "tsdfr",
+        "type_format": 3,
+        "loc": 5,
+        "size":31,
+        "is_active": true
+      },
+      {
+        "store_name": "MAGAZ7",
+        "city": "GOROD1",
+        "division": "tsdfr",
+        "type_format": 3,
+        "loc": 5,
+        "size":31,
+        "is_active": true
+      },
+      {
+        "store_name": "MAGAZ8",
+        "city": "GOROD1",
+        "division": "tsdfr",
+        "type_format": 3,
+        "loc": 5,
+        "size":31,
+        "is_active": true
+      },
+      {
+        "store_name": "MAGAZ9",
+        "city": "GOROD1",
+        "division": "tsdfr",
+        "type_format": 3,
+        "loc": 5,
+        "size":31,
+        "is_active": true
+      },
+      {
+        "store_name": "MAGAZ10",
+        "city": "GOROD1",
+        "division": "tsdfr",
+        "type_format": 3,
+        "loc": 5,
+        "size":31,
+        "is_active": true
+      },
+      {
+        "store_name": "MAGAZ11",
+        "city": "GOROD1",
+        "division": "tsdfr",
+        "type_format": 3,
+        "loc": 5,
+        "size":31,
+        "is_active": true
+      },
+      {
+        "store_name": "MAGAZ12",
+        "city": "GOROD1",
+        "division": "tsdfr",
+        "type_format": 3,
+        "loc": 5,
+        "size":31,
+        "is_active": true
+      },
+      {
+        "store_name": "MAGAZ13",
+        "city": "GOROD1",
+        "division": "tsdfr",
+        "type_format": 3,
+        "loc": 5,
+        "size":31,
+        "is_active": true
+      }
     ],
     groupNames: [
       {

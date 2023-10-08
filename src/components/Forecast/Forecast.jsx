@@ -26,6 +26,17 @@ const Forecast = () => {
   const groups = useSelector(state => state.data.groupNames);
   const categories = useSelector(state => state.data.categoryNames);
   const subcategories = useSelector(state => state.data.subcategoryNames);
+  // Функция трансформации данных с бэка в съедобный для Autocomplete вид - магазины
+  function transformIntoShopsList(initialArray) {
+    return initialArray.map((item, index) => {
+      return {
+        key: (index + 1),
+        label: item.store_name,
+      };
+    });
+  }
+  // Трансформируем магазины в опции фильтра
+  const storesList = transformIntoShopsList(stores);
 
   // Забираем из стейта значение фильтров
   const shopFilter = useSelector(state => state.filter.shopFilter);
@@ -67,7 +78,7 @@ const Forecast = () => {
         <Autocomplete
           disablePortal
           id="stores"
-          options={stores}
+          options={storesList}
           sx={{ 
             maxWidth: 387, 
             width: '100%',
