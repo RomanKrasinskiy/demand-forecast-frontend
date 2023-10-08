@@ -1,6 +1,12 @@
 import { Paper, InputBase, Button } from '@mui/material';
+import { useSelector, useDispatch } from "react-redux";
+import { setNewProductFilter } from '../store/filterSlice';
 
 function SerchForm() {
+  // Забираем из стейта значение фильтра
+  const productFilter = useSelector(state => state.filter.productFilter);
+  // Создаём диспетчер
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -24,6 +30,7 @@ function SerchForm() {
             fontFamily: 'HelveticaNeueCyr',
            }}
           placeholder="Поиск"
+          value={productFilter}
         // inputProps={{ 'aria-label': 'search google maps' }}
         />
         <Button
@@ -38,6 +45,9 @@ function SerchForm() {
             border: "1px solid rgba(0, 60, 150, 1)",
             boxShadow: 'none',
             textTransform: 'none',
+          }}
+          onClick={(event, newValue) => {
+            dispatch(setNewProductFilter(newValue));
           }}
         >
         Найти
