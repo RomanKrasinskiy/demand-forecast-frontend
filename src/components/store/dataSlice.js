@@ -107,22 +107,128 @@ export const dataSlice = createSlice({
         key: '6',
       },
     ],
-    productTableRows: [
-      { id: 1, c1: 'Москва', c2: 'Мучное изделие', c3: 'Штучная продукция', c4: 'Булочки', c5: 'Булочка', c6: 'какая-то ещё информация'},
-      { id: 2, c1: 'Питер', c2: 'Мучное изделие', c3: 'Штучная продукция', c4: 'Булочки', c5: 'Булочка с маком'},
-      { id: 3, c1: 'Екб', c2: 'Мучное изделие', c3: 'Штучная продукция', c4: 'Булочки', c5: 'Булочка с повидлом'},
-      { id: 4, c1: 'Реутов, Юбилейный 2А', c2: 'Мучное изделие', c3: 'Штучная продукция', c4: 'Булочки', c5: 'Булочка Московская'},
-      { id: 5, c1: 'Москва', c2: 'Мучное изделие', c3: 'Штучная продукция', c4: 'Булочки', c5: 'Булочка с изюмом'},
-      { id: 6, c1: 'Реутов, Юбилейный 2А', c2: 'Мучное изделие', c3: 'Штучная продукция', c4: 'Булочки', c5: 'Булочка Свердловская'},
-      { id: 7, c1: 'Реутов, Юбилейный 2А', c2: 'Мучное изделие', c3: 'Штучная продукция', c4: 'Булочки', c5: 'Булочка со сгущенкой'},
-      { id: 8, c1: 'Реутов, Юбилейный 2А', c2: 'Мучное изделие', c3: 'Штучная продукция', c4: 'Булочки', c5: 'Булочка с творогом'},
-      { id: 9, c1: 'Реутов, Юбилейный 2А', c2: 'Мучное изделие', c3: 'Штучная продукция', c4: 'Слойки', c5: 'Слойка с ветчиной'},
-      { id: 10, c1: 'Реутов, Юбилейный 2А', c2: 'Мучное изделие', c3: 'Штучная продукция', c4: 'Слойки', c5: 'Слойка с сыром'},
-      { id: 11, c1: 'Реутов, Юбилейный 2А', c2: 'Мучное изделие', c3: 'Штучная продукция', c4: 'Слойки', c5: 'Слойка с джемом'},
-      { id: 12, c1: 'Реутов, Юбилейный 2А', c2: 'Мучное изделие', c3: 'Штучная продукция', c4: 'Слойки', c5: 'Хачапури'},
-      { id: 13, c1: 'Реутов, Юбилейный 2А', c2: 'Мучное изделие', c3: 'Штучная продукция', c4: 'Жареная выпечка', c5: 'Беляш'},
-      { id: 14, c1: 'Реутов, Юбилейный 2А', c2: 'Мучное изделие', c3: 'Штучная продукция', c4: 'Жареная выпечка', c5: 'Чебурек'},
-      { id: 15, c1: 'Реутов, Юбилейный 2А', c2: 'Овощи', c3: 'Весовая продукция', c4: 'Капуста', c5: 'Брокколи'},
+
+    categories:[
+      {
+          "store": "MAGAZ1",
+          "product": "Pivo IPA",
+          "group": "Alkogol",
+          "category": "Pivo",
+          "subcategory": "Ale",
+          "amount": 444
+      },
+      {
+          "store": "MAGAZ1",
+          "product": "Pivo APA",
+          "group": "Alkogol",
+          "category": "Pivo",
+          "subcategory": "Ale",
+          "amount": 555
+      },
+      {
+          "store": "MAGAZ1",
+          "product": "Pivo Stout",
+          "group": "Alkogol",
+          "category": "Pivo",
+          "subcategory": "Dark",
+          "amount": 444
+      },
+      {
+          "store": "MAGAZ1",
+          "product": "Pivo Porter",
+          "group": "Alkogol",
+          "category": "Pivo",
+          "subcategory": "Dark",
+          "amount": 444
+      },
+      {
+          "store": "MAGAZ1",
+          "product": "Hendricks",
+          "group": "Alkogol",
+          "category": "Gin",
+          "subcategory": "London Dry",
+          "amount": 444
+      },
+      {
+          "store": "MAGAZ1",
+          "product": "Beefeater",
+          "group": "Alkogol",
+          "category": "Gin",
+          "subcategory": "London Dry",
+          "amount": 444
+      },
+      {
+          "store": "MAGAZ1",
+          "product": "Makers Mark",
+          "group": "Alkogol",
+          "category": "Whiskey",
+          "subcategory": "Bourbon",
+          "amount": 444
+      },
+      {
+          "store": "MAGAZ1",
+          "product": "Smirnoff",
+          "group": "Alkogol",
+          "category": "Vodka",
+          "subcategory": "Vodka",
+          "amount": 444
+      },
+      {
+          "store": "MAGAZ1",
+          "product": "Lays Salt",
+          "group": "Snacks",
+          "category": "Chips",
+          "subcategory": "Potato",
+          "amount": 444
+      },
+      {
+          "store": "MAGAZ1",
+          "product": "Doritos Hot",
+          "group": "Snacks",
+          "category": "Chips",
+          "subcategory": "Nachos",
+          "amount": 444
+      },
+      {
+          "store": "MAGAZ1",
+          "product": "Milk 3% fat",
+          "group": "Milk",
+          "category": "Milk",
+          "subcategory": "Milk",
+          "amount": 444
+      },
+      {
+          "store": "MAGAZ1",
+          "product": "Strawberry Yougurt",
+          "group": "Milk",
+          "category": "Yogurt",
+          "subcategory": "Drinkable Yogurt",
+          "amount": 444
+      },
+      {
+          "store": "MAGAZ1",
+          "product": "Tvorog Lenta 0% fat",
+          "group": "Milk",
+          "category": "Tvorog",
+          "subcategory": "Lenta Brand",
+          "amount": 444
+      },
+      {
+          "store": "MAGAZ1",
+          "product": "Water Melon",
+          "group": "Fruits",
+          "category": "Season Fruits",
+          "subcategory": "Bacheviye",
+          "amount": 444
+      },
+      {
+          "store": "MAGAZ1",
+          "product": "Melon",
+          "group": "Fruits",
+          "category": "Season Fruits",
+          "subcategory": "Bacheviye",
+          "amount": 444
+      },
     ],
 
     forecast: [

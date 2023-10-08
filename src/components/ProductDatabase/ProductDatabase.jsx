@@ -27,11 +27,27 @@ function ProductDatabase() {
   const categoryFilter = useSelector(state => state.filter.categoryFilter);
   const subcategoryFilter = useSelector(state => state.filter.subcategoryFilter);
   // const productFilter = useSelector(state => state.filter.productFilter); // - это в сёрч форму нужно будет убрать.
-
-  // Создаём диспетчер
-  const dispatch = useDispatch();
   
-  // Колонки в таблице продуктов постоянные - не вижу смысла их держать в стейте.
+  // Забираем продукты, полученные с бэка
+  const categoriesData = useSelector(state => state.data.categories);
+  // Функция трансформации данных с бэка в съедобный для Data Grid вид - строки
+  function transformCategoriesData(initialArray) {
+    return initialArray.map((item, index) => {
+      const finalRow = {
+        id: index + 1,
+        c1: item.store,
+        c2: item.group,
+        c3: item.category,
+        c4: item.subcategory,
+        c5: item.product,
+      };
+      return finalRow;
+    });
+  }
+  // Трансформируем продукты в строки
+  const categoriesDataRowsDataGrid = transformCategoriesData(categoriesData);
+
+  // Колонки в таблице продуктов постоянные - нет смысла их держать в стейте.
   const productTableColumns = [
     { field: 'c1', headerName: 'ТК', width: 308, headerClassName: 'header'},
     { field: 'c2', headerName: 'Группа', width: 310, headerClassName: 'header' },
@@ -39,16 +55,14 @@ function ProductDatabase() {
     { field: 'c4', headerName: 'Подкатегория', width: 310, headerClassName: 'header' },
     { field: 'c5', headerName: 'Товар', width: 310, headerClassName: 'header' },
   ];
-  // Забираем наполнение строк таблицы
-  const productTableRows = useSelector(state => state.data.productTableRows);
+
+  // Создаём диспетчер
+  const dispatch = useDispatch();
 
   // обработка клика по выбору позиции из фильтра = отрендерить таблицу по новым данным, то есть:
   //   - отправили запрос на бэк с новым параметром фильтра (useDispatch на ответ обращения апишки?)
   //   - после ответа с бэка дёрнули из стейта новые данные (useSelect)
   // обработка поиска по товару = аналогично
-
-  // галочки в таблице:
-  //   - по клику падают в массив в filterSlice
 
   // добавить обработку кнопке "Получить прогноз"
 
@@ -143,7 +157,7 @@ function ProductDatabase() {
             backgroundColor: '#F1F5FF',
           },
         }}
-        rows={productTableRows} 
+        rows={categoriesDataRowsDataGrid} 
         columns={productTableColumns}
         initialState={{
           pagination: { paginationModel: { pageSize: 10 }},
