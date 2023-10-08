@@ -12,7 +12,7 @@ export const API_MAIN_CONFIG = {
       "Content-Type": "application/json",
 
     }, 
-    signUp: `${MAIN_URL}/users`, 
+    signUp: `${MAIN_URL}/users/`, 
     signIn: `${MAIN_URL}${AUTH}/login`, 
     signOut: `${MAIN_URL}${AUTH}/logout`, 
     categories: `${MAIN_URL}${API}/categories`,

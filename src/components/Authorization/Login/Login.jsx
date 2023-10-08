@@ -81,6 +81,7 @@ const [shops, setShop] = React.useState([]); // в стейт
      getShops()
       .then((data) => {
         setShop(data)
+        
       })
       .catch((err) => console.log(`Ошибка: ${err}`)); 
    }, []);

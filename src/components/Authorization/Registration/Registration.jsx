@@ -53,7 +53,6 @@ return (
             type="email"
             size="normal"
             variant="standard"
-            value={values.email}
             fullWidth
             required
             onSubmit={handleSubmit}
@@ -100,7 +99,6 @@ return (
             variant="standard"
             fullWidth
             required
-            value={values.password}
             onSubmit={handleSubmit}
 
           >
