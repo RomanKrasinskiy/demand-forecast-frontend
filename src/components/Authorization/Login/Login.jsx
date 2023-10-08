@@ -1,6 +1,6 @@
 import LoginCSS from "./Login.module.css";
 import Authorization from "../Authorization";
-import React from "react";
+import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
@@ -10,6 +10,7 @@ import { Button, FormControl, Input, InputLabel, MenuItem, Select, Stack } from 
 import MainBackground from "../../Main/MainBackground/MainBackground";
 import { Link } from "react-router-dom";
 import { useFormWithValidation } from "../../../hooks/useFormWithValidation";
+import { getShops } from "../../../api/DataApi";
 
 // eslint-disable-next-line react/prop-types
 export default function Login({ onLogin }) {
@@ -20,62 +21,68 @@ export default function Login({ onLogin }) {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  const data = [
-    {"store": "asd31ыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыывввввввввввввввввввввв",
-      "city": "erert",
-      "division": "tuy5r",
-      "type_format": 1,
-      "loc": 3,
-      "size":19,
-      "is_active": 0},
-    {"store": "dd21",
-      "city": "derg",
-      "division": "tsdfr",
-      "type_format": 3,
-      "loc": 5,
-      "size":31,
-      "is_active": 1},
-      {"store": "d1d1",
-      "city": "derg",
-      "division": "tsdfr",
-      "type_format": 3,
-      "loc": 5,
-      "size":31,
-      "is_active": 1},
-      {"store": "d4d1",
-      "city": "derg",
-      "division": "tsdfr",
-      "type_format": 3,
-      "loc": 5,
-      "size":31,
-      "is_active": 1},
-      {"store": "dd51",
-      "city": "derg",
-      "division": "tsdfr",
-      "type_format": 3,
-      "loc": 5,
-      "size":31,
-      "is_active": 1},
-      {"store": "dd61",
-      "city": "derg",
-      "division": "tsdfr",
-      "type_format": 3,
-      "loc": 5,
-      "size":31,
-      "is_active": 1},
-      {"store": "dd71",
-      "city": "derg",
-      "division": "tsdfr",
-      "type_format": 3,
-      "loc": 5,
-      "size":31,
-      "is_active": 1},
-   ];
+  // const data = [
+  //   {"store": "asd31ыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыывввввввввввввввввввввв",
+  //     "city": "erert",
+  //     "division": "tuy5r",
+  //     "type_format": 1,
+  //     "loc": 3,
+  //     "size":19,
+  //     "is_active": 0},
+  //   {"store": "dd21",
+  //     "city": "derg",
+  //     "division": "tsdfr",
+  //     "type_format": 3,
+  //     "loc": 5,
+  //     "size":31,
+  //     "is_active": 1},
+  //     {"store": "d1d1",
+  //     "city": "derg",
+  //     "division": "tsdfr",
+  //     "type_format": 3,
+  //     "loc": 5,
+  //     "size":31,
+  //     "is_active": 1},
+  //     {"store": "d4d1",
+  //     "city": "derg",
+  //     "division": "tsdfr",
+  //     "type_format": 3,
+  //     "loc": 5,
+  //     "size":31,
+  //     "is_active": 1},
+  //     {"store": "dd51",
+  //     "city": "derg",
+  //     "division": "tsdfr",
+  //     "type_format": 3,
+  //     "loc": 5,
+  //     "size":31,
+  //     "is_active": 1},
+  //     {"store": "dd61",
+  //     "city": "derg",
+  //     "division": "tsdfr",
+  //     "type_format": 3,
+  //     "loc": 5,
+  //     "size":31,
+  //     "is_active": 1},
+  //     {"store": "dd71",
+  //     "city": "derg",
+  //     "division": "tsdfr",
+  //     "type_format": 3,
+  //     "loc": 5,
+  //     "size":31,
+  //     "is_active": 1},
+  //  ];
   
-const [shops] = React.useState(data); // в стейт
+// const [shops] = React.useState(data); // в стейт
+const [shops, setShop] = React.useState([]); // в стейт
 
    useEffect(() => {
-     // феч запрос за названиями всез магазов
+     // феч запрос за названиями всех магазов
+     getShops()
+      .then((data) => {
+        setShop(data)
+      })
+      .catch((err) => console.log(`Ошибка: ${err}`)); 
    }, []);
 
   const handleSubmit = (e) => {
@@ -229,7 +236,7 @@ const [shops] = React.useState(data); // в стейт
               
                 sx={{
                   left: "26px",
-                  top: "20px",
+                  top: "16px",
                   width: '100%',
                   
                   "&.MuiInputLabel-shrink": {
@@ -250,24 +257,22 @@ const [shops] = React.useState(data); // в стейт
                 onChange={handleChange}
                 label="shop"
                 disableUnderline
-                
                 sx={{
                   border: "1px solid rgba(77, 77, 77, 1)",
                   borderRadius: "24px",
                   padding: "13px 24px",
                   marginBottom: "4px",
                   
-                  '&MenuItem:focus': {
-                    backgroundColor: 'red',
-                    opacity: '1',
-                    color: 'red'
+                  '& .MuiSvgIcon-root': {
+                    right: '32px',
                   }
+                  
                 }}
                 
               >
                 {shops.map((shop) => (
                     // <MenuItem id="shop" name='shop' key={`${shop.city}-${shop.store}`} value={values.shop}>{`${shop.city} ${shop.store}`}</MenuItem>
-                    <MenuItem id="shop" name='shop' onClick={handleChange} key={`${shop.city}-${shop.store}`} value={shop.store}>{`${shop.city} ${shop.store}`}</MenuItem>
+                    <MenuItem id="shop" name='shop' onClick={handleChange} key={`${shop.city}-${shop.store_name}`} value={shop.store_name}>{`${shop.city} ${shop.store_name}`}</MenuItem>
                   ))}
                 
               </Select>

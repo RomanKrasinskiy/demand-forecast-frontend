@@ -15,11 +15,17 @@ import ProductDatabase from "../ProductDatabase/ProductDatabase";
 import Header from "../Header/Header";
 import { useEffect, useState } from "react";
 import { signUp, signIn, signOut, checkToken } from "../../api/AuthApi";
+import { useDispatch, useSelector } from "react-redux";
+import { setNewUserEmail, setNewUserName, setNewUserOccupation } from "../store/userSlice";
 
 function App() {
   const navigate = useNavigate();
 
   const [loggedIn, setLoggedIn] = useState(false);
+  const dispatch = useDispatch();
+
+  const user = useSelector(state => state.data.shopNames);
+
   const [currentUser, setCurrentUser] = useState({
     email: "",
     password: "",
@@ -54,6 +60,7 @@ function App() {
       signUp({ email, password, userName, usersPosition })
         .then(() => {
           navigate('/signin')
+          
         })
         .catch((err) => console.log(`Ошибка: ${err}`));
       // .finally(() => setIsLoading(false));
@@ -64,6 +71,9 @@ function App() {
         .then((data) => {
           localStorage.setItem("token", data.token);
           console.log({ email, password, shop })
+          dispatch(setNewUserName(data.userName))
+          dispatch(setNewUserOccupation(data.usersPosition))
+          dispatch(setNewUserEmail(data.email))
           // setLoggedIn(true);
           navigate('/productdatabase')
         })
