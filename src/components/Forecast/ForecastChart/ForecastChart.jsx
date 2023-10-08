@@ -23,14 +23,60 @@ ChartJS.register(
 )
 
 const ForecastChart = () => {
-  // В табличке всегда всего одна колонка - с названием продукта.
-  const forecastChartColumns = [
-    { field: 'c1', headerName: 'Товар', width: '100%', headerClassName: 'header'},
-  ];
-  // Забираем наполнение таблицы
-  const forecastChartRows = useSelector(state => state.data.forecastChartRows);
+  // Забираем прогноз
+  const forecast = useSelector(state => state.data.forecast);
+
+  // ГРАФИК
+  // Функция трансформации данных с бэка в съедобный для ChartJS вид
+  function transformForecastChartData(initialArray) {
+    const labels = Object.keys(initialArray[0].forecast);
+    const datasets = [];
+
+    function generateColors(numColors) {
+      const colors = [];
+      const goldenAngle = 360 / 1.61803398875; // Golden angle in degrees
+      for (let i = 0; i < numColors; i++) {
+        const hue = (goldenAngle * i) % 360; // Generate a hue value
+        const color = `hsl(${hue}, 70%, 50%)`; // Convert to HSL color format
+        colors.push(color);
+      }
+      return colors;
+    }
+
+    const fixedColors = generateColors(initialArray.length);
+  
+    initialArray.forEach((item, index) => {
+      const color = fixedColors[index];
+      const productData = {
+        label: item.product,
+        data: labels.map((date) => item.forecast[date]),
+        backgroundColor: color,
+        borderColor: color,
+        pointBorderColor: '#003C96',
+      };
+      datasets.push(productData);
+    });
+  
+    return { labels, datasets };
+  }
+  // Трансформируем прогноз в дату для графика 
+  const forecastChartData = transformForecastChartData(forecast);
+  // Определяем максимальное значение в датасетах для обозначеия границы графика по оси Y
+  function findMaxValueInDatasets(chartData) {
+    let maxValue = Number.MIN_SAFE_INTEGER;
+  
+    chartData.datasets.forEach((dataset) => {
+      const maxInDataset = Math.max(...dataset.data);
+      if (maxInDataset > maxValue) {
+        maxValue = maxInDataset;
+      }
+    });
+  
+    return maxValue;
+  }
+  // Записываем максимальное значение в переменную
+  const maxValue = findMaxValueInDatasets(forecastChartData);
   // Опции для графика
-  // const maxValue = подумать над формулой, которая считает максимальное значение по оси У;
   const options = {
     plugins: {
       legend: {
@@ -40,12 +86,29 @@ const ForecastChart = () => {
     scales: {
       y: {
         beginAtZero: true,
-        max: 20,
+        max: maxValue+2,
       }
     },
     responsive: true
   }
-  const forecastChartData = useSelector(state => state.data.forecastChartData);
+
+  // ТАБЛИЦА РЯДОМ С ГРАФИКОМ
+  // Функция трансформации данных с бэка в съедобный для Data Grid вид - строки
+  function transformForecastChartTableRows(initialArray) {
+    const finalArray = initialArray.map((item, index) => ({
+      id: index + 1,
+      c1: item.product,
+    }));
+  
+    return finalArray;
+  }
+  // Трансформируем прогноз в строки
+  const forecastChartTableRowsDataGrid = transformForecastChartTableRows(forecast);
+  // В табличке всегда всего одна колонка - с названием продукта.
+  const forecastChartColumns = [
+    { field: 'c1', headerName: 'Товар', width: '100%', headerClassName: 'header'},
+  ];
+
   // контролируем выбранные ячейки
   const forecastRowSelection = useSelector(state => state.filter.productRowSelect);
 
@@ -62,7 +125,7 @@ const ForecastChart = () => {
       </div>
       <div className={ForecastChartCSS.table}>
         <DataGrid 
-          rows={forecastChartRows} 
+          rows={forecastChartTableRowsDataGrid} 
           columns={forecastChartColumns}
           initialState={{
             pagination: { paginationModel: { pageSize: 9 }},

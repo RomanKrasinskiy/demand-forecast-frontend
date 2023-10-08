@@ -7,6 +7,7 @@ import DatePickerCalendar from '../DatePickerCalendar/DatePickerCalendar';
 import SearchForm from '../SearchForm/SearchForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { setNewCategoriesFilter, setNewGroupFilter, setNewShopFilter, setNewSubcategoriesFilter } from '../store/filterSlice';
+
 const Statistics = () => {
 
   const [isDataTable, setDataTable] = useState(true);
@@ -22,16 +23,25 @@ const Statistics = () => {
    const groups = useSelector(state => state.data.groupNames);
    const categories = useSelector(state => state.data.categoryNames);
    const subcategories = useSelector(state => state.data.subcategoryNames);
-  //  const productTableRows = useSelector(state => state.data.productTableRows);
+   // Функция трансформации данных с бэка в съедобный для Autocomplete вид - магазины
+  function transformIntoShopsList(initialArray) {
+    return initialArray.map((item, index) => {
+      return {
+        key: (index + 1),
+        label: item.store_name,
+      };
+    });
+  }
+  // Трансформируем магазины в опции фильтра
+  const storesList = transformIntoShopsList(stores);
  
    // забираем из стейта значение фильтров
-   const shopFilter = useSelector(state => state.filter.shopFilter);
+   const statisticsShopFilter = useSelector(state => state.filter.statisticsShopFilter);
    const groupFilter = useSelector(state => state.filter.groupFilter);
    const categoryFilter = useSelector(state => state.filter.categoryFilter);
    const subcategoryFilter = useSelector(state => state.filter.subcategoryFilter);
-  //  const dateFilter = useSelector(state => state.filter.dateFilter);
-
    // const productFilter = useSelector(state => state.filter.productFilter); // - это в сёрч форму нужно будет убрать.
+   //  const dateFilter = useSelector(state => state.filter.dateFilter);
  
    // пытаемся контролировать выбранные значения фильтров
    // const [shopFilterValue, setShopFilterValue] = useState(shopFilter);
@@ -53,14 +63,13 @@ const Statistics = () => {
       {/* Панель с фильтрами */}
       <div className={StatisticsCSS.optionsContainer}>
         <Autocomplete
-          disablePortal
           sx={{ 
             maxWidth: '387px',
             width: '100%',
           }}
           id="stores"
-          options={stores}
-          value={shopFilter}
+          options={storesList}
+          value={statisticsShopFilter}
           isOptionEqualToValue={(option, value) => option.id === value.id}
           renderInput={(params) => <TextField {...params} label="ТК" />}
           onChange={(event, newValue) => {
