@@ -113,7 +113,9 @@ const Statistics = () => {
             dispatch(setNewSubcategoriesFilter(newValue))
           }}
         />
-          <DatePickerCalendar />
+          <DatePickerCalendar 
+          
+          />
         
 
       </div>

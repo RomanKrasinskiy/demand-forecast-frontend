@@ -31,6 +31,7 @@ export const filterSlice = createSlice({
 
     setNewDateFilter(state, action) {
       state.dateFilter = action.payload
+      state.dateFilter = action.payload
     },
 
     setNewProductRowSelect(state, action) {

@@ -13,8 +13,8 @@ import Statistics from "../Statistics/Statistics";
 // import Preloader from "../Preloader/Preloader";
 import ProductDatabase from "../ProductDatabase/ProductDatabase";
 import Header from "../Header/Header";
-import { useState } from "react";
-import { auth } from "../../api/AuthApi";
+import { useEffect, useState } from "react";
+import { signUp, signIn, signOut, checkToken } from "../../api/AuthApi";
 
 function App() {
   const navigate = useNavigate();
@@ -28,29 +28,64 @@ function App() {
     id: "",
   });
 
+  useEffect(() => {
+    tokenCheck();
+  }, [loggedIn]);
+
+  function tokenCheck() {
+    const jwt = localStorage.getItem("token");
+    if (!jwt) {
+      return;
+    } else {
+      // setIsLoading(true)
+      checkToken(jwt)
+        .then(() => {
+          // setLoggedIn(true);
+          const path = location.pathname;
+          navigate(path);
+        })
+        .catch((err) => console.log(`Ошибка: ${err}`));
+        // .finally(() => setIsLoading(false));
+    }
+  }
+
   function handleRegister({ email, password, userName, usersPosition }) {
     // setIsLoading(true)
-    auth
-      .register({ email, password, userName, usersPosition })
-      .then(() => {
-        navigate('/signin')
-      })
-      // .catch((err) => setFormError({ isError: true, text: err.message })) // Уточнить у дизайнеров, будет ли валидация полей
+      signUp({ email, password, userName, usersPosition })
+        .then(() => {
+          navigate('/signin')
+        })
+        .catch((err) => console.log(`Ошибка: ${err}`));
       // .finally(() => setIsLoading(false));
   }
   function handleLogin({ email, password, shop }) {
-    // setIsLoading(true)
-      console.log(email, password, shop)
-    auth
-      .login({ email, password, shop })
-      .then(() => {
-        console.log(email, password, shop)
-
-        navigate('/productdatabase')
-      })
-      // .catch((err) => setFormError({ isError: true, text: err.message }))
+    // setIsLoading(true)      
+      signIn({ email, password, shop })
+        .then((data) => {
+          localStorage.setItem("token", data.token);
+          console.log({ email, password, shop })
+          // setLoggedIn(true);
+          navigate('/productdatabase')
+        })
+        .catch((err) => console.log(`Ошибка: ${err}`));
       // .finally(() => setIsLoading(false));
   }
+  const handleSignOut = () => {
+    // setIsLoading(true);
+    signOut()
+      .then(() => {
+        navigate('/');
+        console.log('exit')
+        setCurrentUser({ name: '', email: '' });
+        setLoggedIn(false);
+
+        // setFormError({ isError: false, text: '' });
+        // setSearchedProduct([]);
+        localStorage.clear();
+      })
+      .catch((err) => console.log(`Ошибка: ${err}`));
+      // .finally(() => setIsLoading(false));
+  };
 
 
   return (
@@ -77,7 +112,7 @@ function App() {
               path="/productdatabase" // предварительная ручка
               element={
                 <>
-                  <Header />
+                  <Header onSignOut={handleSignOut} />
                   <ProductDatabase />
                 </>
               }
@@ -86,7 +121,7 @@ function App() {
               path="/forecast" // предварительная ручка
               element={
                 <>
-                  <Header />
+                  <Header onSignOut={handleSignOut} />
                   <Forecast />
                 </>
               }
@@ -95,7 +130,7 @@ function App() {
               path="/statistics" // предварительная ручка
               element={
                 <>
-                  <Header />
+                  <Header onSignOut={handleSignOut} />
                   <Statistics />
                 </>
               }

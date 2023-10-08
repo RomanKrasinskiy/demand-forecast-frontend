@@ -23,6 +23,7 @@ export default function DatePickerCalendar() {
 
   const [selectedDates, setSelectedDates] = useState(); // будем мапиться по массиву, переводить даты в строку .toString() и отправлять запрос с датами на бэк
   // console.log(selectedDates);
+  
 
   return (
     <div className={DatePickerCalendarCSS.calendar} >

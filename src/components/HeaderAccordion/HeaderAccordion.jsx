@@ -1,11 +1,17 @@
+import { useSelector } from 'react-redux';
 import styles from './HeaderAccordion.module.css'
-import { useSelector } from "react-redux";
 
-const HeaderAccordion = () => {
+
+// eslint-disable-next-line react/prop-types
+const HeaderAccordion = ({ onSignOut }) => {
   // забираем из стейта наполнение полей
   const name = useSelector(state => state.user.name);
   const occupation = useSelector(state => state.user.occupation);
-  const email = useSelector(state => state.user.email);
+  const email = useSelector(state => state.user.email);  
+  
+  const onSignOutClick = () => {
+        onSignOut();
+      };
 
   return (
     <>
@@ -19,7 +25,7 @@ const HeaderAccordion = () => {
                 </label>
                 <div className={styles["tabContent"]}>
                     <p className={`${styles["tabEmail"]}`}>{email}</p>
-                    <button className={`${styles["tabButton"]}`}>Выход</button>
+                    <button onClick={onSignOutClick} className={`${styles["tabButton"]}`}>Выход</button>
                 </div>
                 
                 </div>

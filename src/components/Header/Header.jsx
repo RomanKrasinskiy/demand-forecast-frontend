@@ -5,7 +5,8 @@ import Logo from '../Logo/Logo';
 import HeaderAccordion from "../HeaderAccordion/HeaderAccordion";
 
 
-const Header = () => {
+// eslint-disable-next-line react/prop-types
+const Header = ({ onSignOut }) => {
   const activeState = ({ isActive }) => {
     return {
       color: isActive ? "white" : "",
@@ -38,7 +39,7 @@ const Header = () => {
           </NavLink>
         </nav>
         
-        <HeaderAccordion/>
+        <HeaderAccordion onSignOut={onSignOut} />
       </div>
     </header>
   );

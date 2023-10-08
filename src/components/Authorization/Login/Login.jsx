@@ -74,6 +74,9 @@ export default function Login({ onLogin }) {
   
 const [shops] = React.useState(data); // в стейт
 
+   useEffect(() => {
+     // феч запрос за названиями всез магазов
+   }, []);
 
   const handleSubmit = (e) => {
     console.log("click login");
