@@ -655,9 +655,12 @@ export const dataSlice = createSlice({
     setNewForecast(state, action) {
       state.forecast = action.payload
     },
+    setShopNames(state, action) {
+      state.shopNames = action.payload
+    },
   }
 })
 
-export const { setNewForecast } = dataSlice.actions;
+export const { setNewForecast, setShopNames} = dataSlice.actions;
 
 export default dataSlice.reducer;

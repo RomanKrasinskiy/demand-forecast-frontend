@@ -6,8 +6,12 @@ export const userSlice = createSlice({
     name: 'Имя',
     occupation: 'Должность',
     email: 'Ваш email@gmail.com',
+    loggedIn: false,
   },
   reducers: {
+    setloggedIn(state, action) {
+      state.loggedIn = action.payload
+    },
     setNewUserName(state, action) {
       state.name = action.payload
     },
@@ -22,6 +26,6 @@ export const userSlice = createSlice({
   }
 })
 
-export const { setNewUserName, setNewUserOccupation, setNewUserEmail } = userSlice.actions;
+export const { setNewUserName, setNewUserOccupation, setNewUserEmail, setloggedIn } = userSlice.actions;
 
 export default userSlice.reducer;
