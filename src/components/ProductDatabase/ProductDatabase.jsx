@@ -38,7 +38,6 @@ function ProductDatabase() {
   const groupFilter = useSelector(state => state.filter.groupFilter);
   const categoryFilter = useSelector(state => state.filter.categoryFilter);
   const subcategoryFilter = useSelector(state => state.filter.subcategoryFilter);
-  // const productFilter = useSelector(state => state.filter.productFilter); // - это в сёрч форму нужно будет убрать.
   
   // Забираем продукты, полученные с бэка
   const categoriesData = useSelector(state => state.data.categories);
