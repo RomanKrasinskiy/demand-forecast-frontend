@@ -6,7 +6,7 @@ export const userSlice = createSlice({
     name: 'Имя',
     occupation: 'Должность',
     email: 'Ваш email@gmail.com',
-    loggedIn: false,
+    loggedIn: true,
   },
   reducers: {
     setloggedIn(state, action) {

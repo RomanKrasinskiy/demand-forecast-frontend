@@ -7,7 +7,7 @@ export const filterSlice = createSlice({
     groupFilter: '',
     categoryFilter: '',
     subcategoryFilter: '',
-    productFilter: '', // для поиска 
+    productFilter: '', 
     dateFilter: '',
     productRowSelect: [],
     forecastRowSelect: [],
