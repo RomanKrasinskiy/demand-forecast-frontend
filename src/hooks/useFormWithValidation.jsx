@@ -14,6 +14,8 @@ export function useFormWithValidation(inputValues) {
     const value = target.value;
     console.log(name, value);
     setValues({ ...values, [name]: value });
+
+    
     // console.log(values);
     if (value.length < 1) {
       setErrors((state) => ({ ...state, [name]: "Это обязательное поле" }));

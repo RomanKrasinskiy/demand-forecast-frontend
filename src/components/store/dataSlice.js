@@ -3,32 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const dataSlice = createSlice({
   name: 'data',
   initialState: {
-    shopNames: [
-      {
-        key: '1',
-        label: 'Москва',
-      },
-      {
-        key: '2',
-        label: 'Питер',
-      },
-      {
-        key: '3',
-        label: 'Екб',
-      },
-      {
-        key: '4',
-        label: 'sdf26',
-      },
-      {
-        key: '5',
-        label: 'sdf27',
-      },
-      {
-        key: '6',
-        label: 'sdf29',
-      },
-    ],
+    shopNames: [],
     groupNames: [
       {
         label: 'dfsdf',
@@ -218,9 +193,12 @@ export const dataSlice = createSlice({
   },
   reducers: {
     // здесь пропишем все нужные действия со стейтами
+    setShopNames(state, action) {
+      state.shopNames = action.payload
+    },
   }
 })
 
-// export const { тут будут экшены из reducers } = dataSlice.actions;
+export const { setShopNames,  } = dataSlice.actions;
 
 export default dataSlice.reducer;

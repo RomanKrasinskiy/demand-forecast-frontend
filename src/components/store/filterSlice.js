@@ -15,7 +15,8 @@ export const filterSlice = createSlice({
   },
   reducers: {
     setNewShopFilter(state, action) {
-      state.shopFilter = action.payload
+      state.shopFilter = action.payload,
+      console.log(state.shopFilter)
     },
 
     setNewGroupFilter(state, action) {

@@ -10,6 +10,7 @@ import {
   setNewProductRowSelect,
  } from '../store/filterSlice';
 import SearchForm from './../SearchForm/SearchForm';
+import { useEffect } from 'react';
 
 function ProductDatabase() {
   // контролируем выбранные ячейки
@@ -52,6 +53,11 @@ function ProductDatabase() {
 
   // добавить обработку кнопке "Получить прогноз"
 
+  useEffect(() => {
+    
+
+  }, []);
+  
   return (
     
     <>

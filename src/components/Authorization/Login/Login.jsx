@@ -11,6 +11,9 @@ import MainBackground from "../../Main/MainBackground/MainBackground";
 import { Link } from "react-router-dom";
 import { useFormWithValidation } from "../../../hooks/useFormWithValidation";
 import { getShops } from "../../../api/DataApi";
+import { useDispatch, useSelector } from "react-redux";
+import { setShopNames } from "../../store/dataSlice";
+import { setNewShopFilter } from "../../store/filterSlice";
 
 // eslint-disable-next-line react/prop-types
 export default function Login({ onLogin }) {
@@ -21,70 +24,21 @@ export default function Login({ onLogin }) {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  // const data = [
-  //   {"store": "asd31ыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыывввввввввввввввввввввв",
-  //     "city": "erert",
-  //     "division": "tuy5r",
-  //     "type_format": 1,
-  //     "loc": 3,
-  //     "size":19,
-  //     "is_active": 0},
-  //   {"store": "dd21",
-  //     "city": "derg",
-  //     "division": "tsdfr",
-  //     "type_format": 3,
-  //     "loc": 5,
-  //     "size":31,
-  //     "is_active": 1},
-  //     {"store": "d1d1",
-  //     "city": "derg",
-  //     "division": "tsdfr",
-  //     "type_format": 3,
-  //     "loc": 5,
-  //     "size":31,
-  //     "is_active": 1},
-  //     {"store": "d4d1",
-  //     "city": "derg",
-  //     "division": "tsdfr",
-  //     "type_format": 3,
-  //     "loc": 5,
-  //     "size":31,
-  //     "is_active": 1},
-  //     {"store": "dd51",
-  //     "city": "derg",
-  //     "division": "tsdfr",
-  //     "type_format": 3,
-  //     "loc": 5,
-  //     "size":31,
-  //     "is_active": 1},
-  //     {"store": "dd61",
-  //     "city": "derg",
-  //     "division": "tsdfr",
-  //     "type_format": 3,
-  //     "loc": 5,
-  //     "size":31,
-  //     "is_active": 1},
-  //     {"store": "dd71",
-  //     "city": "derg",
-  //     "division": "tsdfr",
-  //     "type_format": 3,
-  //     "loc": 5,
-  //     "size":31,
-  //     "is_active": 1},
-  //  ];
-  
-// const [shops] = React.useState(data); // в стейт
-const [shops, setShop] = React.useState([]); // в стейт
+
+  const dispatch = useDispatch();
+  const shopNames = useSelector(state => state.data.shopNames);
+console.log(values);
 
    useEffect(() => {
      // феч запрос за названиями всех магазов
      getShops()
       .then((data) => {
-        setShop(data)
-        
+        console.log(data)
+        dispatch(setShopNames(data))
       })
       .catch((err) => console.log(`Ошибка: ${err}`)); 
    }, []);
+   
 
   const handleSubmit = (e) => {
     console.log("click login");
@@ -94,6 +48,10 @@ const [shops, setShop] = React.useState([]); // в стейт
       password: values.password,
       shop: values.shop,
     });
+    dispatch(setNewShopFilter({
+      label: values.shop,
+      key: 
+    }))
   };
 
   return (
@@ -129,7 +87,7 @@ const [shops, setShop] = React.useState([]); // в стейт
               <InputLabel
                 htmlFor="standard-adornment-email"
                 value={values.email}
-
+                required
                 sx={{
                   left: "26px",
                   top: "16px",
@@ -152,6 +110,7 @@ const [shops, setShop] = React.useState([]); // в стейт
                 id="email"
                 name='email'
                 type="text"
+                required
                 sx={{
                   border: "1px solid rgba(77, 77, 77, 1)",
                   borderRadius: "24px",
@@ -174,6 +133,7 @@ const [shops, setShop] = React.useState([]); // в стейт
           >
             <InputLabel
               htmlFor="standard-adornment-password"
+              required
               sx={{
                 left: "26px",
                 top: "16px",
@@ -190,6 +150,7 @@ const [shops, setShop] = React.useState([]); // в стейт
               Пароль
             </InputLabel>
             <Input
+              required
               name='password'
               disableUnderline
               id="password"
@@ -255,7 +216,8 @@ const [shops, setShop] = React.useState([]); // в стейт
                 id="shop"
                 name='shop'
                 value={values.shop}
-                onChange={handleChange}
+                onChange={
+                  handleChange}
                 label="shop"
                 disableUnderline
                 sx={{
@@ -271,7 +233,7 @@ const [shops, setShop] = React.useState([]); // в стейт
                 }}
                 
               >
-                {shops.map((shop) => (
+                {shopNames.map((shop) => (
                     // <MenuItem id="shop" name='shop' key={`${shop.city}-${shop.store}`} value={values.shop}>{`${shop.city} ${shop.store}`}</MenuItem>
                     <MenuItem id="shop" name='shop' onClick={handleChange} key={`${shop.city}-${shop.store_name}`} value={shop.store_name}>{`${shop.city} ${shop.store_name}`}</MenuItem>
                   ))}
