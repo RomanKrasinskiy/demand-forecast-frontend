@@ -11,8 +11,8 @@ import {
  } from '../store/filterSlice';
 import SearchForm from './../SearchForm/SearchForm';
 import { useEffect } from 'react';
-import { getCategories } from '../../api/DataApi';
-import { setCategories } from '../store/dataSlice';
+import { getCategories, getShops } from '../../api/DataApi';
+import {  setGroupNames, setShopNames } from '../store/dataSlice';
 
 function ProductDatabase() {
   // контролируем выбранные ячейки
@@ -37,6 +37,7 @@ function ProductDatabase() {
 
   // забираем из стейта значение фильтров
   const shopFilter = useSelector(state => state.filter.shopFilter);
+  console.log(shopFilter);
   const groupFilter = useSelector(state => state.filter.groupFilter);
   const categoryFilter = useSelector(state => state.filter.categoryFilter);
   const subcategoryFilter = useSelector(state => state.filter.subcategoryFilter);
@@ -80,14 +81,52 @@ function ProductDatabase() {
   // добавить обработку кнопке "Получить прогноз"
 
   useEffect(() => {
-    // феч запрос за названиями всех магазов
-    getCategories()
-     .then((data) => {
-       console.log(data)
-       dispatch(setCategories(data))
-     })
-     .catch((err) => console.log(`Ошибка: ${err}`)); 
-  }, []);
+    if (shopFilter.length === 0) {
+      getShops()
+        .then((data) => { // в data приходит целый не фильтрованый объект с данными
+          console.log(data);
+          dispatch(setShopNames(data))
+        })
+        .catch((err) => console.log(`Ошибка: ${err}`));
+    }
+  }, [dispatch]);
+  
+  
+
+  useEffect(() => {
+    if (groupFilter.length === 0) {
+      getCategories()
+        .then((data) => { // в data приходит целый не фильтрованый объект с данными
+          console.log(data);
+          dispatch(setGroupNames(data)) // нужно отфильтровать
+        })
+        .catch((err) => console.log(`Ошибка: ${err}`));
+    }
+  }, [dispatch]);
+
+
+  // useEffect(() => {
+  //   if (categoryFilter.length === 0) {
+  //     getCategories()
+  //       .then((data) => { // в data приходит целый не фильтрованый объект с данными
+  //         console.log(data);
+  //         dispatch(setGroupNames(data)) 
+  //       })
+  //       .catch((err) => console.log(`Ошибка: ${err}`));
+  //   }
+  // }, [dispatch]);
+
+  // useEffect(() => {
+  //   if (categoryFilter.length === 0) {
+  //     getCategories()
+  //       .then((data) => {
+  //         console.log(data);
+  //         dispatch(setGroupNames(data))
+  //       })
+  //       .catch((err) => console.log(`Ошибка: ${err}`));
+  //   }
+  // }, [dispatch]);
+
   
   return (
     
@@ -136,6 +175,7 @@ function ProductDatabase() {
           value={groupFilter}
           onChange={(event, newValue) => {
             dispatch(setNewGroupFilter(newValue))
+
           }}
         />
         <Autocomplete
