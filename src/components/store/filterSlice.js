@@ -31,6 +31,10 @@ export const filterSlice = createSlice({
       state.subcategoryFilter = action.payload
     },
 
+    setNewProductFilter(state, action) {
+      state.productFilter = action.payload
+    },
+
     setNewDateFilter(state, action) {
       state.dateFilter = action.payload
       state.dateFilter = action.payload
@@ -54,7 +58,8 @@ export const {
   setNewShopFilter, 
   setNewGroupFilter, 
   setNewCategoriesFilter, 
-  setNewSubcategoriesFilter, 
+  setNewSubcategoriesFilter,
+  setNewProductFilter, 
   setNewDateFilter,
   setNewProductRowSelect,
   setNewForecastRowSelect,
