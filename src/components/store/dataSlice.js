@@ -658,9 +658,13 @@ export const dataSlice = createSlice({
     setShopNames(state, action) {
       state.shopNames = action.payload
     },
+    setCategories(state, action) {
+      state.categories = action.payload
+    },
+
   }
 })
 
-export const { setNewForecast, setShopNames} = dataSlice.actions;
+export const { setNewForecast, setShopNames, setCategories} = dataSlice.actions;
 
 export default dataSlice.reducer;

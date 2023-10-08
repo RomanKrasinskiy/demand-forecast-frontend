@@ -39,14 +39,14 @@ export const signOut = async () => {
   return checkResponse(res);
 };
 
-export const checkToken = async () => {
-  const res = await fetch(API_MAIN_CONFIG.user, {
-    method: "GET",
-      headers: API_MAIN_CONFIG.headers,
-      // credentials: 'include',
-  });
-  return checkResponse(res);
-};
+// export const checkToken = async () => {
+//   const res = await fetch(API_MAIN_CONFIG.user, {
+//     method: "GET",
+//       headers: API_MAIN_CONFIG.headers,
+//       // credentials: 'include',
+//   });
+//   return checkResponse(res);
+// };
 
 // export const getInfoProfile = async () => {
 //   const res = await fetch(API_MAIN_CONFIG.user, {
