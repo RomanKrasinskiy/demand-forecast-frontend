@@ -3,45 +3,34 @@ import { createSlice } from "@reduxjs/toolkit";
 export const filterSlice = createSlice({
   name: 'filter',
   initialState: {
-    shopFilter: null,
-    groupFilter: null,
-    categoryFilter: null,
-    subcategoryFilter: null,
-    productFilter: null, // для поиска 
-    dateFilter: {},
+    shopFilter: '',
+    groupFilter: '',
+    categoryFilter: '',
+    subcategoryFilter: '',
+    productFilter: '', // для поиска 
+    dateFilter: '',
     productRowSelect: [],
     forecastRowSelect: [],
   },
   reducers: {
     setNewShopFilter(state, action) {
-      state.shopFilter = {
-        key: action.payload.key,
-        label: action.payload.label,
-      }
+      state.shopFilter = action.payload
     },
-  
+
     setNewGroupFilter(state, action) {
-      state.groupFilter = {
-        key: action.payload.key,
-        label: action.payload.label,
-      }
+      state.groupFilter = action.payload
     },
 
     setNewCategoriesFilter(state, action) {
-      state.categoryFilter = {
-        key: action.payload.key,
-        label: action.payload.label,
-      }
+      state.categoryFilter = action.payload
     },
 
     setNewSubcategoriesFilter(state, action) {
-      state.subcategoryFilter = {
-        key: action.payload.key,
-        label: action.payload.label,
-      }
+      state.subcategoryFilter = action.payload
     },
 
     setNewDateFilter(state, action) {
+      state.dateFilter = action.payload
       state.dateFilter = action.payload
     },
 

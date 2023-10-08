@@ -3,13 +3,25 @@ import { createSlice } from "@reduxjs/toolkit";
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
-    // тут будут данные о юзере
+    name: 'Имя',
+    occupation: 'Должность',
+    email: 'Ваш email@gmail.com',
   },
   reducers: {
-    // здесь пропишем все нужные действия со стейтами
+    setNewUserName(state, action) {
+      state.name = action.payload
+    },
+
+    setNewUserOccupation(state, action) {
+      state.occupation = action.payload
+    },
+
+    setNewUserEmail(state, action) {
+      state.email = action.payload
+    },
   }
 })
 
-// export const { тут будут экшены из reducers } = userSlice.actions;
+export const { setNewUserName, setNewUserOccupation, setNewUserEmail } = userSlice.actions;
 
 export default userSlice.reducer;

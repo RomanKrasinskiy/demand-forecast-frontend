@@ -1,5 +1,5 @@
 import StatisticsChartCSS from './StatisticsChart.module.css';
-import { data, options, chartRows, chartColumns } from '../../../utils/ForecastData';
+import { data, options, chartRows, chartColumns } from '../../../utils/StatisticsData';
 import { DataGrid } from '@mui/x-data-grid';
 import { Line } from 'react-chartjs-2';
 import {
