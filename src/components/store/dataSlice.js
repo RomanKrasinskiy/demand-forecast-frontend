@@ -209,7 +209,6 @@ export const dataSlice = createSlice({
         key: '6',
       },
     ],
-
     categories:[
       {
           "store": "MAGAZ1",
@@ -332,7 +331,6 @@ export const dataSlice = createSlice({
           "amount": 444
       },
     ],
-
     forecast: [
       {
           "store": "MAGAZ",
@@ -658,6 +656,9 @@ export const dataSlice = createSlice({
     setShopNames(state, action) {
       state.shopNames = action.payload
     },
+    setGroupNames(state, action) {
+      state.categories = action.payload
+    },
     setCategories(state, action) {
       state.categories = action.payload
     },
@@ -665,6 +666,6 @@ export const dataSlice = createSlice({
   }
 })
 
-export const { setNewForecast, setShopNames, setCategories} = dataSlice.actions;
+export const { setNewForecast, setShopNames, setGroupNames, setCategories} = dataSlice.actions;
 
 export default dataSlice.reducer;

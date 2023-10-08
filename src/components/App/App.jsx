@@ -13,7 +13,7 @@ import Statistics from "../Statistics/Statistics";
 // import Preloader from "../Preloader/Preloader";
 import ProductDatabase from "../ProductDatabase/ProductDatabase";
 import Header from "../Header/Header";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { signUp, signIn, signOut } from "../../api/AuthApi";
 import { useDispatch, useSelector } from "react-redux";
 import { setNewUserEmail, setNewUserName, setNewUserOccupation, setloggedIn } from "../store/userSlice";
@@ -33,20 +33,20 @@ function App() {
     id: "",
   });
 
-  
-  useEffect(() => {
-    tokenCheck();
-  }, [loggedIn]);
 
-  function tokenCheck() {
-    const jwt = localStorage.getItem("auth_token");
-    if (!jwt) {
-      navigate('/');
-    } else {      
-          navigate(location.pathname);
-        }
+  // useEffect(() => {
+  //   tokenCheck();
+  // }, [loggedIn]);
+
+  // function tokenCheck() {
+  //   const jwt = localStorage.getItem("auth_token");
+  //   if (!jwt) {
+  //     navigate('/');
+  //   } else {      
+  //         navigate(location.pathname);
+  //       }
        
-    }
+  //   }
   
   function handleRegister({ email, password, userName, usersPosition }) {
     // setIsLoading(true)

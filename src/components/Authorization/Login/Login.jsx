@@ -35,15 +35,26 @@ export default function Login({ onLogin }) {
   const shopNames = useSelector(state => state.data.shopNames);
 console.log(values);
 
+  //  useEffect(() => {
+  //    // феч запрос за названиями всех магазов
+  //    getShops()
+  //     .then((data) => {
+  //       console.log(data)
+  //       dispatch(setShopNames(data))
+  //     })
+  //     .catch((err) => console.log(`Ошибка: ${err}`)); 
+  //  }, []);
+
    useEffect(() => {
-     // феч запрос за названиями всех магазов
-     getShops()
-      .then((data) => {
-        console.log(data)
-        dispatch(setShopNames(data))
-      })
-      .catch((err) => console.log(`Ошибка: ${err}`)); 
-   }, []);
+    if (shopFilter.length === 0) {
+      getShops()
+        .then((data) => {
+          console.log(data);
+          dispatch(setShopNames(data))
+        })
+        .catch((err) => console.log(`Ошибка: ${err}`));
+    }
+  }, [dispatch]);
    
 
    const handleShopChange = (event) => {
