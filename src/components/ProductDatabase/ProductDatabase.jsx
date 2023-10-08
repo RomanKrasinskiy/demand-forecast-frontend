@@ -11,6 +11,8 @@ import {
  } from '../store/filterSlice';
 import SearchForm from './../SearchForm/SearchForm';
 import { useEffect } from 'react';
+import { getCategories } from '../../api/DataApi';
+import { setCategories } from '../store/dataSlice';
 
 function ProductDatabase() {
   // контролируем выбранные ячейки
@@ -79,8 +81,13 @@ function ProductDatabase() {
   // добавить обработку кнопке "Получить прогноз"
 
   useEffect(() => {
-    
-
+    // феч запрос за названиями всех магазов
+    getCategories()
+     .then((data) => {
+       console.log(data)
+       dispatch(setCategories(data))
+     })
+     .catch((err) => console.log(`Ошибка: ${err}`)); 
   }, []);
   
   return (

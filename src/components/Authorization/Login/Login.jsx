@@ -14,11 +14,17 @@ import { getShops } from "../../../api/DataApi";
 import { useDispatch, useSelector } from "react-redux";
 import { setShopNames } from "../../store/dataSlice";
 import { setNewShopFilter } from "../../store/filterSlice";
+// import { setNewShopFilter } from "../../store/filterSlice";
 
 // eslint-disable-next-line react/prop-types
 export default function Login({ onLogin }) {
   const { values, handleChange} =
-    useFormWithValidation({ email: "", password: "", shop: "" });
+    useFormWithValidation({ email: "", password: ""});
+
+    const shopFilter = useSelector(state => state.filter.shopFilter);
+
+    // const [selectedKey, setSelectedKey] = React.useState("");
+    // const [selectedLabel, setSelectedLabel] = React.useState("");
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => {
@@ -40,18 +46,19 @@ console.log(values);
    }, []);
    
 
-  const handleSubmit = (e) => {
-    console.log("click login");
-    e.preventDefault();
+   const handleShopChange = (event) => {
+    const { name, value } = event.target;
+    if (name === "shop") {
+      dispatch(setNewShopFilter(value)); // Отправляем новое значение в Redux
+    }
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
     onLogin({
       email: values.email,
       password: values.password,
       shop: values.shop,
     });
-    dispatch(setNewShopFilter({
-      label: values.shop,
-      key: 
-    }))
   };
 
   return (
@@ -215,9 +222,8 @@ console.log(values);
                 labelId="demo-simple-select-shop"
                 id="shop"
                 name='shop'
-                value={values.shop}
-                onChange={
-                  handleChange}
+                value={shopFilter}
+                onChange={handleShopChange}
                 label="shop"
                 disableUnderline
                 sx={{
@@ -225,17 +231,13 @@ console.log(values);
                   borderRadius: "24px",
                   padding: "13px 24px",
                   marginBottom: "4px",
-                  
                   '& .MuiSvgIcon-root': {
                     right: '32px',
                   }
-                  
                 }}
-                
               >
-                {shopNames.map((shop) => (
-                    // <MenuItem id="shop" name='shop' key={`${shop.city}-${shop.store}`} value={values.shop}>{`${shop.city} ${shop.store}`}</MenuItem>
-                    <MenuItem id="shop" name='shop' onClick={handleChange} key={`${shop.city}-${shop.store_name}`} value={shop.store_name}>{`${shop.city} ${shop.store_name}`}</MenuItem>
+                {shopNames.map((shop, index) => (
+                    <MenuItem id="shop" name='shop' key={(index + 1)} label={shop.store_name} value={shop.store_name}>{shop.store_name}</MenuItem>
                   ))}
                 
               </Select>
@@ -273,7 +275,6 @@ console.log(values);
                 textTransform: 'none',
                 fontWeight: '500',
                 fontSize: '20px',
-
               }}
             >Назад</Button>
             </Link>

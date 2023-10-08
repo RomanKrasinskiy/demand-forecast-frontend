@@ -14,13 +14,14 @@ import Statistics from "../Statistics/Statistics";
 import ProductDatabase from "../ProductDatabase/ProductDatabase";
 import Header from "../Header/Header";
 import { useEffect, useState } from "react";
-import { signUp, signIn, signOut, checkToken } from "../../api/AuthApi";
+import { signUp, signIn, signOut } from "../../api/AuthApi";
 import { useDispatch, useSelector } from "react-redux";
-import { setNewUserEmail, setNewUserName, setNewUserOccupation } from "../store/userSlice";
+import { setNewUserEmail, setNewUserName, setNewUserOccupation, setloggedIn } from "../store/userSlice";
+import ProtectedRoutes from "../ProtectedRoutes/ProtectedRoutes";
 
 function App() {
   const navigate = useNavigate();
-  const loggedIn = useSelector(state => state.filter.loggedIn);
+  const loggedIn = useSelector(state => state.user.loggedIn);
   const dispatch = useDispatch();
 
 
@@ -37,22 +38,15 @@ function App() {
   }, [loggedIn]);
 
   function tokenCheck() {
-    const jwt = localStorage.getItem("token");
+    const jwt = localStorage.getItem("auth_token");
     if (!jwt) {
-      return;
-    } else {
-      // setIsLoading(true)
-      checkToken(jwt)
-        .then(() => {
-          // setLoggedIn(true);
-          const path = location.pathname;
-          navigate(path);
-        })
-        .catch((err) => console.log(`Ошибка: ${err}`));
-        // .finally(() => setIsLoading(false));
+      navigate('/');
+    } else {      
+          navigate(location.pathname);
+        }
+       
     }
-  }
-
+  
   function handleRegister({ email, password, userName, usersPosition }) {
     // setIsLoading(true)
       signUp({ email, password, userName, usersPosition })
@@ -68,7 +62,8 @@ function App() {
     // setIsLoading(true)      
       signIn({ email, password, shop })
         .then((data) => {
-          localStorage.setItem("token", data.token);
+          dispatch(setloggedIn(true))
+          localStorage.setItem("auth_token", data.auth_token);
           console.log(data)
           dispatch(setNewUserName(data.userName))
           dispatch(setNewUserOccupation(data.usersPosition))
@@ -108,7 +103,7 @@ function App() {
             path="/signup" // предварительная ручка
             element={
               loggedIn ? (
-                <Navigate to="/forecast" />
+                <Navigate to="/productdatabase" />
               ) : (
                 <Registration onRegister={handleRegister} />
               )
@@ -116,11 +111,11 @@ function App() {
           />
           <Route
             path="/signin" // предварительная ручка
-            element={loggedIn ? <Navigate to="/forecast" /> : <Login onLogin={handleLogin}/>}
+            element={loggedIn ? <Navigate to="/productdatabase" /> : <Login onLogin={handleLogin}/>}
           />
-          <Route>
+          <Route element={<ProtectedRoutes loggedIn={loggedIn} />}>
             <Route
-              path="/productdatabase" // предварительная ручка
+              path="/productdatabase"
               element={
                 <>
                   <Header onSignOut={handleSignOut} />
