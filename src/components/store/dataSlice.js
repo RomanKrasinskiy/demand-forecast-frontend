@@ -131,84 +131,6 @@ export const dataSlice = createSlice({
         "is_active": true
       }
     ],
-    groupNames: [
-      {
-        label: 'dfsdf',
-        key: '1',
-      },
-      {
-        label: 'vpchk',
-        key: '2',
-      },
-      {
-        label: 'alkgl',
-        key: '3',
-      },
-      {
-        label: 'mlchk',
-        key: '4',
-      },
-      {
-        label: 'kndtr',
-        key: '5',
-      },
-      {
-        label: 'mstso',
-        key: '6',
-      },
-    ],
-    categoryNames: [
-      {
-        label: 'Москва',
-        key: '1',
-      },
-      {
-        label: 'vdchk',
-        key: '2',
-      },
-      {
-        label: 'pviok',
-        key: '3',
-      },
-      {
-        label: 'whksy',
-        key: '4',
-      },
-      {
-        label: 'vrmth',
-        key: '5',
-      },
-      {
-        label: 'lqrck',
-        key: '6',
-      },
-    ],
-    subcategoryNames: [
-      {
-        label: 'pvksv',
-        key: '1',
-      },
-      {
-        label: 'pvknf',
-        key: '2',
-      },
-      {
-        label: 'pvktm',
-        key: '3',
-      },
-      {
-        label: 'pvkfr',
-        key: '4',
-      },
-      {
-        label: 'pvkcr',
-        key: '5',
-      },
-      {
-        label: 'pvksr',
-        key: '6',
-      },
-    ],
     categories:[
       {
           "store": "MAGAZ1",
@@ -653,19 +575,15 @@ export const dataSlice = createSlice({
     setNewForecast(state, action) {
       state.forecast = action.payload
     },
-    setShopNames(state, action) {
+    setShops(state, action) {
       state.shopNames = action.payload
-    },
-    setGroupNames(state, action) {
-      state.categories = action.payload
     },
     setCategories(state, action) {
       state.categories = action.payload
     },
-
   }
 })
 
-export const { setNewForecast, setShopNames, setGroupNames, setCategories} = dataSlice.actions;
+export const { setNewForecast, setShopNames, setCategories} = dataSlice.actions;
 
 export default dataSlice.reducer;
