@@ -13,7 +13,7 @@ export const API_MAIN_CONFIG = {
 
     }, 
     signUp: `${MAIN_URL}/users/`, 
-    signIn: `${MAIN_URL}${AUTH}/login`, 
+    signIn: `${MAIN_URL}${API}-token-auth/`, 
     signOut: `${MAIN_URL}${AUTH}/logout`, 
     categories: `${MAIN_URL}${API}/categories`,
     shops: `${MAIN_URL}${API}/shops`,
