@@ -8,6 +8,7 @@ import {
 import SearchForm from './../SearchForm/SearchForm';
 import Filters from '../Filters/Filters';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getShops } from '../../api/DataApi';
 import { setShops } from '../store/dataSlice';
 
@@ -62,21 +63,20 @@ function ProductDatabase() {
     dispatch(setNewProductRowSelectId(newSelection));
   };
 
-  // обработка клика по выбору позиции из фильтра = отрендерить таблицу по новым данным, то есть:
-  //   - отправили запрос на бэк с новым параметром фильтра (useDispatch на ответ обращения апишки?)
-  //   - после ответа с бэка дёрнули из стейта новые данные (useSelect)
-  // обработка поиска по товару = аналогично
-
-  // добавить обработку кнопке "Получить прогноз"
-  // забираем из стейта значение фильтров
+  // Забираем из стейта значение фильтров
   const shopFilter = useSelector(state => state.filter.shopFilter);
+
+  // Обработка клика по кнопке "Получить прогноз"
+  const navigate = useNavigate();
+  const handleClick = () => {
+    const handleGoForecast = () => { navigate("/forecast") };
+    if (selectedRowIds.length > 0) { handleGoForecast() }
+  };
  
    useEffect(() => {
     if (shopFilter.length === 0) {
       getShops()
         .then((data) => { // в data приходит целый не фильтрованый объект с данными
-          // console.log(data);
-
           dispatch(setShops(data))
         })
         .catch((err) => console.log(`Ошибка: ${err}`));
@@ -104,9 +104,13 @@ function ProductDatabase() {
       <div className={ProductDataCSS.switchContainer}>
         <button className={ProductDataCSS.optionActive}>Таблица</button>
       </div>
-      <button className={`${ProductDataCSS.btnForecast} ${(selectedRowIds.length > 0) ? 
-        ProductDataCSS.btnForecastActive : ''}`} 
-        data-tooltip="Выберите строки для прогноза">Получить прогноз</button>
+      <button 
+        className={`${ProductDataCSS.btnForecast} ${(selectedRowIds.length > 0) ? ProductDataCSS.btnForecastActive : ''}`} 
+        data-tooltip="Выберите строки для прогноза"
+        onClick={handleClick}
+      >
+        Получить прогноз
+      </button>
     </div>
     {/* Основной блок с данными */}
     <div className={ProductDataCSS.dataContainer}>
