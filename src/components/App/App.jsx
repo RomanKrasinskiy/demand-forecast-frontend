@@ -69,8 +69,6 @@ function App() {
           dispatch(setNewUserName(data.userName))
           dispatch(setNewUserOccupation(data.usersPosition))
           dispatch(setNewUserEmail(data.email))
-
-
           // setLoggedIn(true);
           navigate('/productdatabase')
         })

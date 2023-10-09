@@ -7,7 +7,9 @@ import {
  } from '../store/filterSlice';
 import SearchForm from './../SearchForm/SearchForm';
 import Filters from '../Filters/Filters';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getShops } from '../../api/DataApi';
+import { setShops } from '../store/dataSlice';
 
 function ProductDatabase() {
   const dispatch = useDispatch();
@@ -50,11 +52,9 @@ function ProductDatabase() {
 
     const updatedSelectedValues = newSelection.map((rowId) => {
       const selectedRowData = categoriesDataRowsDataGrid.find((row) => row.id === rowId);
-
       if (selectedRowData) {
         return selectedRowData.c5;
       }
-
       return null;
     });
     
@@ -68,31 +68,33 @@ function ProductDatabase() {
   // обработка поиска по товару = аналогично
 
   // добавить обработку кнопке "Получить прогноз"
+  // забираем из стейта значение фильтров
+  const shopFilter = useSelector(state => state.filter.shopFilter);
+ 
    useEffect(() => {
     if (shopFilter.length === 0) {
       getShops()
         .then((data) => { // в data приходит целый не фильтрованый объект с данными
           // console.log(data);
-          dispatch(setShopNames(data))
+
+          dispatch(setShops(data))
         })
         .catch((err) => console.log(`Ошибка: ${err}`));
     }
   }, [dispatch]);
   
-  useEffect(() => {
-    if (groupFilter.length === 0) {
-      getCategories()
-        .then((data) => { // в data приходит целый не фильтрованый объект с данными
-          // console.log(data);
-          const transformedData = transformIntoShopsList(data);
-          dispatch(setGroupNames(transformedData))
-            console.log(transformedData);
-
-
-        })
-        .catch((err) => console.log(`Ошибка: ${err}`));
-    }
-  }, [dispatch]);
+  // useEffect(() => {
+  //   if (groupFilter.length === 0) {
+  //     getCategories()
+  //       .then((data) => { // в data приходит целый не фильтрованый объект с данными
+  //         // console.log(data);
+  //         const transformedData = transformIntoShopsList(data);
+  //         dispatch(setGroupNames(transformedData))
+  //           console.log(transformedData);
+  //       })
+  //       .catch((err) => console.log(`Ошибка: ${err}`));
+  //   }
+  // }, [dispatch]);
 
   return (
     
@@ -102,7 +104,9 @@ function ProductDatabase() {
       <div className={ProductDataCSS.switchContainer}>
         <button className={ProductDataCSS.optionActive}>Таблица</button>
       </div>
-      <button className={`${ProductDataCSS.btnForecast} ${(selectedRowIds.length > 0) ? ProductDataCSS.btnForecastActive : ''}`} data-tooltip="Выберите строки для прогноза">Получить прогноз</button>
+      <button className={`${ProductDataCSS.btnForecast} ${(selectedRowIds.length > 0) ? 
+        ProductDataCSS.btnForecastActive : ''}`} 
+        data-tooltip="Выберите строки для прогноза">Получить прогноз</button>
     </div>
     {/* Основной блок с данными */}
     <div className={ProductDataCSS.dataContainer}>

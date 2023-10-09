@@ -5,10 +5,11 @@ import {
     setNewCategoriesFilter, 
     setNewGroupFilter, 
     setNewShopFilter, 
+    // setNewStatisticsShopFilter, 
     setNewSubcategoriesFilter,
    } from '../store/filterSlice';
 import { getCategories, getShops } from '../../api/DataApi';
-import { setCategories, setShopNames } from '../store/dataSlice';
+import { setCategories, setShops } from '../store/dataSlice';
 
 function Filters() {
     // Создаём диспетчер
@@ -77,14 +78,12 @@ function Filters() {
 
     // Юз эффекты
     useEffect(() => {
-        if (shopFilter.length === 0) {
           getShops()
             .then((data) => { // в data приходит целый не фильтрованый объект с данными
               // console.log(data);
-              dispatch(setShopNames(data))
+              dispatch(setShops(data))
             })
             .catch((err) => console.log(`Ошибка: ${err}`));
-        }
       }, [dispatch]);
       
     useEffect(() => {
@@ -120,8 +119,19 @@ function Filters() {
     //   }
     // }, [dispatch]);
 
+    // function changeTablesItems(value) {
+    //   console.log(value);
+
+    //   getShops({ store: value.store_name }) 
+    //     .then((data) => {
+    //       console.log(data);
+    //       dispatch(setShops(data));
+    //     })
+    //     .catch((err) => console.error(`Ошибка: ${err}`));
+    // }
+
     return (
-        <>shopFilter
+        <>
         <Autocomplete
           disablePortal
           id="stores"
@@ -131,11 +141,17 @@ function Filters() {
             maxWidth: 387, 
             width: '100%',
             height: 48,
+            '& .MuiOutlinedInput-root': {
+            fontSize: "13px",
+          }
           }}
           renderInput={(params) => <TextField {...params} label="ТК" />}
           value={shopFilter}
           onChange={(event, newValue) => {
             dispatch(setNewShopFilter(newValue))
+            // changeTablesItems(newValue);
+            // console.log(newValue);
+
           }}
         />
         <Autocomplete
@@ -147,6 +163,9 @@ function Filters() {
             maxWidth: 387, 
             width: '100%',
             height: 48,
+            '& .MuiOutlinedInput-root': {
+              fontSize: "13px",
+            }
           }}
           renderInput={(params) => <TextField {...params} label="Группа" />}
           value={groupFilter}
@@ -162,6 +181,9 @@ function Filters() {
             maxWidth: 387, 
             width: '100%',
             height: 48,
+            '& .MuiOutlinedInput-root': {
+              fontSize: "13px",
+            }
           }}
           renderInput={(params) => <TextField {...params} label="Категория" />}
           value={categoryFilter}
@@ -178,6 +200,9 @@ function Filters() {
             maxWidth: 387, 
             width: '100%',
             height: 48,
+            '& .MuiOutlinedInput-root': {
+            fontSize: "13px",
+          }
           }}
           renderInput={(params) => <TextField {...params} label="Подкатегория" />}
           value={subcategoryFilter}

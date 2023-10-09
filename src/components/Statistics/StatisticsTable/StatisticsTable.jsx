@@ -9,15 +9,7 @@ const StatisticsTable = () => {
 
   // контролируем выбранные ячейки
   const [rowSelectionModel, setRowSelectionModel] = useState([0]);
-  // const stores = useSelector(state => state.data.shopNames);
   const shopFilter = useSelector(state => state.filter.shopFilter);
-
-  // console.log(shopFilter)
-  
-  
-  
-  
-  
   const filteredRows = tableRows.filter(item => shopFilter?.key == item.id); 
 
   return (
