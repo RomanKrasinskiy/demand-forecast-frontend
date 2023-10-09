@@ -16,8 +16,11 @@ import { getCategories, getShops } from '../../api/DataApi';
 import { setGroupNames, setShopNames } from '../store/dataSlice';
 
 function ProductDatabase() {
-  // Создаём диспетчер
   const dispatch = useDispatch();
+
+
+ 
+  // Создаём диспетчер
 
   // забираем из стейта наполнение фильтров
   const stores = useSelector(state => state.data.shopNames);
@@ -35,6 +38,8 @@ function ProductDatabase() {
   }
   // Трансформируем магазины в опции фильтра
   const storesList = transformIntoShopsList(stores);
+  // const categoriesList = transformIntoShopsList(stores);
+
 
   // забираем из стейта значение фильтров
   const shopFilter = useSelector(state => state.filter.shopFilter);
@@ -97,8 +102,7 @@ function ProductDatabase() {
   // обработка поиска по товару = аналогично
 
   // добавить обработку кнопке "Получить прогноз"
-
-  useEffect(() => {
+   useEffect(() => {
     if (shopFilter.length === 0) {
       getShops()
         .then((data) => { // в data приходит целый не фильтрованый объект с данными
@@ -109,43 +113,21 @@ function ProductDatabase() {
     }
   }, [dispatch]);
   
-  
-
   useEffect(() => {
     if (groupFilter.length === 0) {
       getCategories()
         .then((data) => { // в data приходит целый не фильтрованый объект с данными
           // console.log(data);
-          dispatch(setGroupNames(data)) // нужно отфильтровать
+          const transformedData = transformIntoShopsList(data);
+          dispatch(setGroupNames(transformedData))
+            console.log(transformedData);
+
+
         })
         .catch((err) => console.log(`Ошибка: ${err}`));
     }
   }, [dispatch]);
 
-
-  // useEffect(() => {
-  //   if (categoryFilter.length === 0) {
-  //     getCategories()
-  //       .then((data) => { // в data приходит целый не фильтрованый объект с данными
-  //         console.log(data);
-  //         dispatch(setGroupNames(data)) 
-  //       })
-  //       .catch((err) => console.log(`Ошибка: ${err}`));
-  //   }
-  // }, [dispatch]);
-
-  // useEffect(() => {
-  //   if (categoryFilter.length === 0) {
-  //     getCategories()
-  //       .then((data) => {
-  //         console.log(data);
-  //         dispatch(setGroupNames(data))
-  //       })
-  //       .catch((err) => console.log(`Ошибка: ${err}`));
-  //   }
-  // }, [dispatch]);
-
-  
   return (
     
     <>
