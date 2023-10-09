@@ -2,7 +2,8 @@ import ForecastChartCSS from './ForecastChart.module.css';
 import { DataGrid } from '@mui/x-data-grid';
 import { Line } from 'react-chartjs-2';
 import { useSelector, useDispatch } from "react-redux";
-import { setNewForecastRowSelect } from '../../store/filterSlice';
+import { setNewForecastRowSelectId, setNewForecastRowSelectName } from '../../store/filterSlice';
+import { useState } from 'react';
 import {
     Chart as ChartJS,
     LineElement,
@@ -23,6 +24,9 @@ ChartJS.register(
 )
 
 const ForecastChart = () => {
+  // Создаём диспетчер
+  const dispatch = useDispatch();
+
   // Забираем прогноз
   const forecast = useSelector(state => state.data.forecast);
 
@@ -109,11 +113,27 @@ const ForecastChart = () => {
     { field: 'c1', headerName: 'Товар', width: '100%', headerClassName: 'header'},
   ];
 
-  // контролируем выбранные ячейки
-  const forecastRowSelection = useSelector(state => state.filter.productRowSelect);
+  // Контролируем выбранные ячейки
+  const forecastRowSelectId = useSelector(state => state.filter.forecastRowSelectId);
+  // Создаём стейт айдишников выбранных строк
+  const [selectedRowIds, setSelectedRowIds] = useState(forecastRowSelectId);
+  // Хэндлер изменения стейта выбранных строк
+  const handleSelectionChange = (newSelection) => {
+    setSelectedRowIds(newSelection);
 
-  // Создаём диспетчер
-  const dispatch = useDispatch();
+    const updatedSelectedValues = newSelection.map((rowId) => {
+      const selectedRowData = forecastChartTableRowsDataGrid.find((row) => row.id === rowId);
+
+      if (selectedRowData) {
+        return selectedRowData.c1;
+      }
+
+      return null;
+    });
+    
+    dispatch(setNewForecastRowSelectName(updatedSelectedValues));
+    dispatch(setNewForecastRowSelectId(newSelection));
+  };
 
   return (
     <div className={ForecastChartCSS.container}>
@@ -133,10 +153,8 @@ const ForecastChart = () => {
           checkboxSelection
           disableRowSelectionOnClick
           keepNonExistentRowsSelected
-          onRowSelectionModelChange={(newRowSelection) => {
-            dispatch(setNewForecastRowSelect(newRowSelection));
-          }}
-          rowSelectionModel={forecastRowSelection}
+          rowSelectionModel={selectedRowIds}
+          onRowSelectionModelChange={handleSelectionChange}
         />
       </div>
     </div>

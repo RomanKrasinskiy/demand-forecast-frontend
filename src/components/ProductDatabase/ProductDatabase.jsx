@@ -7,16 +7,17 @@ import {
   setNewGroupFilter, 
   setNewShopFilter, 
   setNewSubcategoriesFilter,
-  setNewProductRowSelect,
+  setNewProductRowSelectName,
+  setNewProductRowSelectId,
  } from '../store/filterSlice';
 import SearchForm from './../SearchForm/SearchForm';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getCategories, getShops } from '../../api/DataApi';
-import {  setGroupNames, setShopNames } from '../store/dataSlice';
+import { setGroupNames, setShopNames } from '../store/dataSlice';
 
 function ProductDatabase() {
-  // контролируем выбранные ячейки
-  const productRowSelection = useSelector(state => state.filter.productRowSelect);
+  // Создаём диспетчер
+  const dispatch = useDispatch();
 
   // забираем из стейта наполнение фильтров
   const stores = useSelector(state => state.data.shopNames);
@@ -37,11 +38,9 @@ function ProductDatabase() {
 
   // забираем из стейта значение фильтров
   const shopFilter = useSelector(state => state.filter.shopFilter);
-  console.log(shopFilter);
   const groupFilter = useSelector(state => state.filter.groupFilter);
   const categoryFilter = useSelector(state => state.filter.categoryFilter);
   const subcategoryFilter = useSelector(state => state.filter.subcategoryFilter);
-  
   // Забираем продукты, полученные с бэка
   const categoriesData = useSelector(state => state.data.categories);
   // Функция трансформации данных с бэка в съедобный для Data Grid вид - строки
@@ -70,8 +69,27 @@ function ProductDatabase() {
     { field: 'c5', headerName: 'Товар', width: 310, headerClassName: 'header' },
   ];
 
-  // Создаём диспетчер
-  const dispatch = useDispatch();
+  // Контролируем выбранные ячейки
+  const productRowSelectId = useSelector(state => state.filter.productRowSelectId);
+  // Создаём стейт айдишников выбранных строк
+  const [selectedRowIds, setSelectedRowIds] = useState(productRowSelectId);
+  // Хэндлер изменения стейта выбранных строк
+  const handleSelectionChange = (newSelection) => {
+    setSelectedRowIds(newSelection);
+
+    const updatedSelectedValues = newSelection.map((rowId) => {
+      const selectedRowData = categoriesDataRowsDataGrid.find((row) => row.id === rowId);
+
+      if (selectedRowData) {
+        return selectedRowData.c5;
+      }
+
+      return null;
+    });
+    
+    dispatch(setNewProductRowSelectName(updatedSelectedValues));
+    dispatch(setNewProductRowSelectId(newSelection));
+  };
 
   // обработка клика по выбору позиции из фильтра = отрендерить таблицу по новым данным, то есть:
   //   - отправили запрос на бэк с новым параметром фильтра (useDispatch на ответ обращения апишки?)
@@ -84,7 +102,7 @@ function ProductDatabase() {
     if (shopFilter.length === 0) {
       getShops()
         .then((data) => { // в data приходит целый не фильтрованый объект с данными
-          console.log(data);
+          // console.log(data);
           dispatch(setShopNames(data))
         })
         .catch((err) => console.log(`Ошибка: ${err}`));
@@ -97,7 +115,7 @@ function ProductDatabase() {
     if (groupFilter.length === 0) {
       getCategories()
         .then((data) => { // в data приходит целый не фильтрованый объект с данными
-          console.log(data);
+          // console.log(data);
           dispatch(setGroupNames(data)) // нужно отфильтровать
         })
         .catch((err) => console.log(`Ошибка: ${err}`));
@@ -136,7 +154,7 @@ function ProductDatabase() {
       <div className={ProductDataCSS.switchContainer}>
         <button className={ProductDataCSS.optionActive}>Таблица</button>
       </div>
-      <button className={`${ProductDataCSS.btnForecast} ${(productRowSelection.length > 0) ? ProductDataCSS.btnForecastActive : ''}`} data-tooltip="Выберите строки для прогноза">Получить прогноз</button>
+      <button className={`${ProductDataCSS.btnForecast} ${(selectedRowIds.length > 0) ? ProductDataCSS.btnForecastActive : ''}`} data-tooltip="Выберите строки для прогноза">Получить прогноз</button>
     </div>
     {/* Основной блок с данными */}
     <div className={ProductDataCSS.dataContainer}>
@@ -175,7 +193,6 @@ function ProductDatabase() {
           value={groupFilter}
           onChange={(event, newValue) => {
             dispatch(setNewGroupFilter(newValue))
-
           }}
         />
         <Autocomplete
@@ -229,10 +246,8 @@ function ProductDatabase() {
         checkboxSelection
         disableRowSelectionOnClick
         keepNonExistentRowsSelected
-        onRowSelectionModelChange={(newRowSelectionModel) => {
-          dispatch(setNewProductRowSelect(newRowSelectionModel));
-        }}
-        rowSelectionModel={productRowSelection}
+        rowSelectionModel={selectedRowIds}
+        onRowSelectionModelChange={handleSelectionChange}
       />
       </div>
     </div>

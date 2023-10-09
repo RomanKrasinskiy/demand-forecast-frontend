@@ -9,8 +9,10 @@ export const filterSlice = createSlice({
     subcategoryFilter: '',
     productFilter: '', 
     dateFilter: '',
-    productRowSelect: [],
-    forecastRowSelect: [],
+    productRowSelectName: [],
+    productRowSelectId: [],
+    forecastRowSelectName: [],
+    forecastRowSelectId: [],
     statisticsShopFilter: [],
   },
   reducers: {
@@ -39,12 +41,20 @@ export const filterSlice = createSlice({
       state.dateFilter = action.payload
     },
 
-    setNewProductRowSelect(state, action) {
-      state.productRowSelect = action.payload
+    setNewProductRowSelectName(state, action) {
+      state.productRowSelectName = action.payload
     },
 
-    setNewForecastRowSelect(state, action) {
-      state.productRowSelect = action.payload
+    setNewProductRowSelectId(state, action) {
+      state.productRowSelectId = action.payload
+    },
+
+    setNewForecastRowSelectName(state, action) {
+      state.forecastRowSelectName = action.payload
+    },
+
+    setNewForecastRowSelectId(state, action) {
+      state.forecastRowSelectId = action.payload
     },
 
     setNewStatisticsShopFilter(state, action) {
@@ -60,8 +70,10 @@ export const {
   setNewSubcategoriesFilter,
   setNewProductFilter, 
   setNewDateFilter,
-  setNewProductRowSelect,
-  setNewForecastRowSelect,
+  setNewProductRowSelectName,
+  setNewProductRowSelectId,
+  setNewForecastRowSelectName,
+  setNewForecastRowSelectId,
   setNewStatisticsShopFilter,
 } = filterSlice.actions;
 

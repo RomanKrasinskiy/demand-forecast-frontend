@@ -19,7 +19,7 @@ const Forecast = () => {
   }
   
   // Получаем состояние выбранных ячеек
-  const forecastRowSelection = useSelector(state => state.filter.productRowSelect);
+  const forecastRowSelectId = useSelector(state => state.filter.forecastRowSelectId);
 
   // Забираем из стейта наполнение фильтров
   const stores = useSelector(state => state.data.shopNames);
@@ -43,7 +43,6 @@ const Forecast = () => {
   const groupFilter = useSelector(state => state.filter.groupFilter);
   const categoryFilter = useSelector(state => state.filter.categoryFilter);
   const subcategoryFilter = useSelector(state => state.filter.subcategoryFilter);
-  // const productFilter = useSelector(state => state.filter.productFilter); // - это в сёрч форму нужно будет убрать.
 
   // Создаём диспетчер
   const dispatch = useDispatch();
@@ -66,7 +65,7 @@ const Forecast = () => {
         <button className={`${ForecastCSS.option} ${isDataTable ? ForecastCSS.optionActive : ''}`} onClick={handleDataTable}>Таблица</button>
         <button className={`${ForecastCSS.option} ${!isDataTable ? ForecastCSS.optionActive : ''}`} onClick={handleDataChart}>График</button>
       </div>
-      <button className={`${ForecastCSS.btnExcel} ${(forecastRowSelection.length > 0) ? ForecastCSS.btnExcelActive : ''}`} data-tooltip="Выберите строки для экспорта">Выгрузить в Excel</button>
+      <button className={`${ForecastCSS.btnExcel} ${(forecastRowSelectId.length > 0) ? ForecastCSS.btnExcelActive : ''}`} data-tooltip="Выберите строки для экспорта">Выгрузить в Excel</button>
     </div>
     {/* Основной блок с данными */}
     <div className={ForecastCSS.dataContainer}>

@@ -1,11 +1,12 @@
 import ForecastTableCSS from './ForecastTable.module.css';
 import { DataGrid } from '@mui/x-data-grid';
 import { useSelector, useDispatch } from "react-redux";
-import { setNewForecastRowSelect } from '../../store/filterSlice';
+import { setNewForecastRowSelectId, setNewForecastRowSelectName } from '../../store/filterSlice';
+import { useState } from 'react';
 
 const ForecastTable = () => {
-  // контролируем выбранные ячейки
-  const forecastRowSelection = useSelector(state => state.filter.productRowSelect);
+  // Создаём диспетчер
+  const dispatch = useDispatch();
 
   // Забираем прогноз
   const forecast = useSelector(state => state.data.forecast);
@@ -54,8 +55,27 @@ const ForecastTable = () => {
   // Трансформируем прогноз в колонки
   const forecastTableColumnsDataGrid = transformForecastTableColumns(forecast);
 
-  // Создаём диспетчер
-  const dispatch = useDispatch();
+  // Контролируем выбранные ячейки
+  const forecastRowSelectId = useSelector(state => state.filter.forecastRowSelectId);
+  // Создаём стейт айдишников выбранных строк
+  const [selectedRowIds, setSelectedRowIds] = useState(forecastRowSelectId);
+  // Хэндлер изменения стейта выбранных строк
+  const handleSelectionChange = (newSelection) => {
+    setSelectedRowIds(newSelection);
+
+    const updatedSelectedValues = newSelection.map((rowId) => {
+      const selectedRowData = forecastTableRowsDataGrid.find((row) => row.id === rowId);
+
+      if (selectedRowData) {
+        return selectedRowData.c1;
+      }
+
+      return null;
+    });
+    
+    dispatch(setNewForecastRowSelectName(updatedSelectedValues));
+    dispatch(setNewForecastRowSelectId(newSelection));
+  };
 
   return (
     <div className={ForecastTableCSS.table}>
@@ -77,10 +97,8 @@ const ForecastTable = () => {
         checkboxSelection
         disableRowSelectionOnClick
         keepNonExistentRowsSelected
-        onRowSelectionModelChange={(newRowSelection) => {
-          dispatch(setNewForecastRowSelect(newRowSelection));
-        }}
-        rowSelectionModel={forecastRowSelection}
+        rowSelectionModel={selectedRowIds}
+        onRowSelectionModelChange={handleSelectionChange}
       />  
     </div>
   )
