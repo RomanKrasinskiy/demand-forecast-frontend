@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import { useFormWithValidation } from "../../../hooks/useFormWithValidation";
 import { getShops } from "../../../api/DataApi";
 import { useDispatch, useSelector } from "react-redux";
-import { setShopNames } from "../../store/dataSlice";
+import { setShops } from "../../store/dataSlice";
 import { setNewShopFilter } from "../../store/filterSlice";
 // import { setNewShopFilter } from "../../store/filterSlice";
 
@@ -50,7 +50,7 @@ console.log(values);
       getShops()
         .then((data) => {
           console.log(data);
-          dispatch(setShopNames(data))
+          dispatch(setShops(data))
         })
         .catch((err) => console.log(`Ошибка: ${err}`));
     }

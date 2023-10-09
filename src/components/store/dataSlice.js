@@ -570,6 +570,985 @@ export const dataSlice = createSlice({
         }
       },
     ],
+    stats: [
+      {
+        "store": "Калужское ш., 42-й км, д. 6",
+        "product_name": null,
+        "profit": [
+            {
+                "date": "2023-10-01",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 3098.0,
+                "money_promo": 6873.0
+            },
+            {
+                "date": "2023-10-02",
+                "type": 1,
+                "units": 54,
+                "units_promo": 85,
+                "money": 7643.0,
+                "money_promo": 10098.0
+            },
+            {
+                "date": "2023-10-03",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 1809.0,
+                "money_promo": 3962.0
+            },
+            {
+                "date": "2023-10-05",
+                "type": 1,
+                "units": 76,
+                "units_promo": 109,
+                "money": 5973.0,
+                "money_promo": 8734.0
+            }
+        ]
+    },
+    {
+        "store": "ул. 15-я Парковая, д. 40, к. 1",
+        "product_name": null,
+        "profit": [
+            {
+                "date": "2023-10-01",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 3098.0,
+                "money_promo": 6873.0
+            },
+            {
+                "date": "2023-10-02",
+                "type": 1,
+                "units": 54,
+                "units_promo": 85,
+                "money": 7643.0,
+                "money_promo": 10098.0
+            },
+            {
+                "date": "2023-10-03",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 1809.0,
+                "money_promo": 3962.0
+            },
+            {
+                "date": "2023-10-05",
+                "type": 1,
+                "units": 76,
+                "units_promo": 109,
+                "money": 5973.0,
+                "money_promo": 8734.0
+            },
+            {
+                "date": "2023-10-04",
+                "type": 1,
+                "units": 87,
+                "units_promo": 126,
+                "money": 8953.0,
+                "money_promo": 13975.0
+            }
+        ]
+    },
+    {
+        "store": "ул. Астахова, д. 4, к. 4",
+        "product_name": null,
+        "profit": [
+            {
+                "date": "2023-10-01",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 3098.0,
+                "money_promo": 6873.0
+            },
+            {
+                "date": "2023-10-02",
+                "type": 1,
+                "units": 54,
+                "units_promo": 85,
+                "money": 7643.0,
+                "money_promo": 10098.0
+            },
+            {
+                "date": "2023-10-03",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 1809.0,
+                "money_promo": 3962.0
+            },
+            {
+                "date": "2023-10-05",
+                "type": 1,
+                "units": 76,
+                "units_promo": 109,
+                "money": 5973.0,
+                "money_promo": 8734.0
+            },
+            {
+                "date": "2023-10-04",
+                "type": 1,
+                "units": 87,
+                "units_promo": 126,
+                "money": 8953.0,
+                "money_promo": 13975.0
+            },
+            {
+                "date": "2023-10-06",
+                "type": 1,
+                "units": 65,
+                "units_promo": 98,
+                "money": 5087.0,
+                "money_promo": 9628.0
+            },
+            {
+                "date": "2023-10-07",
+                "type": 1,
+                "units": 109,
+                "units_promo": 165,
+                "money": 9853.0,
+                "money_promo": 14988.0
+            }
+        ]
+    },
+    {
+        "store": "ул. Большая Академическая, д. 17",
+        "product_name": null,
+        "profit": [
+            {
+                "date": "2023-10-01",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 3098.0,
+                "money_promo": 6873.0
+            },
+            {
+                "date": "2023-10-02",
+                "type": 1,
+                "units": 54,
+                "units_promo": 85,
+                "money": 7643.0,
+                "money_promo": 10098.0
+            },
+            {
+                "date": "2023-10-03",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 1809.0,
+                "money_promo": 3962.0
+            },
+            {
+                "date": "2023-10-05",
+                "type": 1,
+                "units": 76,
+                "units_promo": 109,
+                "money": 5973.0,
+                "money_promo": 8734.0
+            },
+            {
+                "date": "2023-10-04",
+                "type": 1,
+                "units": 87,
+                "units_promo": 126,
+                "money": 8953.0,
+                "money_promo": 13975.0
+            }
+        ]
+    },
+    {
+        "store": "ул. Большая Черемушкинская, д. 1",
+        "product_name": null,
+        "profit": [
+            {
+                "date": "2023-10-01",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 3098.0,
+                "money_promo": 6873.0
+            },
+            {
+                "date": "2023-10-02",
+                "type": 1,
+                "units": 54,
+                "units_promo": 85,
+                "money": 7643.0,
+                "money_promo": 10098.0
+            },
+            {
+                "date": "2023-10-03",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 1809.0,
+                "money_promo": 3962.0
+            },
+            {
+                "date": "2023-10-05",
+                "type": 1,
+                "units": 76,
+                "units_promo": 109,
+                "money": 5973.0,
+                "money_promo": 8734.0
+            },
+            {
+                "date": "2023-10-04",
+                "type": 1,
+                "units": 87,
+                "units_promo": 126,
+                "money": 8953.0,
+                "money_promo": 13975.0
+            }
+        ]
+    },
+    {
+        "store": "ул. 7-я Кожуховская, д. 9",
+        "product_name": null,
+        "profit": [
+            {
+                "date": "2023-10-01",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 3098.0,
+                "money_promo": 6873.0
+            },
+            {
+                "date": "2023-10-02",
+                "type": 1,
+                "units": 54,
+                "units_promo": 85,
+                "money": 7643.0,
+                "money_promo": 10098.0
+            },
+            {
+                "date": "2023-10-03",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 1809.0,
+                "money_promo": 3962.0
+            },
+            {
+                "date": "2023-10-05",
+                "type": 1,
+                "units": 76,
+                "units_promo": 109,
+                "money": 5973.0,
+                "money_promo": 8734.0
+            },
+            {
+                "date": "2023-10-04",
+                "type": 1,
+                "units": 87,
+                "units_promo": 126,
+                "money": 8953.0,
+                "money_promo": 13975.0
+            },
+            {
+                "date": "2023-10-06",
+                "type": 1,
+                "units": 65,
+                "units_promo": 98,
+                "money": 5087.0,
+                "money_promo": 9628.0
+            }
+        ]
+    },
+    {
+        "store": "ул. Большая Почтовая, д. 28",
+        "product_name": null,
+        "profit": [
+            {
+                "date": "2023-10-01",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 3098.0,
+                "money_promo": 6873.0
+            },
+            {
+                "date": "2023-10-02",
+                "type": 1,
+                "units": 54,
+                "units_promo": 85,
+                "money": 7643.0,
+                "money_promo": 10098.0
+            },
+            {
+                "date": "2023-10-03",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 1809.0,
+                "money_promo": 3962.0
+            },
+            {
+                "date": "2023-10-05",
+                "type": 1,
+                "units": 76,
+                "units_promo": 109,
+                "money": 5973.0,
+                "money_promo": 8734.0
+            }
+        ]
+    },
+    {
+        "store": "ш. Энтузиастов, д. 80",
+        "product_name": null,
+        "profit": [
+            {
+                "date": "2023-10-01",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 3098.0,
+                "money_promo": 6873.0
+            },
+            {
+                "date": "2023-10-02",
+                "type": 1,
+                "units": 54,
+                "units_promo": 85,
+                "money": 7643.0,
+                "money_promo": 10098.0
+            },
+            {
+                "date": "2023-10-03",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 1809.0,
+                "money_promo": 3962.0
+            },
+            {
+                "date": "2023-10-05",
+                "type": 1,
+                "units": 76,
+                "units_promo": 109,
+                "money": 5973.0,
+                "money_promo": 8734.0
+            },
+            {
+                "date": "2023-10-04",
+                "type": 1,
+                "units": 87,
+                "units_promo": 126,
+                "money": 8953.0,
+                "money_promo": 13975.0
+            }
+        ]
+    },
+    {
+        "store": "ул. 7-я Кожуховская, д. 9",
+        "product_name": null,
+        "profit": [
+            {
+                "date": "2023-10-01",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 3098.0,
+                "money_promo": 6873.0
+            },
+            {
+                "date": "2023-10-02",
+                "type": 1,
+                "units": 54,
+                "units_promo": 85,
+                "money": 7643.0,
+                "money_promo": 10098.0
+            },
+            {
+                "date": "2023-10-03",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 1809.0,
+                "money_promo": 3962.0
+            },
+            {
+                "date": "2023-10-05",
+                "type": 1,
+                "units": 76,
+                "units_promo": 109,
+                "money": 5973.0,
+                "money_promo": 8734.0
+            },
+            {
+                "date": "2023-10-04",
+                "type": 1,
+                "units": 87,
+                "units_promo": 126,
+                "money": 8953.0,
+                "money_promo": 13975.0
+            }
+        ]
+    },
+    {
+        "store": "ул. Астахова, д. 4, к. 4",
+        "product_name": null,
+        "profit": [
+            {
+                "date": "2023-10-01",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 3098.0,
+                "money_promo": 6873.0
+            },
+            {
+                "date": "2023-10-02",
+                "type": 1,
+                "units": 54,
+                "units_promo": 85,
+                "money": 7643.0,
+                "money_promo": 10098.0
+            },
+            {
+                "date": "2023-10-03",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 1809.0,
+                "money_promo": 3962.0
+            },
+            {
+                "date": "2023-10-05",
+                "type": 1,
+                "units": 76,
+                "units_promo": 109,
+                "money": 5973.0,
+                "money_promo": 8734.0
+            },
+            {
+                "date": "2023-10-04",
+                "type": 1,
+                "units": 87,
+                "units_promo": 126,
+                "money": 8953.0,
+                "money_promo": 13975.0
+            }
+        ]
+    },
+    {
+        "store": "ул. Большая Почтовая, д. 28",
+        "product_name": null,
+        "profit": [
+            {
+                "date": "2023-10-01",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 3098.0,
+                "money_promo": 6873.0
+            },
+            {
+                "date": "2023-10-02",
+                "type": 1,
+                "units": 54,
+                "units_promo": 85,
+                "money": 7643.0,
+                "money_promo": 10098.0
+            },
+            {
+                "date": "2023-10-03",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 1809.0,
+                "money_promo": 3962.0
+            },
+            {
+                "date": "2023-10-05",
+                "type": 1,
+                "units": 76,
+                "units_promo": 109,
+                "money": 5973.0,
+                "money_promo": 8734.0
+            },
+            {
+                "date": "2023-10-04",
+                "type": 1,
+                "units": 87,
+                "units_promo": 126,
+                "money": 8953.0,
+                "money_promo": 13975.0
+            }
+        ]
+    },
+    {
+        "store": "ул. Дубнинская, д. 12, корп. 3",
+        "product_name": null,
+        "profit": [
+            {
+                "date": "2023-10-01",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 3098.0,
+                "money_promo": 6873.0
+            },
+            {
+                "date": "2023-10-02",
+                "type": 1,
+                "units": 54,
+                "units_promo": 85,
+                "money": 7643.0,
+                "money_promo": 10098.0
+            },
+            {
+                "date": "2023-10-03",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 1809.0,
+                "money_promo": 3962.0
+            },
+            {
+                "date": "2023-10-05",
+                "type": 1,
+                "units": 76,
+                "units_promo": 109,
+                "money": 5973.0,
+                "money_promo": 8734.0
+            },
+            {
+                "date": "2023-10-04",
+                "type": 1,
+                "units": 87,
+                "units_promo": 126,
+                "money": 8953.0,
+                "money_promo": 13975.0
+            }
+        ]
+    },
+    {
+        "store": "ш. Энтузиастов, д. 80",
+        "product_name": null,
+        "profit": [
+            {
+                "date": "2023-10-01",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 3098.0,
+                "money_promo": 6873.0
+            },
+            {
+                "date": "2023-10-02",
+                "type": 1,
+                "units": 54,
+                "units_promo": 85,
+                "money": 7643.0,
+                "money_promo": 10098.0
+            },
+            {
+                "date": "2023-10-03",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 1809.0,
+                "money_promo": 3962.0
+            },
+            {
+                "date": "2023-10-05",
+                "type": 1,
+                "units": 76,
+                "units_promo": 109,
+                "money": 5973.0,
+                "money_promo": 8734.0
+            },
+            {
+                "date": "2023-10-04",
+                "type": 1,
+                "units": 87,
+                "units_promo": 126,
+                "money": 8953.0,
+                "money_promo": 13975.0
+            }
+        ]
+    },
+    {
+        "store": "ул. Большая Академическая, д. 17",
+        "product_name": null,
+        "profit": [
+            {
+                "date": "2023-10-01",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 3098.0,
+                "money_promo": 6873.0
+            },
+            {
+                "date": "2023-10-02",
+                "type": 1,
+                "units": 54,
+                "units_promo": 85,
+                "money": 7643.0,
+                "money_promo": 10098.0
+            },
+            {
+                "date": "2023-10-03",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 1809.0,
+                "money_promo": 3962.0
+            },
+            {
+                "date": "2023-10-05",
+                "type": 1,
+                "units": 76,
+                "units_promo": 109,
+                "money": 5973.0,
+                "money_promo": 8734.0
+            },
+            {
+                "date": "2023-10-04",
+                "type": 1,
+                "units": 87,
+                "units_promo": 126,
+                "money": 8953.0,
+                "money_promo": 13975.0
+            },
+            {
+                "date": "2023-10-06",
+                "type": 1,
+                "units": 65,
+                "units_promo": 98,
+                "money": 5087.0,
+                "money_promo": 9628.0
+            }
+        ]
+    },
+    {
+        "store": "ул. Большая Почтовая, д. 28",
+        "product_name": null,
+        "profit": [
+            {
+                "date": "2023-10-01",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 3098.0,
+                "money_promo": 6873.0
+            },
+            {
+                "date": "2023-10-02",
+                "type": 1,
+                "units": 54,
+                "units_promo": 85,
+                "money": 7643.0,
+                "money_promo": 10098.0
+            },
+            {
+                "date": "2023-10-03",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 1809.0,
+                "money_promo": 3962.0
+            },
+            {
+                "date": "2023-10-05",
+                "type": 1,
+                "units": 76,
+                "units_promo": 109,
+                "money": 5973.0,
+                "money_promo": 8734.0
+            },
+            {
+                "date": "2023-10-04",
+                "type": 1,
+                "units": 87,
+                "units_promo": 126,
+                "money": 8953.0,
+                "money_promo": 13975.0
+            }
+        ]
+    },
+    {
+        "store": "ул. Шипиловская, д. 1",
+        "product_name": null,
+        "profit": [
+            {
+                "date": "2023-10-01",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 3098.0,
+                "money_promo": 6873.0
+            },
+            {
+                "date": "2023-10-02",
+                "type": 1,
+                "units": 54,
+                "units_promo": 85,
+                "money": 7643.0,
+                "money_promo": 10098.0
+            },
+            {
+                "date": "2023-10-03",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 1809.0,
+                "money_promo": 3962.0
+            },
+            {
+                "date": "2023-10-05",
+                "type": 1,
+                "units": 76,
+                "units_promo": 109,
+                "money": 5973.0,
+                "money_promo": 8734.0
+            },
+            {
+                "date": "2023-10-04",
+                "type": 1,
+                "units": 87,
+                "units_promo": 126,
+                "money": 8953.0,
+                "money_promo": 13975.0
+            },
+            {
+                "date": "2023-10-06",
+                "type": 1,
+                "units": 65,
+                "units_promo": 98,
+                "money": 5087.0,
+                "money_promo": 9628.0
+            }
+        ]
+    },
+    {
+        "store": "ул. 7-я Кожуховская, д. 9",
+        "product_name": null,
+        "profit": [
+            {
+                "date": "2023-10-01",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 3098.0,
+                "money_promo": 6873.0
+            },
+            {
+                "date": "2023-10-02",
+                "type": 1,
+                "units": 54,
+                "units_promo": 85,
+                "money": 7643.0,
+                "money_promo": 10098.0
+            },
+            {
+                "date": "2023-10-03",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 1809.0,
+                "money_promo": 3962.0
+            },
+            {
+                "date": "2023-10-05",
+                "type": 1,
+                "units": 76,
+                "units_promo": 109,
+                "money": 5973.0,
+                "money_promo": 8734.0
+            },
+            {
+                "date": "2023-10-04",
+                "type": 1,
+                "units": 87,
+                "units_promo": 126,
+                "money": 8953.0,
+                "money_promo": 13975.0
+            },
+            {
+                "date": "2023-10-06",
+                "type": 1,
+                "units": 65,
+                "units_promo": 98,
+                "money": 5087.0,
+                "money_promo": 9628.0
+            }
+        ]
+    },
+    {
+        "store": "ш. Энтузиастов, д. 80",
+        "product_name": null,
+        "profit": [
+            {
+                "date": "2023-10-01",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 3098.0,
+                "money_promo": 6873.0
+            },
+            {
+                "date": "2023-10-02",
+                "type": 1,
+                "units": 54,
+                "units_promo": 85,
+                "money": 7643.0,
+                "money_promo": 10098.0
+            },
+            {
+                "date": "2023-10-03",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 1809.0,
+                "money_promo": 3962.0
+            },
+            {
+                "date": "2023-10-05",
+                "type": 1,
+                "units": 76,
+                "units_promo": 109,
+                "money": 5973.0,
+                "money_promo": 8734.0
+            },
+            {
+                "date": "2023-10-04",
+                "type": 1,
+                "units": 87,
+                "units_promo": 126,
+                "money": 8953.0,
+                "money_promo": 13975.0
+            },
+            {
+                "date": "2023-10-06",
+                "type": 1,
+                "units": 65,
+                "units_promo": 98,
+                "money": 5087.0,
+                "money_promo": 9628.0
+            }
+        ]
+    },
+    {
+        "store": "ул. Дубнинская, д. 12, корп. 3",
+        "product_name": null,
+        "profit": [
+            {
+                "date": "2023-10-01",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 3098.0,
+                "money_promo": 6873.0
+            },
+            {
+                "date": "2023-10-02",
+                "type": 1,
+                "units": 54,
+                "units_promo": 85,
+                "money": 7643.0,
+                "money_promo": 10098.0
+            },
+            {
+                "date": "2023-10-03",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 1809.0,
+                "money_promo": 3962.0
+            },
+            {
+                "date": "2023-10-05",
+                "type": 1,
+                "units": 76,
+                "units_promo": 109,
+                "money": 5973.0,
+                "money_promo": 8734.0
+            },
+            {
+                "date": "2023-10-04",
+                "type": 1,
+                "units": 87,
+                "units_promo": 126,
+                "money": 8953.0,
+                "money_promo": 13975.0
+            },
+            {
+                "date": "2023-10-06",
+                "type": 1,
+                "units": 65,
+                "units_promo": 98,
+                "money": 5087.0,
+                "money_promo": 9628.0
+            }
+        ]
+    },
+    {
+        "store": "ул. Большая Черемушкинская, д. 1",
+        "product_name": null,
+        "profit": [
+            {
+                "date": "2023-10-01",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 3098.0,
+                "money_promo": 6873.0
+            },
+            {
+                "date": "2023-10-02",
+                "type": 1,
+                "units": 54,
+                "units_promo": 85,
+                "money": 7643.0,
+                "money_promo": 10098.0
+            },
+            {
+                "date": "2023-10-03",
+                "type": 1,
+                "units": 34,
+                "units_promo": 87,
+                "money": 1809.0,
+                "money_promo": 3962.0
+            },
+            {
+                "date": "2023-10-05",
+                "type": 1,
+                "units": 76,
+                "units_promo": 109,
+                "money": 5973.0,
+                "money_promo": 8734.0
+            },
+            {
+                "date": "2023-10-04",
+                "type": 1,
+                "units": 87,
+                "units_promo": 126,
+                "money": 8953.0,
+                "money_promo": 13975.0
+            },
+            {
+                "date": "2023-10-06",
+                "type": 1,
+                "units": 65,
+                "units_promo": 98,
+                "money": 5087.0,
+                "money_promo": 9628.0
+            }
+        ]
+    }
+
+    ]
   },
   reducers: {
     setNewForecast(state, action) {
@@ -581,9 +1560,12 @@ export const dataSlice = createSlice({
     setCategories(state, action) {
       state.categories = action.payload
     },
+    setStats(state, action) {
+      state.stats = action.payload
+    },
   }
 })
 
-export const { setNewForecast, setShopNames, setCategories} = dataSlice.actions;
+export const { setNewForecast, setShops, setCategories, setStats } = dataSlice.actions;
 
 export default dataSlice.reducer;
