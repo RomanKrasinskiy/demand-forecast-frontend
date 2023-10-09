@@ -1,51 +1,17 @@
 import ProductDataCSS from './ProductDatabase.module.css';
-import { TextField, Autocomplete } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { useSelector, useDispatch } from "react-redux";
 import { 
-  setNewCategoriesFilter, 
-  setNewGroupFilter, 
-  setNewShopFilter, 
-  setNewSubcategoriesFilter,
   setNewProductRowSelectName,
   setNewProductRowSelectId,
  } from '../store/filterSlice';
 import SearchForm from './../SearchForm/SearchForm';
-import { useEffect, useState } from 'react';
-import { getCategories, getShops } from '../../api/DataApi';
-import { setGroupNames, setShopNames } from '../store/dataSlice';
+import Filters from '../Filters/Filters';
+import { useState } from 'react';
 
 function ProductDatabase() {
   const dispatch = useDispatch();
 
-
- 
-  // Создаём диспетчер
-
-  // забираем из стейта наполнение фильтров
-  const stores = useSelector(state => state.data.shopNames);
-  const groups = useSelector(state => state.data.groupNames);
-  const categories = useSelector(state => state.data.categoryNames);
-  const subcategories = useSelector(state => state.data.subcategoryNames);
-  // Функция трансформации данных с бэка в съедобный для Autocomplete вид - магазины
-  function transformIntoShopsList(initialArray) {
-    return initialArray.map((item, index) => {
-      return {
-        key: (index + 1),
-        label: item.store_name,
-      };
-    });
-  }
-  // Трансформируем магазины в опции фильтра
-  const storesList = transformIntoShopsList(stores);
-  // const categoriesList = transformIntoShopsList(stores);
-
-
-  // забираем из стейта значение фильтров
-  const shopFilter = useSelector(state => state.filter.shopFilter);
-  const groupFilter = useSelector(state => state.filter.groupFilter);
-  const categoryFilter = useSelector(state => state.filter.categoryFilter);
-  const subcategoryFilter = useSelector(state => state.filter.subcategoryFilter);
   // Забираем продукты, полученные с бэка
   const categoriesData = useSelector(state => state.data.categories);
   // Функция трансформации данных с бэка в съедобный для Data Grid вид - строки
@@ -145,69 +111,7 @@ function ProductDatabase() {
       </div>
       {/* Панель с фильтрами */}
       <div className={ProductDataCSS.optionsContainer}>
-        <Autocomplete
-          disablePortal
-          id="stores"
-          options={storesList}
-          isOptionEqualToValue={(option, value) => option.id === value.id}
-          sx={{ 
-            maxWidth: 387, 
-            width: '100%',
-            height: 48,
-          }}
-          renderInput={(params) => <TextField {...params} label="ТК" />}
-          value={shopFilter}
-          onChange={(event, newValue) => {
-            dispatch(setNewShopFilter(newValue))
-          }}
-        />
-        <Autocomplete
-          disablePortal
-          id="group"
-          options={groups}
-          isOptionEqualToValue={(option, value) => option.id === value.id}
-          sx={{ 
-            maxWidth: 387, 
-            width: '100%',
-            height: 48,
-          }}
-          renderInput={(params) => <TextField {...params} label="Группа" />}
-          value={groupFilter}
-          onChange={(event, newValue) => {
-            dispatch(setNewGroupFilter(newValue))
-          }}
-        />
-        <Autocomplete
-          disablePortal
-          id="categories"
-          options={categories}
-          sx={{ 
-            maxWidth: 387, 
-            width: '100%',
-            height: 48,
-          }}
-          renderInput={(params) => <TextField {...params} label="Категория" />}
-          value={categoryFilter}
-          onChange={(event, newValue) => {
-            dispatch(setNewCategoriesFilter(newValue))
-          }}
-        />
-        <Autocomplete
-          disablePortal
-          id="subcategories"
-          options={subcategories}
-          isOptionEqualToValue={(option, value) => option.id === value.id}
-          sx={{ 
-            maxWidth: 387, 
-            width: '100%',
-            height: 48,
-          }}
-          renderInput={(params) => <TextField {...params} label="Подкатегория" />}
-          value={subcategoryFilter}
-          onChange={(event, newValue) => {
-            dispatch(setNewSubcategoriesFilter(newValue))
-          }}
-        />
+        <Filters />
       </div>
       <div className={ProductDataCSS.data}>
       <DataGrid 

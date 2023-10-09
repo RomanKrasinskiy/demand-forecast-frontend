@@ -1,11 +1,10 @@
 import ForecastCSS from './Forecast.module.css';
 import { useState } from 'react';
-import { TextField, Autocomplete } from '@mui/material';
-import { useSelector, useDispatch } from "react-redux";
-import { setNewCategoriesFilter, setNewGroupFilter, setNewShopFilter, setNewSubcategoriesFilter } from '../store/filterSlice';
+import { useSelector } from "react-redux";
 import ForecastTable from './ForecastTable/ForecastTable';
 import ForecastChart from './ForecastChart/ForecastChart';
 import SearchForm from './../SearchForm/SearchForm';
+import Filters from '../Filters/Filters';
 
 const Forecast = () => {
   const [isDataTable, setDataChart] = useState(true);
@@ -20,40 +19,6 @@ const Forecast = () => {
   
   // Получаем состояние выбранных ячеек
   const forecastRowSelectId = useSelector(state => state.filter.forecastRowSelectId);
-
-  // Забираем из стейта наполнение фильтров
-  const stores = useSelector(state => state.data.shopNames);
-  const groups = useSelector(state => state.data.groupNames);
-  const categories = useSelector(state => state.data.categoryNames);
-  const subcategories = useSelector(state => state.data.subcategoryNames);
-  // Функция трансформации данных с бэка в съедобный для Autocomplete вид - магазины
-  function transformIntoShopsList(initialArray) {
-    return initialArray.map((item, index) => {
-      return {
-        key: (index + 1),
-        label: item.store_name,
-      };
-    });
-  }
-  // Трансформируем магазины в опции фильтра
-  const storesList = transformIntoShopsList(stores);
-
-  // Забираем из стейта значение фильтров
-  const shopFilter = useSelector(state => state.filter.shopFilter);
-  const groupFilter = useSelector(state => state.filter.groupFilter);
-  const categoryFilter = useSelector(state => state.filter.categoryFilter);
-  const subcategoryFilter = useSelector(state => state.filter.subcategoryFilter);
-
-  // Создаём диспетчер
-  const dispatch = useDispatch();
-
-  // обработка клика по выбору позиции из фильтра = отрендерить таблицу/график по новым данным, то есть:
-  //   - отправили запрос на бэк с новым параметром фильттра (useDispatch на ответ обращения апишки?)
-  //   - после ответа с бэка дёрнули из стейта новые данные (useSelect)
-  // обработка поиска по товару = аналогично
-
-  // галочки в таблице = массив с номерами строк rowSelectionModel (местный стейт, не редакс), который будет отправлять запрос на бэк 
-  // за прогнозом, а полученный результат useDispatch в слайс с данными.
 
   // клик по кнопке Скачать в Эксель = дёрнуть бэк за файлом.
 
@@ -74,66 +39,7 @@ const Forecast = () => {
       </div>
       {/* Панель с фильтрами */}
       <div className={ForecastCSS.optionsContainer}>
-        <Autocomplete
-          disablePortal
-          id="stores"
-          options={storesList}
-          sx={{ 
-            maxWidth: 387, 
-            width: '100%',
-            height: 48,
-          }}
-          renderInput={(params) => <TextField {...params} label="ТК" />}
-          value={shopFilter}
-          onChange={(event, newValue) => {
-            dispatch(setNewShopFilter(newValue))
-          }}
-        />
-        <Autocomplete
-          // disablePortal
-          id="group"
-          options={groups}
-          sx={{ 
-            maxWidth: 387, 
-            width: '100%',
-            height: 48,
-          }}
-          renderInput={(params) => <TextField {...params} label="Группа" />}
-          value={groupFilter}
-          onChange={(event, newValue) => {
-            dispatch(setNewGroupFilter(newValue))
-          }}
-        />
-        <Autocomplete
-          disablePortal
-          id="categories"
-          options={categories}
-          sx={{ 
-            maxWidth: 387, 
-            width: '100%',
-            height: 48,
-          }}
-          renderInput={(params) => <TextField {...params} label="Категория" />}
-          value={categoryFilter}
-          onChange={(event, newValue) => {
-            dispatch(setNewCategoriesFilter(newValue))
-          }}
-        />
-        <Autocomplete
-          disablePortal
-          id="subcategories"
-          options={subcategories}
-          sx={{ 
-            maxWidth: 387, 
-            width: '100%',
-            height: 48,
-          }}
-          renderInput={(params) => <TextField {...params} label="Подкатегория" />}
-          value={subcategoryFilter}
-          onChange={(event, newValue) => {
-            dispatch(setNewSubcategoriesFilter(newValue))
-          }}
-        />
+        <Filters />
       </div>
       <div className={ForecastCSS.data}>
       {isDataTable
