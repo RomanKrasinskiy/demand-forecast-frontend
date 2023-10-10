@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { 
     setNewCategoriesFilter, 
     setNewGroupFilter, 
-    setNewShopFilter, 
+    setNewShopFilter,
     setNewSubcategoriesFilter,
    } from '../store/filterSlice';
 // import { getCategories, getShops } from '../../api/DataApi';
@@ -97,7 +97,7 @@ function Filters() {
     // }, [dispatch]);
     
     return (
-        <>
+      <>
         <Autocomplete
           disablePortal
           id="stores"
@@ -173,7 +173,7 @@ function Filters() {
             dispatch(setNewSubcategoriesFilter(newValue))
           }}
         />
-        </>
+      </>
     )
 }
 

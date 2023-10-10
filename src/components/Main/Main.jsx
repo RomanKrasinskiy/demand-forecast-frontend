@@ -1,8 +1,6 @@
 import MainCss from './Main.module.css';
 import Authorization from "../Authorization/Authorization";
 // import Select from 'react-select'
-
-
 import { Box, Button, Stack } from "@mui/material";
 import MainBackground from "../Main/MainBackground/MainBackground";
 import { Link } from 'react-router-dom';
@@ -22,8 +20,6 @@ export default function Registration() {
     //   password: values.password,
     // });
   };
-
-
 
 return (
   <div className={MainCss.container}>
@@ -78,8 +74,6 @@ return (
                     textTransform: 'none',
                     fontWeight: '500',
                     fontSize: '20px',
-
-
                   }}
                 >
                   Зарегистрироваться

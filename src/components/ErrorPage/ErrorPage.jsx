@@ -5,7 +5,6 @@ import Logo from '../Logo/Logo';
 import MainBackground from "../Main/MainBackground/MainBackground";
 import { useNavigate } from 'react-router-dom';
 
-
 function ErrorPage() {
   const navigate = useNavigate();
   const handleGoBack = () => {
@@ -35,12 +34,10 @@ function ErrorPage() {
               fontSize: '20px',
               textTransform: 'none',
               fontWeight: '500',
-
             }}
           >На главную</Button>
         </Link>
       </div>
-      
     </div>
   )
 }
