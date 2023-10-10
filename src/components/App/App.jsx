@@ -10,14 +10,14 @@ import Login from "../Authorization/Login/Login";
 import Main from "../Main/Main";
 import Forecast from "../Forecast/Forecast";
 import Statistics from "../Statistics/Statistics";
-// import Preloader from "../Preloader/Preloader";
 import ProductDatabase from "../ProductDatabase/ProductDatabase";
 import Header from "../Header/Header";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { signUp, signIn, signOut } from "../../api/AuthApi";
 import { useDispatch, useSelector } from "react-redux";
-import { setNewUserEmail, setNewUserName, setNewUserOccupation, setloggedIn } from "../store/userSlice";
+import { setNewUserEmail, setNewUserName, setNewUserOccupation, setPreloaderState, setloggedIn } from "../store/userSlice";
 import ProtectedRoutes from "../ProtectedRoutes/ProtectedRoutes";
+import Preloader from "../Preloader/Preloader";
 
 function App() {
   const navigate = useNavigate();
@@ -34,33 +34,31 @@ function App() {
   });
 
 
-  // useEffect(() => {
-  //   tokenCheck();
-  // }, [loggedIn]);
+  useEffect(() => {
+    tokenCheck();
+  }, [loggedIn]);
 
-  // function tokenCheck() {
-  //   const jwt = localStorage.getItem("auth_token");
-  //   if (!jwt) {
-  //     navigate('/');
-  //   } else {      
-  //         navigate(location.pathname);
-  //       }
+  function tokenCheck() {
+    const jwt = localStorage.getItem("auth_token");
+    if (!jwt) {
+      navigate('/');
+    } else {      
+          navigate(location.pathname);
+        }
        
-  //   }
+    }
   
   function handleRegister({ email, password, userName, usersPosition }) {
-    // setIsLoading(true)
+    setPreloaderState(true)
       signUp({ email, password, userName, usersPosition })
         .then(() => {
           navigate('/signin')
-          
-
         })
-        .catch((err) => console.log(`Ошибка: ${err}`));
-      // .finally(() => setIsLoading(false));
+        .catch((err) => console.log(`Ошибка: ${err}`))
+        .finally(() => setPreloaderState(false));
   }
   function handleLogin({ email, password, shop }) {
-    // setIsLoading(true)      
+    setPreloaderState(true)
       signIn({ email, password, shop })
         .then((data) => {
           dispatch(setloggedIn(true))
@@ -72,25 +70,23 @@ function App() {
           // setLoggedIn(true);
           navigate('/productdatabase')
         })
-        .catch((err) => console.log(`Ошибка: ${err}`));
-      // .finally(() => setIsLoading(false));
+        .catch((err) => console.log(`Ошибка: ${err}`))
+        .finally(() => setPreloaderState(false));
   }
   const handleSignOut = () => {
-    // setIsLoading(true);
+    setPreloaderState(true)
     signOut()
       .then(() => {
         navigate('/');
         console.log('exit')
         setCurrentUser({ name: '', email: '' });
         // setLoggedIn(false);
-
-        // setFormError({ isError: false, text: '' });
         // setSearchedProduct([]);
         localStorage.clear();
       })
-      .catch((err) => console.log(`Ошибка: ${err}`));
-      // .finally(() => setIsLoading(false));
-  };
+      .catch((err) => console.log(`Ошибка: ${err}`))
+      .finally(() => setPreloaderState(false));
+    };
 
 
   return (
@@ -143,8 +139,7 @@ function App() {
           </Route>
           <Route path="*" element={<ErrorPage />} />
         </Routes>
-        {/* <Preloader  /> */}
-        {/* isActive={isActive} */}
+        <Preloader />
       </CurrentUserContext.Provider>
     </div>
   );

@@ -96,37 +96,6 @@ function Filters() {
     //   }
     // }, [dispatch]);
     
-    // useEffect(() => {
-    //   if (categoryFilter.length === 0) {
-    //     getCategories()
-    //       .then((data) => { // в data приходит целый не фильтрованый объект с данными
-    //         console.log(data);
-    //         dispatch(setCategories(data)) 
-    //       })
-    //       .catch((err) => console.log(`Ошибка: ${err}`));
-    //   }
-    // }, [dispatch]);
-  
-    // useEffect(() => {
-    //   if (categoryFilter.length === 0) {
-    //     getCategories()
-    //       .then((data) => {
-    //         console.log(data);
-    //         dispatch(setCategories(data))
-    //       })
-    //       .catch((err) => console.log(`Ошибка: ${err}`));
-    //   }
-    // }, [dispatch]);
-
-    // function changeTablesItems(value) {
-    //   getShops({ store: value.store_name }) 
-    //     .then((data) => {
-    //       console.log(data);
-    //       dispatch(setShops(data));
-    //     })
-    //     .catch((err) => console.error(`Ошибка: ${err}`));
-    // }
-
     return (
       <>
         <Autocomplete
@@ -146,7 +115,6 @@ function Filters() {
           value={shopFilter}
           onChange={(event, newValue) => {
             dispatch(setNewShopFilter(newValue))
-            // changeTablesItems(newValue);
           }}
         />
         <Autocomplete

@@ -17,14 +17,15 @@ export const signUp = async ({ email, password, userName, usersPosition }) => {
   return checkResponse(res);
 };
 
-export const signIn = async ({ email, password}) => {
+export const signIn = async ({ email, password, shop }) => {
   const res = await fetch(API_MAIN_CONFIG.signIn, {
     method: 'POST',
     headers: API_MAIN_CONFIG.headers,
     // credentials: 'include',
     body: JSON.stringify({
-      email: `${email}`, // в этом поле ключ не username а email. Такое присвоение удобно для бека
+      username: `${email}`, // в этом поле ключ не username а email. Такое присвоение удобно для бека
       password: `${password}`,
+      shop: `${shop}`,
     }),
   });
   return checkResponse(res);

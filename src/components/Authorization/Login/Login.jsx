@@ -1,6 +1,6 @@
 import LoginCSS from "./Login.module.css";
 import Authorization from "../Authorization";
-import React, { useEffect } from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
@@ -10,9 +10,9 @@ import { Button, FormControl, Input, InputLabel, MenuItem, Select, Stack } from 
 import MainBackground from "../../Main/MainBackground/MainBackground";
 import { Link } from "react-router-dom";
 import { useFormWithValidation } from "../../../hooks/useFormWithValidation";
-import { getShops } from "../../../api/DataApi";
+// import { getShops } from "../../../api/DataApi";
 import { useDispatch, useSelector } from "react-redux";
-import { setShops } from "../../store/dataSlice";
+// import { setShops } from "../../store/dataSlice";
 import { setNewShopFilter } from "../../store/filterSlice";
 // import { setNewShopFilter } from "../../store/filterSlice";
 
@@ -45,16 +45,16 @@ console.log(values);
   //     .catch((err) => console.log(`Ошибка: ${err}`)); 
   //  }, []);
 
-   useEffect(() => {
-    if (shopFilter.length === 0) {
-      getShops()
-        .then((data) => {
-          console.log(data);
-          dispatch(setShops(data))
-        })
-        .catch((err) => console.log(`Ошибка: ${err}`));
-    }
-  }, [dispatch]);
+  //  useEffect(() => {
+  //   if (shopFilter.length === 0) {
+  //     getShops()
+  //       .then((data) => {
+  //         console.log(data);
+  //         dispatch(setShops(data))
+  //       })
+  //       .catch((err) => console.log(`Ошибка: ${err}`));
+  //   }
+  // }, [dispatch]);
    
 
    const handleShopChange = (event) => {
@@ -68,8 +68,9 @@ console.log(values);
     onLogin({
       email: values.email,
       password: values.password,
-      shop: values.shop,
+      shop: shopFilter,
     });
+    console.log(shopFilter)
   };
 
   return (

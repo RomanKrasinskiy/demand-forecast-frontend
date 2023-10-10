@@ -1,7 +1,6 @@
 import StatisticsCSS from './Statistics.module.css';
 import { TextField, Autocomplete } from '@mui/material';
 import { useState } from "react";
-// import { useEffect } from "react";
 import DatePickerCalendar from '../DatePickerCalendar/DatePickerCalendar';
 import SearchForm from '../SearchForm/SearchForm';
 import { useDispatch, useSelector } from 'react-redux';
