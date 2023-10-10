@@ -1,19 +1,17 @@
-import "./Preloader";
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import styles from './Preloader.module.css';
 
-export default function Preloader({ isActive }) {
-  // Проверяем, что в loggedIn попадает именно boolean значение
-  // Нужно декомпозировать.
-  Preloader.propTypes = {
-    isActive: PropTypes.bool.isRequired,
-  }
-  
-
+export default function Preloader() {
+  const preloaderState = useSelector(state => state.user.preloaderState);
   return (
     <>
-      {isActive && (<div>Preloader</div>)}
+      {preloaderState && (
+        <div className={styles.preloader}>
+      <div className={styles.loaderContainer}>
+        <span className={styles.loader}></span>
+      </div>
+      </div>
+    )}
     </>
   );
-  
-
 }

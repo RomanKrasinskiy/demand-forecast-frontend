@@ -1,65 +1,56 @@
-.header {
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: #003c96;
-    padding: 8px 16px;
-}
-
-.logo {
-    display: block;
-    width: 71px;
-    height: 28px;
+.page {
+  display: flex;
 }
 
 .container {
-    margin: 65px 40px 48px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  min-height: 600px;
+  padding-top: 75px;
+  padding-left: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 2;
 }
 
-.img {
-    max-height: 200px;
-    max-width: 100%;
-    margin: 0 0 42px;
+.textContainer {
+  margin: 0 0 40px;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
 }
 
 .title {
-    color: #0b77c7;
-    font-family: Gilroy,Arial,Helvetica Neue,Helvetica,sans-serif;
-    font-size: 30px;
-    line-height: 1.33;
-    margin: 0 0 8px;
-    text-align: center;
+  margin: 0 0 24px;
+  color: var(--black, #2C2A29);
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }
 
-.description {
-    color: #0b77c7;
-    font-family: Gilroy,Arial,Helvetica Neue,Helvetica,sans-serif;
-    font-size: 24px;
-    font-weight: 200;
-    line-height: 1.33;
-    text-align: center;
-    margin: 0 0 26px;
-    width: 100%;
+.text {
+  margin: 0 0 8px;
+  color: var(--gray, #4D4D4D);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }
 
-.btn {
-    height: 36px;
-    padding: 0 26px;
-    border: 0;
-    text-transform: none;
-    text-decoration: none;
-    color: #fff;
-    background: #003c96;
-    font-family: Gilroy,Arial,Helvetica Neue,Helvetica,sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    border-radius: 26px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+.linkText {
+  margin: 0;
+  color: var(--light-grey, #A7A7A7);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.link {
+  color: var(--blue, #003C96);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }

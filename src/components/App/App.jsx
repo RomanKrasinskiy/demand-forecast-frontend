@@ -1,81 +1,138 @@
-import './App';
-import CurrentUserContext from '../../contexts/CurrentUserContext';
-// import ProtectedRoutes from '../ProtectedRoutes/ProtectedRoutes';
-
-import { Routes, Route, Navigate } from 'react-router-dom';
-
-import ErrorPage from '../ErrorPage/ErrorPage';
-import Registration from '../Authorization/Registration/Registration';
-import Login from '../Authorization/Login/Login';
-import Main from '../Main/Main';
-import ProductDatabase from '../ProductDatabase/ProductDatabase';
-import Forecast from '../Forecast/Forecast';
-import Statistics from '../Statistics/Statistics';
-import Preloader from '../Preloader/Preloader';
-
-
-
-const loggedIn = true; // временная заглушка
-const currentUser = true; // временная заглушка
-const handleRegister = true; // временная заглушка
-const formError = true; // временная заглушка
-const isActive = false; // временная заглушка
-const handleLogin = true; // временная заглушка
-const number = '404'; // заглушка
-const message = 'err message'; // заглушка
-
+import "./App";
+import AppCSS from "./App.module.css";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import ErrorPage from "../ErrorPage/ErrorPage";
+import Registration from "../Authorization/Registration/Registration";
+import Login from "../Authorization/Login/Login";
+import Main from "../Main/Main";
+import Forecast from "../Forecast/Forecast";
+import Statistics from "../Statistics/Statistics";
+import ProductDatabase from "../ProductDatabase/ProductDatabase";
+import Header from "../Header/Header";
+import { useEffect } from "react";
+import { signUp, signIn, signOut } from "../../api/AuthApi";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setNewUserEmail,
+  setNewUserName,
+  setNewUserOccupation,
+  setPreloaderState,
+  setloggedIn,
+} from "../store/userSlice";
+import ProtectedRoutes from "../ProtectedRoutes/ProtectedRoutes";
+import Preloader from "../Preloader/Preloader";
 
 function App() {
-  
+  const navigate = useNavigate();
+  const loggedIn = useSelector((state) => state.user.loggedIn);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    tokenCheck();
+  }, [loggedIn]);
+
+  function tokenCheck() {
+    const jwt = localStorage.getItem("auth_token");
+    if (!jwt) {
+      navigate("/");
+    } else {
+      navigate(location.pathname);
+    }
+  }
+
+  function handleRegister({ email, password, userName, usersPosition }) {
+    setPreloaderState(true);
+    signUp({ email, password, userName, usersPosition })
+      .then(() => {
+        navigate("/signin");
+      })
+      .catch((err) => console.log(`Ошибка: ${err}`))
+      .finally(() => setPreloaderState(false));
+  }
+  function handleLogin({ email, password, shop }) {
+    setPreloaderState(true);
+    signIn({ email, password, shop })
+      .then((data) => {
+        dispatch(setloggedIn(true));
+        localStorage.setItem("auth_token", data.auth_token);
+        console.log(data);
+        dispatch(setNewUserName(data.userName));
+        dispatch(setNewUserOccupation(data.usersPosition));
+        dispatch(setNewUserEmail(data.email));
+        navigate("/productdatabase");
+      })
+      .catch((err) => console.log(`Ошибка: ${err}`))
+      .finally(() => setPreloaderState(false));
+  }
+  const handleSignOut = () => {
+    setPreloaderState(true);
+    signOut()
+      .then(() => {
+        navigate("/");
+        console.log("exit");
+        localStorage.clear();
+      })
+      .catch((err) => console.log(`Ошибка: ${err}`))
+      .finally(() => setPreloaderState(false));
+  };
+
   return (
-    <div className="App">
-      <CurrentUserContext.Provider value={currentUser}>
-        <Routes>
+    <div className={AppCSS.app}>
+      <Routes>
+        <Route exact path="/" element={<Main />} />
+        <Route
+          path="/signup" // предварительная ручка
+          element={
+            loggedIn ? (
+              <Navigate to="/productdatabase" />
+            ) : (
+              <Registration onRegister={handleRegister} />
+            )
+          }
+        />
+        <Route
+          path="/signin" // предварительная ручка
+          element={
+            loggedIn ? (
+              <Navigate to="/productdatabase" />
+            ) : (
+              <Login onLogin={handleLogin} />
+            )
+          }
+        />
+        <Route element={<ProtectedRoutes loggedIn={loggedIn} />}>
           <Route
-            path="/signup" // предварительная ручка
-            element={!loggedIn 
-              ? <Navigate to='/' />
-              : <Registration onRegister={handleRegister} formError={formError} />
+            path="/productdatabase"
+            element={
+              <>
+                <Header onSignOut={handleSignOut} />
+                <ProductDatabase />
+              </>
             }
           />
           <Route
-            path="/signin" // предварительная ручка
-            element={!loggedIn 
-              ? <Navigate to='/' />
-              : <Login onLogin={handleLogin} formError={formError} />
+            path="/forecast" // предварительная ручка
+            element={
+              <>
+                <Header onSignOut={handleSignOut} />
+                <Forecast />
+              </>
             }
-            
           />
-          <Route exact path="/" element={<Main loggedIn={loggedIn} />} />
-          <Route >
-            <Route
-              path="/forecast" // предварительная ручка
-              element={
-                <Forecast loggedIn={loggedIn} />
-              }
-            />
-            <Route
-              path="/statistics" // предварительная ручка
-              element={
-                <Statistics/>
-              }
-            />
-            <Route
-              path="/productdatabase" // предварительная ручка
-              element={
-                <ProductDatabase/>
-              }
-            />
-          </Route>
           <Route
-            path="*"
-            element={<ErrorPage number={number} message={message} />}
+            path="/statistics" // предварительная ручка
+            element={
+              <>
+                <Header onSignOut={handleSignOut} />
+                <Statistics />
+              </>
+            }
           />
-        </Routes>
-        <Preloader isActive={isActive} />
-      </CurrentUserContext.Provider>
+        </Route>
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+      <Preloader />
     </div>
   );
 }
 
-export default App
+export default App;

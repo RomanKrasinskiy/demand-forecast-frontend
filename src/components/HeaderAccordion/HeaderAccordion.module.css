@@ -1,0 +1,165 @@
+.span {
+  position: relative;
+  border-radius: 48px;
+  width: 300px;
+  min-height: 72px;
+}
+
+.accordion {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 48px;
+  width: 300px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+input[type="checkbox"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.tab input {
+  opacity: 0;
+  z-index: -1;
+
+}
+
+.tabContent {
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.35s;
+}
+
+.tab input:checked~.tabContent {
+  max-height: 200px;
+
+}
+
+
+.tabLabel,
+.tabClose {
+  display: flex;
+  color: black;
+  cursor: pointer;
+  flex-direction: column;
+  margin: 0;
+}
+
+.tabLabel {
+  max-width: 300px;
+  justify-content: center;
+  min-height: 72px;
+  padding: 0 35px 4px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-family: 'Inter';
+  font-size: 20px;
+  font-weight: 400;
+  line-height: normal;
+  color: rgba(44, 42, 41, 1);
+  transition: all 1s;
+
+
+}
+
+.tabSubtitle {
+  margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 180px;
+  font-family: 'Inter';
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: rgba(167, 167, 167, 1);
+  transition: all 0.35s;
+
+}
+
+input[type="checkbox"]:checked+label .tabSubtitle {
+  white-space: normal;
+  max-width: 220px;
+  color: rgba(97, 97, 97, 1);
+}
+
+input[type="checkbox"]:checked+label .tabLabel {
+  white-space: normal;
+  max-width: 220px;
+}
+input[type="checkbox"]:checked .tabLabel .tab {
+  height: 200px;
+  display: flex;
+}
+
+.tabLabel::after {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  content: "";
+  width: 32px;
+  height: 32px;
+  background-image: url('../../images/up.svg');
+  text-align: center;
+  transition: all 0.35s;
+
+}
+
+.tabContent p {
+  margin: 0;
+  justify-content: space-between;
+  padding: 0 35px;
+}
+
+.tabEmail {
+  color: rgba(97, 97, 97, 1);
+font-family: 'Inter';
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: all 0.35s;
+
+
+}
+
+
+.tabButton {
+  padding: 10px 35px 24px;
+  cursor: pointer;
+  background-color: transparent;
+  color: rgba(170, 35, 50, 1);
+  border: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  font-family: "Inter";
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.tabClose {
+  justify-content: flex-end;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+}
+
+.tab input:not(:checked)+.tabLabel:hover::after {
+  animation: bounce .5s infinite;
+}
+
+@keyframes bounce {
+  25% {
+    transform: translateY(.25rem);
+  }
+
+  75% {
+    transform: translateY(-.25rem);
+  }
+}

@@ -1,0 +1,54 @@
+.formGroup {
+    position: relative;
+    margin: 21px 0;
+}
+.input {
+    width: 366px;
+    /* background-color: rgba(47, 47, 47, 1); */
+    /* color: rgba(255, 255, 255, 1); */
+    outline: none;
+    border-radius: 8px;
+    border: 1px solid rgba(64, 64, 64, 1);
+    padding: 15px;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    margin: 0;
+}
+.label {
+    position: absolute;
+    left: 15px;
+    top: 16px;
+    z-index: 1;
+    /* color: rgba(139, 139, 139, 0.5); */
+    transition: 0.3s;
+    pointer-events: none;
+    
+}
+.input:focus ~ .label,
+.input:not(:placeholder-shown) ~ .label {
+    left: 3px;
+    top: -16px;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    /* color: rgba(139, 139, 139, 1); */
+    transition: 0.3s;
+}
+.textError {
+    position: absolute;
+    bottom: -16px;
+    left: 3px;
+    color: rgba(238, 52, 101, 1);
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+}
+/* .input:focus,
+.input:not(:placeholder-shown) {   
+    border-bottom: 2px solid rgba(61, 220, 132, 1);
+} */
+.inputError:not(:placeholder-shown) {
+    color: rgba(238, 52, 101, 1);
+    border-bottom: 2px solid rgba(238, 52, 101, 1);
+}
