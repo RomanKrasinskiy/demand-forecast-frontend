@@ -1,9 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import styles from './Header.module.css';
 import Logo from '../Logo/Logo';
-
 import HeaderAccordion from "../HeaderAccordion/HeaderAccordion";
-
 
 // eslint-disable-next-line react/prop-types
 const Header = ({ onSignOut }) => {
@@ -38,7 +36,6 @@ const Header = ({ onSignOut }) => {
             Статистика
           </NavLink>
         </nav>
-        
         <HeaderAccordion onSignOut={onSignOut} />
       </div>
     </header>

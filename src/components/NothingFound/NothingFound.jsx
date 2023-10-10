@@ -1,6 +1,7 @@
 import NothingFoundCSS from './NothingFound.module.css';
 
 function NothingFound() {
+  
   return (
     <div className={NothingFoundCSS.container}>
       <div className={NothingFoundCSS.image}/>

@@ -71,7 +71,6 @@ function ProductDatabase() {
   };
 
   return (
-    
     <>
     {/* Переключатель Таблица-График */}
     <div className={ProductDataCSS.btnContainer}>
@@ -127,3 +126,4 @@ function ProductDatabase() {
   );
 }
 export default ProductDatabase;
+
