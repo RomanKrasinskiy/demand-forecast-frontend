@@ -14,7 +14,6 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.11",
     "@mui/material": "^5.14.11",
-    "@mui/x-charts": "^6.0.0-alpha.13",
     "@mui/x-data-grid": "^6.16.0",
     "@reduxjs/toolkit": "^1.9.5",
     "chart.js": "^4.4.0",
