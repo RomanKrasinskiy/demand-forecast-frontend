@@ -1,15 +1,14 @@
 import { TextField, Autocomplete } from '@mui/material';
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { 
     setNewCategoriesFilter, 
     setNewGroupFilter, 
     setNewShopFilter, 
-    // setNewStatisticsShopFilter, 
     setNewSubcategoriesFilter,
    } from '../store/filterSlice';
-import { getCategories, getShops } from '../../api/DataApi';
-import { setCategories, setShops } from '../store/dataSlice';
+// import { getCategories, getShops } from '../../api/DataApi';
+// import { setCategories, setShops } from '../store/dataSlice';
 
 function Filters() {
     // Создаём диспетчер
@@ -77,59 +76,26 @@ function Filters() {
     const subcategoriesList = transformIntoSubategoriesList(categories);
 
     // Юз эффекты
-    useEffect(() => {
-          getShops()
-            .then((data) => { // в data приходит целый не фильтрованый объект с данными
-              // console.log(data);
-              dispatch(setShops(data))
-            })
-            .catch((err) => console.log(`Ошибка: ${err}`));
-      }, [dispatch]);
-      
-    useEffect(() => {
-      if (groupFilter.length === 0) {
-        getCategories()
-          .then((data) => { // в data приходит целый не фильтрованый объект с данными
-            // console.log(data);
-            dispatch(setCategories(data)) // нужно отфильтровать
-          })
-          .catch((err) => console.log(`Ошибка: ${err}`));
-      }
-    }, [dispatch]);
-    
     // useEffect(() => {
-    //   if (categoryFilter.length === 0) {
+    //       getShops()
+    //         .then((data) => { // в data приходит целый не фильтрованый объект с данными
+    //           // console.log(data);
+    //           dispatch(setShops(data))
+    //         })
+    //         .catch((err) => console.log(`Ошибка: ${err}`));
+    //   }, [dispatch]);
+      
+    // useEffect(() => {
+    //   if (groupFilter.length === 0) {
     //     getCategories()
     //       .then((data) => { // в data приходит целый не фильтрованый объект с данными
-    //         console.log(data);
-    //         dispatch(setCategories(data)) 
+    //         // console.log(data);
+    //         dispatch(setCategories(data)) // нужно отфильтровать
     //       })
     //       .catch((err) => console.log(`Ошибка: ${err}`));
     //   }
     // }, [dispatch]);
-  
-    // useEffect(() => {
-    //   if (categoryFilter.length === 0) {
-    //     getCategories()
-    //       .then((data) => {
-    //         console.log(data);
-    //         dispatch(setCategories(data))
-    //       })
-    //       .catch((err) => console.log(`Ошибка: ${err}`));
-    //   }
-    // }, [dispatch]);
-
-    // function changeTablesItems(value) {
-    //   console.log(value);
-
-    //   getShops({ store: value.store_name }) 
-    //     .then((data) => {
-    //       console.log(data);
-    //       dispatch(setShops(data));
-    //     })
-    //     .catch((err) => console.error(`Ошибка: ${err}`));
-    // }
-
+    
     return (
         <>
         <Autocomplete
@@ -149,9 +115,6 @@ function Filters() {
           value={shopFilter}
           onChange={(event, newValue) => {
             dispatch(setNewShopFilter(newValue))
-            // changeTablesItems(newValue);
-            // console.log(newValue);
-
           }}
         />
         <Autocomplete

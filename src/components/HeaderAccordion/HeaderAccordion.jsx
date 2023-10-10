@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import styles from './HeaderAccordion.module.css'
+import { useNavigate } from 'react-router-dom';
 
 
 // eslint-disable-next-line react/prop-types
@@ -8,8 +9,9 @@ const HeaderAccordion = ({ onSignOut }) => {
   const name = useSelector(state => state.user.name);
   const occupation = useSelector(state => state.user.occupation);
   const email = useSelector(state => state.user.email);  
-  
+  const navigate = useNavigate();
   const onSignOutClick = () => {
+        navigate('/');
         onSignOut();
       };
 

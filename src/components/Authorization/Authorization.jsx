@@ -1,6 +1,6 @@
 import Logo from "../Logo/Logo";
 import Auth from"./Authorization.module.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 /* eslint-disable */
 export default function Authorization({
   children,
@@ -13,9 +13,9 @@ export default function Authorization({
 //     setErrorText(formError.isError ? formError.text : '');
 //   }, [formError]);
 
-  useEffect(() => {
-    setErrorText('');
-  }, []);
+  // useEffect(() => {
+  //   setErrorText('');
+  // }, []);
   
   return (
     <>

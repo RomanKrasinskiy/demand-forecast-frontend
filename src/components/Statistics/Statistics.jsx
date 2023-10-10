@@ -1,12 +1,12 @@
 import StatisticsCSS from './Statistics.module.css';
 import { TextField, Autocomplete } from '@mui/material';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import DatePickerCalendar from '../DatePickerCalendar/DatePickerCalendar';
 import SearchForm from '../SearchForm/SearchForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { setNewCategoriesFilter, setNewGroupFilter, setNewProductRowSelectId, setNewProductRowSelectName, setNewShopFilter, setNewSubcategoriesFilter } from '../store/filterSlice';
-import { getCategories, getShops } from '../../api/DataApi';
-import { setCategories, setShops } from '../store/dataSlice';
+// import { getCategories, getShops } from '../../api/DataApi';
+// import { setCategories, setShops } from '../store/dataSlice';
 import { DataGrid } from '@mui/x-data-grid';
 
 const Statistics = () => {
@@ -120,32 +120,24 @@ const Statistics = () => {
     dispatch(setNewProductRowSelectId(newSelection));
   };
   // Юз эффекты
-//   useEffect(() => {
-//     getSales()
-//       .then((data) => { // в data приходит целый не фильтрованый объект с данными
-//         // console.log(data);
-//         dispatch(setStats(data))
-//       })
-//       .catch((err) => console.log(`Ошибка: ${err}`));
-// }, [dispatch]);
 
-  useEffect(() => {
-        getShops()
-          .then((data) => { // в data приходит целый не фильтрованый объект с данными
-            // console.log(data);
-            dispatch(setShops(data))
-          })
-          .catch((err) => console.log(`Ошибка: ${err}`));
-    }, [dispatch]);
+  // useEffect(() => {
+  //       getShops()
+  //         .then((data) => { // в data приходит целый не фильтрованый объект с данными
+  //           // console.log(data);
+  //           dispatch(setShops(data))
+  //         })
+  //         .catch((err) => console.log(`Ошибка: ${err}`));
+  //   }, [dispatch]);
     
-  useEffect(() => {
-      getCategories()
-        .then((data) => { // в data приходит целый не фильтрованый объект с данными
-          // console.log(data);
-          dispatch(setCategories(data)) // нужно отфильтровать
-        })
-        .catch((err) => console.log(`Ошибка: ${err}`));
-  }, [dispatch]);
+  // useEffect(() => {
+  //     getCategories()
+  //       .then((data) => { // в data приходит целый не фильтрованый объект с данными
+  //         // console.log(data);
+  //         dispatch(setCategories(data)) // нужно отфильтровать
+  //       })
+  //       .catch((err) => console.log(`Ошибка: ${err}`));
+  // }, [dispatch]);
 
   return (
     <>

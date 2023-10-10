@@ -7,9 +7,7 @@ import {
  } from '../store/filterSlice';
 import SearchForm from './../SearchForm/SearchForm';
 import Filters from '../Filters/Filters';
-import { useEffect, useState } from 'react';
-import { getShops } from '../../api/DataApi';
-import { setShops } from '../store/dataSlice';
+import { useState } from 'react';
 
 function ProductDatabase() {
   const dispatch = useDispatch();
@@ -69,19 +67,19 @@ function ProductDatabase() {
 
   // добавить обработку кнопке "Получить прогноз"
   // забираем из стейта значение фильтров
-  const shopFilter = useSelector(state => state.filter.shopFilter);
- 
-   useEffect(() => {
-    if (shopFilter.length === 0) {
-      getShops()
-        .then((data) => { // в data приходит целый не фильтрованый объект с данными
-          // console.log(data);
 
-          dispatch(setShops(data))
-        })
-        .catch((err) => console.log(`Ошибка: ${err}`));
-    }
-  }, [dispatch]);
+  // const shopFilter = useSelector(state => state.filter.shopFilter);
+  //  useEffect(() => {
+  //   if (shopFilter.length === 0) {
+  //     getShops()
+  //       .then((data) => { // в data приходит целый не фильтрованый объект с данными
+  //         // console.log(data);
+
+  //         dispatch(setShops(data))
+  //       })
+  //       .catch((err) => console.log(`Ошибка: ${err}`));
+  //   }
+  // }, [dispatch]);
   
   // useEffect(() => {
   //   if (groupFilter.length === 0) {

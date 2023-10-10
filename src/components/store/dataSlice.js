@@ -573,7 +573,7 @@ export const dataSlice = createSlice({
     stats: [
       {
         "store": "Калужское ш., 42-й км, д. 6",
-        "product_name": null,
+        "product_name": 'Булочка с повидлом',
         "profit": [
             {
                 "date": "2023-10-01",
@@ -611,7 +611,7 @@ export const dataSlice = createSlice({
     },
     {
         "store": "ул. 15-я Парковая, д. 40, к. 1",
-        "product_name": null,
+        "product_name": 'Рогалик с маком',
         "profit": [
             {
                 "date": "2023-10-01",
@@ -657,7 +657,7 @@ export const dataSlice = createSlice({
     },
     {
         "store": "ул. Астахова, д. 4, к. 4",
-        "product_name": null,
+        "product_name": "Сёмга",
         "profit": [
             {
                 "date": "2023-10-01",
@@ -719,7 +719,7 @@ export const dataSlice = createSlice({
     },
     {
         "store": "ул. Большая Академическая, д. 17",
-        "product_name": null,
+        "product_name": "Мороженное Доброе",
         "profit": [
             {
                 "date": "2023-10-01",
@@ -765,7 +765,7 @@ export const dataSlice = createSlice({
     },
     {
         "store": "ул. Большая Черемушкинская, д. 1",
-        "product_name": null,
+        "product_name": "Сардина",
         "profit": [
             {
                 "date": "2023-10-01",
@@ -811,7 +811,7 @@ export const dataSlice = createSlice({
     },
     {
         "store": "ул. 7-я Кожуховская, д. 9",
-        "product_name": null,
+        "product_name": "Печенье злаковое",
         "profit": [
             {
                 "date": "2023-10-01",
@@ -865,7 +865,7 @@ export const dataSlice = createSlice({
     },
     {
         "store": "ул. Большая Почтовая, д. 28",
-        "product_name": null,
+        "product_name": "Крекер",
         "profit": [
             {
                 "date": "2023-10-01",
@@ -903,7 +903,7 @@ export const dataSlice = createSlice({
     },
     {
         "store": "ш. Энтузиастов, д. 80",
-        "product_name": null,
+        "product_name": "Пончики",
         "profit": [
             {
                 "date": "2023-10-01",
@@ -949,7 +949,7 @@ export const dataSlice = createSlice({
     },
     {
         "store": "ул. 7-я Кожуховская, д. 9",
-        "product_name": null,
+        "product_name": "Вареники",
         "profit": [
             {
                 "date": "2023-10-01",
@@ -995,7 +995,7 @@ export const dataSlice = createSlice({
     },
     {
         "store": "ул. Астахова, д. 4, к. 4",
-        "product_name": null,
+        "product_name": "Роллы",
         "profit": [
             {
                 "date": "2023-10-01",
@@ -1041,7 +1041,7 @@ export const dataSlice = createSlice({
     },
     {
         "store": "ул. Большая Почтовая, д. 28",
-        "product_name": null,
+        "product_name": "Яйца",
         "profit": [
             {
                 "date": "2023-10-01",
@@ -1087,7 +1087,7 @@ export const dataSlice = createSlice({
     },
     {
         "store": "ул. Дубнинская, д. 12, корп. 3",
-        "product_name": null,
+        "product_name": "Хот-дог",
         "profit": [
             {
                 "date": "2023-10-01",
@@ -1133,7 +1133,7 @@ export const dataSlice = createSlice({
     },
     {
         "store": "ш. Энтузиастов, д. 80",
-        "product_name": null,
+        "product_name": "Молочный шоколад",
         "profit": [
             {
                 "date": "2023-10-01",
@@ -1179,7 +1179,7 @@ export const dataSlice = createSlice({
     },
     {
         "store": "ул. Большая Академическая, д. 17",
-        "product_name": null,
+        "product_name": "Шпинат свежий",
         "profit": [
             {
                 "date": "2023-10-01",
@@ -1233,7 +1233,7 @@ export const dataSlice = createSlice({
     },
     {
         "store": "ул. Большая Почтовая, д. 28",
-        "product_name": null,
+        "product_name": "Грейпфрут сорта Руби",
         "profit": [
             {
                 "date": "2023-10-01",
@@ -1279,7 +1279,7 @@ export const dataSlice = createSlice({
     },
     {
         "store": "ул. Шипиловская, д. 1",
-        "product_name": null,
+        "product_name": "мед липовый",
         "profit": [
             {
                 "date": "2023-10-01",
@@ -1333,7 +1333,7 @@ export const dataSlice = createSlice({
     },
     {
         "store": "ул. 7-я Кожуховская, д. 9",
-        "product_name": null,
+        "product_name": "авокадо спелое",
         "profit": [
             {
                 "date": "2023-10-01",
@@ -1387,7 +1387,7 @@ export const dataSlice = createSlice({
     },
     {
         "store": "ш. Энтузиастов, д. 80",
-        "product_name": null,
+        "product_name": "французский багет",
         "profit": [
             {
                 "date": "2023-10-01",
@@ -1441,7 +1441,7 @@ export const dataSlice = createSlice({
     },
     {
         "store": "ул. Дубнинская, д. 12, корп. 3",
-        "product_name": null,
+        "product_name": "оливки каламата",
         "profit": [
             {
                 "date": "2023-10-01",
@@ -1495,7 +1495,7 @@ export const dataSlice = createSlice({
     },
     {
         "store": "ул. Большая Черемушкинская, д. 1",
-        "product_name": null,
+        "product_name": "сельдерей свежий",
         "profit": [
             {
                 "date": "2023-10-01",
