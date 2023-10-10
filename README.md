@@ -28,89 +28,35 @@ Frontend для проекта хакатона "Яндекс.Практикум
 
 ## В работе: 
 
-- Добавление фактических данных: принимает входящий запрос на добавление исторических данных по продажам, обрабатывает их и складывает в БД. 
-- Запускает и управляет процессом инференса. По расписанию (раз в день) данных начинает процесс прогнозирования.
+- 
+- 
 
-## Запуск в контейнерах
-- Клонировать репозиторий и перейти в него в командной строке:
-```
-git clone git@github.com:bobr2072/YL_hackathon_backend.git
-```
-```
-cd YL_hackathon_backend
-```
+## Локальный запуск в preview-режиме
 
-- Переход в папку с docker-compose для запуска контейнеров (доступ по http://localhost:80/)
-```
-cd infra/
-```
+- Переход в папку с frontend для запуска preview проекта локально 
 
-- Создать файл .env и прописать в него свои данные.
-Пример:
-```
-DJANGO_SECRET_KEY= 'django-insecure-example-seckret-key'
-```
 
-- Запуск проекта
+- Создать оптимизированную сборку проекта:
 ```
-docker-compose up -d
-```
-
-- Создание суперпользователя
-```
-docker-compose exec backend python manage.py createsuperuser
-```
-
-- Загрузка данных в базу из csv-файла и из базы в csv-файл:
-```
-docker-compose exec backend python manage.py uploading_to_db
-```
-```
-docker-compose exec backend python manage.py loading_from_db
-```
-
-## Локальный запуск
-
-- Переход в папку с backend для запуска проекта локально (доступ по http://127.0.0.1:8000/)
-
-- Cоздать и активировать виртуальное окружение:
-```
-python -m venv venv
-```
-```
-source venv/Scripts/activate
-```
-
-- Установить зависимости из файла requirements.txt:
-```
-pip install -r requirements.txt
-```
-
-- Выполнить миграции:
-```
-python manage.py makemigrations
-```
-```
-python manage.py migrate
+npm build
 ```
 
 - Запустить проект:
 ```
-python manage.py runserver
+npm run preview
+```
+## Локальный запуск в dev-режиме
+
+- Переход в папку с frontend для запуска проекта локально (доступ по http://localhost:5173/)
+
+
+- Установвить зависимости из файла package.json:
+```
+npm install
 ```
 
-- Создание суперпользователя
+- Запустить проект:
 ```
-python manage.py createsuperuser
-```
-
-## К проекту подключен Swagger, в котором можно ознакомиться с эндпоинтами и методами, а также с примерами запросов, ответов и кода:
-```
-http://127.0.0.1:8000/api/swagger/
+npm run dev
 ```
 
-## Запуск тестов
-- Запускаются при пуше и pull request, а также через терминал
-```
-python manage.py test api.tests
-```
