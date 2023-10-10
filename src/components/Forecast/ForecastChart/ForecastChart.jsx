@@ -13,6 +13,7 @@ import {
     Legend,
     Tooltip
   } from 'chart.js';
+import NothingFound from '../../NothingFound/NothingFound';
 
 ChartJS.register(
   LineElement,
@@ -33,6 +34,10 @@ const ForecastChart = () => {
   // ГРАФИК
   // Функция трансформации данных с бэка в съедобный для ChartJS вид
   function transformForecastChartData(initialArray) {
+    if (!Array.isArray(initialArray) || initialArray.length === 0) {
+      return { labels: [], datasets: [] };
+    }
+
     const labels = Object.keys(initialArray[0].forecast);
     const datasets = [];
 
@@ -65,8 +70,14 @@ const ForecastChart = () => {
   }
   // Трансформируем прогноз в дату для графика 
   const forecastChartData = transformForecastChartData(forecast);
+  // Проверяем, а не пустой ли массив мы преобразовываем
+  const chartDataIsEmpty = forecastChartData.labels.length === 0;
   // Определяем максимальное значение в датасетах для обозначеия границы графика по оси Y
   function findMaxValueInDatasets(chartData) {
+    if (chartDataIsEmpty) {
+      return 0;
+    }
+
     let maxValue = Number.MIN_SAFE_INTEGER;
   
     chartData.datasets.forEach((dataset) => {
@@ -99,6 +110,10 @@ const ForecastChart = () => {
   // ТАБЛИЦА РЯДОМ С ГРАФИКОМ
   // Функция трансформации данных с бэка в съедобный для Data Grid вид - строки
   function transformForecastChartTableRows(initialArray) {
+    if (!Array.isArray(initialArray) || initialArray.length === 0) {
+      return [];
+    }
+    
     const finalArray = initialArray.map((item, index) => ({
       id: index + 1,
       c1: item.product,
@@ -136,28 +151,30 @@ const ForecastChart = () => {
   };
 
   return (
-    <div className={ForecastChartCSS.container}>
-      <div className={ForecastChartCSS.chart}>
-        <Line
-          data = {forecastChartData}
-          options = {options}
-        ></Line>
-      </div>
-      <div className={ForecastChartCSS.table}>
-        <DataGrid 
-          rows={forecastChartTableRowsDataGrid} 
-          columns={forecastChartColumns}
-          initialState={{
-            pagination: { paginationModel: { pageSize: 9 }},
-          }}
-          checkboxSelection
-          disableRowSelectionOnClick
-          keepNonExistentRowsSelected
-          rowSelectionModel={selectedRowIds}
-          onRowSelectionModelChange={handleSelectionChange}
-        />
-      </div>
-    </div>
+    (forecast.length > 0)
+      ? <div className={ForecastChartCSS.container}>
+          <div className={ForecastChartCSS.chart}>
+            <Line
+              data = {forecastChartData}
+              options = {options}
+            ></Line>
+          </div>
+          <div className={ForecastChartCSS.table}>
+            <DataGrid 
+              rows={forecastChartTableRowsDataGrid} 
+              columns={forecastChartColumns}
+              initialState={{
+                pagination: { paginationModel: { pageSize: 9 }},
+              }}
+              checkboxSelection
+              disableRowSelectionOnClick
+              keepNonExistentRowsSelected
+              rowSelectionModel={selectedRowIds}
+              onRowSelectionModelChange={handleSelectionChange}
+            />
+          </div>
+        </div>
+      : <NothingFound/>
   )
 }
 

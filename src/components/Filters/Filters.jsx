@@ -150,8 +150,6 @@ function Filters() {
           onChange={(event, newValue) => {
             dispatch(setNewShopFilter(newValue))
             // changeTablesItems(newValue);
-            // console.log(newValue);
-
           }}
         />
         <Autocomplete
