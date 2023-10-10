@@ -7,6 +7,7 @@ import SearchForm from './../SearchForm/SearchForm';
 import Filters from '../Filters/Filters';
 
 const Forecast = () => {
+  // Управление переключателем Таблица/График
   const [isDataTable, setDataChart] = useState(true);
 
   function handleDataChart() {
@@ -30,10 +31,12 @@ const Forecast = () => {
         <button className={`${ForecastCSS.option} ${isDataTable ? ForecastCSS.optionActive : ''}`} onClick={handleDataTable}>Таблица</button>
         <button className={`${ForecastCSS.option} ${!isDataTable ? ForecastCSS.optionActive : ''}`} onClick={handleDataChart}>График</button>
       </div>
+      {/* Кнопка скачать в Эксель */}
       <button className={`${ForecastCSS.btnExcel} ${(forecastRowSelectId.length > 0) ? ForecastCSS.btnExcelActive : ''}`} data-tooltip="Выберите строки для экспорта">Выгрузить в Excel</button>
     </div>
     {/* Основной блок с данными */}
     <div className={ForecastCSS.dataContainer}>
+      {/* Строка поиска */}
       <div className={ForecastCSS.searchContainer}>
         <SearchForm />
       </div>
@@ -42,10 +45,11 @@ const Forecast = () => {
         <Filters />
       </div>
       <div className={ForecastCSS.data}>
-      {isDataTable
-        ? <ForecastTable />
-        : <ForecastChart />
-      }
+        {/* Отображение данных */}
+        {isDataTable
+          ? <ForecastTable />
+          : <ForecastChart />
+        }
       </div>
     </div>
     </>

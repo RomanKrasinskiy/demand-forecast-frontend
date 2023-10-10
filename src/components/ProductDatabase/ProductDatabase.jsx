@@ -7,11 +7,12 @@ import {
  } from '../store/filterSlice';
 import SearchForm from './../SearchForm/SearchForm';
 import Filters from '../Filters/Filters';
-import { useEffect, useState } from 'react';
-import { getShops } from '../../api/DataApi';
-import { setShops } from '../store/dataSlice';
+import NothingFound from '../NothingFound/NothingFound';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function ProductDatabase() {
+  // Создаём диспетчер
   const dispatch = useDispatch();
 
   // Забираем продукты, полученные с бэка
@@ -62,51 +63,27 @@ function ProductDatabase() {
     dispatch(setNewProductRowSelectId(newSelection));
   };
 
-  // обработка клика по выбору позиции из фильтра = отрендерить таблицу по новым данным, то есть:
-  //   - отправили запрос на бэк с новым параметром фильтра (useDispatch на ответ обращения апишки?)
-  //   - после ответа с бэка дёрнули из стейта новые данные (useSelect)
-  // обработка поиска по товару = аналогично
-
-  // добавить обработку кнопке "Получить прогноз"
-  // забираем из стейта значение фильтров
-  const shopFilter = useSelector(state => state.filter.shopFilter);
- 
-   useEffect(() => {
-    if (shopFilter.length === 0) {
-      getShops()
-        .then((data) => { // в data приходит целый не фильтрованый объект с данными
-          // console.log(data);
-
-          dispatch(setShops(data))
-        })
-        .catch((err) => console.log(`Ошибка: ${err}`));
-    }
-  }, [dispatch]);
-  
-  // useEffect(() => {
-  //   if (groupFilter.length === 0) {
-  //     getCategories()
-  //       .then((data) => { // в data приходит целый не фильтрованый объект с данными
-  //         // console.log(data);
-  //         const transformedData = transformIntoShopsList(data);
-  //         dispatch(setGroupNames(transformedData))
-  //           console.log(transformedData);
-  //       })
-  //       .catch((err) => console.log(`Ошибка: ${err}`));
-  //   }
-  // }, [dispatch]);
+  // Обработка клика по кнопке "Получить прогноз"
+  const navigate = useNavigate();
+  const handleClick = () => {
+    const handleGoForecast = () => { navigate("/forecast") };
+    if (selectedRowIds.length > 0) { handleGoForecast() }
+  };
 
   return (
-    
     <>
     {/* Переключатель Таблица-График */}
     <div className={ProductDataCSS.btnContainer}>
       <div className={ProductDataCSS.switchContainer}>
         <button className={ProductDataCSS.optionActive}>Таблица</button>
       </div>
-      <button className={`${ProductDataCSS.btnForecast} ${(selectedRowIds.length > 0) ? 
-        ProductDataCSS.btnForecastActive : ''}`} 
-        data-tooltip="Выберите строки для прогноза">Получить прогноз</button>
+      <button 
+        className={`${ProductDataCSS.btnForecast} ${(selectedRowIds.length > 0) ? ProductDataCSS.btnForecastActive : ''}`} 
+        data-tooltip="Выберите строки для прогноза"
+        onClick={handleClick}
+      >
+        Получить прогноз
+      </button>
     </div>
     {/* Основной блок с данными */}
     <div className={ProductDataCSS.dataContainer}>
@@ -117,31 +94,36 @@ function ProductDatabase() {
       <div className={ProductDataCSS.optionsContainer}>
         <Filters />
       </div>
+      {/* Блок с таблицей */}
       <div className={ProductDataCSS.data}>
-      <DataGrid 
-        sx={{
-          '& .header': {
-            backgroundColor: '#F1F5FF',
-          },
-          '& .MuiDataGrid-columnHeaderCheckbox': {
-            backgroundColor: '#F1F5FF',
-          },
-        }}
-        rows={categoriesDataRowsDataGrid} 
-        columns={productTableColumns}
-        initialState={{
-          pagination: { paginationModel: { pageSize: 10 }},
-        }}
-        pageSizeOptions={[5, 10, 20, 30]}
-        checkboxSelection
-        disableRowSelectionOnClick
-        keepNonExistentRowsSelected
-        rowSelectionModel={selectedRowIds}
-        onRowSelectionModelChange={handleSelectionChange}
-      />
+        {(categoriesData.length > 0)
+          ? <DataGrid 
+              sx={{
+                '& .header': {
+                  backgroundColor: '#F1F5FF',
+                },
+                '& .MuiDataGrid-columnHeaderCheckbox': {
+                  backgroundColor: '#F1F5FF',
+                },
+              }}
+              rows={categoriesDataRowsDataGrid} 
+              columns={productTableColumns}
+              initialState={{
+                pagination: { paginationModel: { pageSize: 10 }},
+              }}
+              pageSizeOptions={[5, 10, 20, 30]}
+              checkboxSelection
+              disableRowSelectionOnClick
+              keepNonExistentRowsSelected
+              rowSelectionModel={selectedRowIds}
+              onRowSelectionModelChange={handleSelectionChange}
+            />
+          : <NothingFound />
+        }
       </div>
     </div>
     </>
   );
 }
 export default ProductDatabase;
+

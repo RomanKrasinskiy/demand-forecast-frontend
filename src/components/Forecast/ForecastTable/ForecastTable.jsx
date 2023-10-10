@@ -3,6 +3,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import { useSelector, useDispatch } from "react-redux";
 import { setNewForecastRowSelectId, setNewForecastRowSelectName } from '../../store/filterSlice';
 import { useState } from 'react';
+import NothingFound from '../../NothingFound/NothingFound';
 
 const ForecastTable = () => {
   // Создаём диспетчер
@@ -13,6 +14,10 @@ const ForecastTable = () => {
 
   // Функция трансформации данных с бэка в съедобный для Data Grid вид - строки
   function transformForecastTableRows(initialArray) {
+    if (!Array.isArray(initialArray) || initialArray.length === 0) {
+      return [];
+    }
+
     const finalArray = initialArray.map((item, index) => {
       const forecastValues = Object.values(item.forecast);
   
@@ -35,6 +40,10 @@ const ForecastTable = () => {
 
   // Функция трансформации данных с бэка в съедобный для Data Grid вид - колонки
   function transformForecastTableColumns(initialArray) {
+    if (!Array.isArray(initialArray) || initialArray.length === 0) {
+      return [];
+    }
+
     const columns = [
       { field: 'c1', headerName: 'Product', width: 200, headerClassName: 'header' },
     ];
@@ -79,27 +88,30 @@ const ForecastTable = () => {
 
   return (
     <div className={ForecastTableCSS.table}>
-      <DataGrid 
-        sx={{
-          '& .header': {
-            backgroundColor: '#F1F5FF',
-          },
-          '& .MuiDataGrid-columnHeaderCheckbox': {
-            backgroundColor: '#F1F5FF',
-          },
-        }}
-        rows={forecastTableRowsDataGrid} 
-        columns={forecastTableColumnsDataGrid}
-        initialState={{
-          pagination: { paginationModel: { pageSize: 10 }},
-        }}
-        pageSizeOptions={[5, 10, 20, 30]}
-        checkboxSelection
-        disableRowSelectionOnClick
-        keepNonExistentRowsSelected
-        rowSelectionModel={selectedRowIds}
-        onRowSelectionModelChange={handleSelectionChange}
-      />  
+      {(forecast.length > 0)
+        ? <DataGrid 
+            sx={{
+              '& .header': {
+                backgroundColor: '#F1F5FF',
+              },
+              '& .MuiDataGrid-columnHeaderCheckbox': {
+                backgroundColor: '#F1F5FF',
+              },
+            }}
+            rows={forecastTableRowsDataGrid} 
+            columns={forecastTableColumnsDataGrid}
+            initialState={{
+              pagination: { paginationModel: { pageSize: 10 }},
+            }}
+            pageSizeOptions={[5, 10, 20, 30]}
+            checkboxSelection
+            disableRowSelectionOnClick
+            keepNonExistentRowsSelected
+            rowSelectionModel={selectedRowIds}
+            onRowSelectionModelChange={handleSelectionChange}
+          />
+        : <NothingFound/>
+      }  
     </div>
   )
 }

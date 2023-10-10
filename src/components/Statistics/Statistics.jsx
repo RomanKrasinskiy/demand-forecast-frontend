@@ -1,16 +1,28 @@
 import StatisticsCSS from './Statistics.module.css';
 import { TextField, Autocomplete } from '@mui/material';
-import { useEffect, useState } from "react";
+import { useState } from "react";
+// import { useEffect } from "react";
 import DatePickerCalendar from '../DatePickerCalendar/DatePickerCalendar';
 import SearchForm from '../SearchForm/SearchForm';
 import { useDispatch, useSelector } from 'react-redux';
-import { setNewCategoriesFilter, setNewGroupFilter, setNewProductRowSelectId, setNewProductRowSelectName, setNewShopFilter, setNewSubcategoriesFilter } from '../store/filterSlice';
-import { getCategories, getShops } from '../../api/DataApi';
-import { setCategories, setShops } from '../store/dataSlice';
-import { DataGrid } from '@mui/x-data-grid';
+import { setNewCategoriesFilter, setNewGroupFilter, setNewShopFilter, setNewSubcategoriesFilter } from '../store/filterSlice';
+// import { getCategories, getShops } from '../../api/DataApi';
+import StatisticsTable from './StatisticsTable/StatisticsTable';
+import StatisticsChart from './StatisticsChart/StatisticsChart';
 
 const Statistics = () => {
+  // Управление переключателем Таблица/График
+  const [isDataTable, setDataChart] = useState(true);
 
+  function handleDataChart() {
+    isDataTable ? setDataChart(false) : '';
+  }
+
+  function handleDataTable() {
+    !isDataTable ? setDataChart(true) : '';
+  }
+  
+  // Создаём диспетчер
   const dispatch = useDispatch();
 
   // забираем из стейта наполнение фильтров
@@ -74,96 +86,48 @@ const Statistics = () => {
   // Трансформируем категории в опции фильтра
   const subcategoriesList = transformIntoSubategoriesList(categories);
 
-  // Забираем продукты, полученные с бэка
-  const statsData = useSelector(state => state.data.stats);
-  // Функция трансформации данных с бэка в съедобный для Data Grid вид - строки
-  function transformCategoriesData(initialArray) {
-    return initialArray.map((item, index) => {
-      const finalRow = {
-        id: index + 1,
-        c1: item.product_name,
-        c2: item.profit.reduce((total, entry) => total + entry.units, 0),
-        c3: item.profit.reduce((total, entry) => total + entry.units_promo, 0),
-        c4: item.profit.reduce((total, entry) => total + entry.money, 0),
-        c5: item.profit.reduce((total, entry) => total + (entry.units - entry.units_promo), 0),
-        c6: item.profit.reduce((total, entry) => total + entry.money_promo, 0),
-      };
-      return finalRow;
-    });
-  }
-  // Трансформируем продукты в строчки таблицы
-  const statsDataRowsDataGrid = transformCategoriesData(statsData);
-  // Колонки в таблице продуктов постоянные - нет смысла их держать в стейте.
-  const productTableColumns = [
-    { field: 'c1', headerName: 'Товар', width: 310, headerClassName: 'header'},
-    { field: 'c2', headerName: 'Фактические продажи', width: 300, headerClassName: 'header' },
-    { field: 'c3', headerName: 'Прогноз шт', width: 186, headerClassName: 'header' },
-    { field: 'c4', headerName: 'Прогноз ₽', width: 186, headerClassName: 'header' },
-    { field: 'c5', headerName: 'Разница прогнозов', width: 240, headerClassName: 'header' },
-    { field: 'c6', headerName: 'Качество прогноза по WAPE', width: 308, headerClassName: 'header' },
-  ];
-  // Контролируем выбранные ячейки
-  const productRowSelectId = useSelector(state => state.filter.productRowSelectId);
-  // Создаём стейт айдишников выбранных строк
-  const [selectedRowIds, setSelectedRowIds] = useState(productRowSelectId);
-  // Хэндлер изменения стейта выбранных строк
-  const handleSelectionChange = (newSelection) => {
-    setSelectedRowIds(newSelection);
-    const updatedSelectedValues = newSelection.map((rowId) => {
-      const selectedRowData = statsDataRowsDataGrid.find((row) => row.id === rowId);
-      if (selectedRowData) {
-        return selectedRowData.c5;
-      }
-      return null;
-    });
-    dispatch(setNewProductRowSelectName(updatedSelectedValues));
-    dispatch(setNewProductRowSelectId(newSelection));
-  };
-  // Юз эффекты
-//   useEffect(() => {
-//     getSales()
-//       .then((data) => { // в data приходит целый не фильтрованый объект с данными
-//         // console.log(data);
-//         dispatch(setStats(data))
-//       })
-//       .catch((err) => console.log(`Ошибка: ${err}`));
-// }, [dispatch]);
+  // Получаем состояние выбранных ячеек
+  const statisticsRowSelectId = useSelector(state => state.filter.statisticsRowSelectId);
 
-  useEffect(() => {
-        getShops()
-          .then((data) => { // в data приходит целый не фильтрованый объект с данными
-            // console.log(data);
-            dispatch(setShops(data))
-          })
-          .catch((err) => console.log(`Ошибка: ${err}`));
-    }, [dispatch]);
+  // Юз эффекты
+  // useEffect(() => {
+  //       getShops()
+  //         .then((data) => { // в data приходит целый не фильтрованый объект с данными
+  //           // console.log(data);
+  //           dispatch(setShops(data))
+  //         })
+  //         .catch((err) => console.log(`Ошибка: ${err}`));
+  //   }, [dispatch]);
     
-  useEffect(() => {
-      getCategories()
-        .then((data) => { // в data приходит целый не фильтрованый объект с данными
-          // console.log(data);
-          dispatch(setCategories(data)) // нужно отфильтровать
-        })
-        .catch((err) => console.log(`Ошибка: ${err}`));
-  }, [dispatch]);
+  // useEffect(() => {
+  //     getCategories()
+  //       .then((data) => { // в data приходит целый не фильтрованый объект с данными
+  //         // console.log(data);
+  //         dispatch(setCategories(data)) // нужно отфильтровать
+  //       })
+  //       .catch((err) => console.log(`Ошибка: ${err}`));
+  // }, [dispatch]);
 
   return (
     <>
+    {/* Переключатель Таблица-График */}
     <div className={StatisticsCSS.btnContainer}>
-    <div className={StatisticsCSS.switchContainer}>
-      <button className={StatisticsCSS.optionActive}>Таблица</button>
+      <div className={StatisticsCSS.switchContainer}>
+        <button className={`${StatisticsCSS.option} ${isDataTable ? StatisticsCSS.optionActive : ''}`} onClick={handleDataTable}>Таблица</button>
+        <button className={`${StatisticsCSS.option} ${!isDataTable ? StatisticsCSS.optionActive : ''}`} onClick={handleDataChart} disabled>График</button> {/* Выключено, так как график не готов */}
+      </div>
+      {/* Кнопка скачать в Эксель */}
+      <button className={`${StatisticsCSS.btnExcel} ${(statisticsRowSelectId.length > 0) ? StatisticsCSS.btnExcelActive : ''}`} data-tooltip="Выберите строки для экспорта">Выгрузить в Excel</button>
     </div>
-    <button className={`${StatisticsCSS.btnForecast} ${(selectedRowIds.length > 0) ? 
-        StatisticsCSS.btnForecastActive : ''}`} 
-        data-tooltip="Выберите строки для прогноза">Получить прогноз</button>
-    </div>
+    {/* Основной блок с данными */}
     <div className={StatisticsCSS.dataContainer}>
       <div className={StatisticsCSS.searchContainer}>
+        {/* Строка поиска */}
         <SearchForm />
       </div>
+      {/* Панель с фильтрами */}
       <div className={StatisticsCSS.optionsContainer}>
-
-      <Autocomplete
+        <Autocomplete
           disablePortal
           id="stores"
           options={storesList}
@@ -239,38 +203,14 @@ const Statistics = () => {
             dispatch(setNewSubcategoriesFilter(newValue))
           }}
         />
-          <DatePickerCalendar 
-          
-          />
-        
-
+        <DatePickerCalendar/>
       </div>
       <div className={StatisticsCSS.data}>
-      <DataGrid
-        sx={{
-          '& .header': {
-            backgroundColor: '#F1F5FF',
-          },
-          '& .MuiDataGrid-columnHeaderCheckbox': {
-            backgroundColor: '#F1F5FF',
-          },
-          
-        }}
-        rows={statsDataRowsDataGrid} 
-        columns={productTableColumns}
-        initialState={{pagination: { paginationModel: { pageSize: 10 }}}}
-        pageSizeOptions={[5, 10, 20, 30]}
-        checkboxSelection
-        disableRowSelectionOnClick
-        keepNonExistentRowsSelected
-        onRowSelectionModelChange={handleSelectionChange}
-        rowSelectionModel={selectedRowIds}
-      />  
-      
-      {/* {isDataTable
-        ? <StatisticsTable />
-        : <StatisticsChart />
-      } */}
+        {/* Отображение данных */}
+        {isDataTable
+          ? <StatisticsTable />
+          : <StatisticsChart />
+        }
       </div>
     </div>
     </>
@@ -278,4 +218,3 @@ const Statistics = () => {
 }
 
 export default Statistics;
-

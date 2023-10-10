@@ -23,20 +23,18 @@ export default function DatePickerCalendar() {
 
   const [selectedDates, setSelectedDates] = useState(); // будем мапиться по массиву, переводить даты в строку .toString() и отправлять запрос с датами на бэк
   // console.log(selectedDates);
-  
 
   return (
     <div className={DatePickerCalendarCSS.calendar} >
-    <DatePicker
-      {...props}
+      <DatePicker
+        {...props}
         value={selectedDates}
         onChange={setSelectedDates}
         onPropsChange={setProps}
         ref={datePickerRef}
         containerClassName={DatePickerCalendarCSS.container}
         inputClass={DatePickerCalendarCSS.input}
-        placeholder='Дата или период'
-        
+        placeholder='Дата или период'    
         numberOfMonths={2}
         plugins={[
           weekends([6, 7]),
@@ -48,7 +46,6 @@ export default function DatePickerCalendar() {
             disabledList={["calendar", "locale", "otherPickers", 'other' ]}
             modes={["multiple", "range"]}
           />
-
         ]}
       />
       <button className={DatePickerCalendarCSS.arrowButton} onClick={toggleDatePicker}>
@@ -56,9 +53,6 @@ export default function DatePickerCalendar() {
           className={DatePickerCalendarCSS.arrow}
         />
       </button>
-      
     </div>
-      
-    
   );
 }

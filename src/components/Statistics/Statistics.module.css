@@ -3,14 +3,14 @@
     justify-content: space-between;
 }
 
-.btnForecast {
+.btnExcel {
     margin-right: 160px;
     padding-bottom: 16px;
     width: 231px;
     height: 24px;
     border: 0;
     background: transparent;
-    background-image: url('../../images/forecast.svg');
+    background-image: url('../../images/excel.svg');
     background-repeat: no-repeat;
     color: var(--light-grey, #A7A7A7);
     font-size: 20px;
@@ -20,7 +20,7 @@
     cursor: help;
 }
 
-.btnForecast::after {
+.btnExcel::after {
     background: white;
     border-radius: 24px;
 	box-shadow: 1px 1px rgba(0, 0, 0, 0.2);
@@ -37,23 +37,23 @@
 	transition: all 0.3s ease-in-out;
 }
 
-.btnForecast:hover::after {
+.btnExcel:hover::after {
 	opacity: 1;
 	visibility: visible;
 }
 
-.btnForecastActive {
+.btnExcelActive {
     color: var(--blue, #003C96);
-    background-image: url('../../images/forecast-active.svg');
+    background-image: url('../../images/excel-active.svg');
     cursor: pointer;
     transition: 0.3s;
 }
 
-.btnForecastActive:hover {
+.btnExcelActive:hover {
     opacity: 0.7;
 }
 
-.btnForecastActive::after {
+.btnExcelActive::after {
     content: none;
 }
 
@@ -66,7 +66,7 @@
     height: 40px;
 }
 
-.optionActive {
+.option {
     margin: 0;
     padding-bottom: 11px;
     color: #7B7B7B;
@@ -78,12 +78,15 @@
     background: transparent;
     cursor: pointer;
     transition: 0.3s;
-    color: #2C2A29;
-    border-bottom: 3px solid #003C96;
 }
 
-.optionActive:hover {
+.option:hover {
     opacity: 0.7;
+}
+
+.optionActive {
+    color: #2C2A29;
+    border-bottom: 3px solid #003C96;
 }
 
 .dataContainer {

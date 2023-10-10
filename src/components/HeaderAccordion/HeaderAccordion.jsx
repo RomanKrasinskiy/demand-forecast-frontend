@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux';
 import styles from './HeaderAccordion.module.css'
 
-
 // eslint-disable-next-line react/prop-types
 const HeaderAccordion = ({ onSignOut }) => {
   // забираем из стейта наполнение полей
@@ -32,7 +31,6 @@ const HeaderAccordion = ({ onSignOut }) => {
             </section>
         </span>
     </>
-    
   );
 };
 

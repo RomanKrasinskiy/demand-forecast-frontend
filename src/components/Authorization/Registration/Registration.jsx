@@ -8,15 +8,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useFormWithValidation } from '../../../hooks/useFormWithValidation';
 
-
 // eslint-disable-next-line react/prop-types
 export default function Registration({ onRegister }) {
   
   const [showPassword, setShowPassword] = React.useState(false);
-  const { values, handleChange} =
-    useFormWithValidation({email: "", password: "", userName: "", usersPosition: ""});
-
-
+  const { values, handleChange} = useFormWithValidation({email: "", password: "", userName: "", usersPosition: ""});
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (e) => {e.preventDefault()};
@@ -69,7 +65,7 @@ return (
                   transform: "translate(0, -10px) scale(1)",
                 },
                 "&.Mui-focused": {
-                  color: "rgba(0, 60, 150, 1)", // Погда поле выбрано цвет синий. Добавить валидацию смены цвета на красный при error
+                  color: "rgba(0, 60, 150, 1)", // Когда поле выбрано цвет синий. Добавить валидацию смены цвета на красный при error
                 },
               }}
             >
@@ -183,8 +179,6 @@ return (
               type="text"
               value={values.userName}
               onChange={handleChange}
-
-
               sx={{
                 border: "1px solid rgba(77, 77, 77, 1)",
                 borderRadius: "24px",
@@ -226,8 +220,6 @@ return (
               type="text"
               value={values.usersPosition}
               onChange={handleChange}
-
-
               sx={{
                 border: "1px solid rgba(77, 77, 77, 1)",
                 borderRadius: "24px",
@@ -252,11 +244,8 @@ return (
                 textTransform: 'none',
                 fontWeight: '500',
                 fontSize: '20px',
-                
-
               }}
             >Зарегистрироваться</Button>
-
             <Link to='/'>
               <Button variant="outlined"
               sx={{
@@ -272,14 +261,8 @@ return (
               }}
             >Назад</Button>
             </Link>
-            
-
            </Stack>
-
           </FormControl>
-        
-          
-
         </Box>
       </Authorization>
     </div>
